@@ -1,0 +1,66 @@
+\section*{Esercizi del 28 marzo}
+\subsection*{Introduzione teorica}
+\begin{definition*}
+Sia $\Gamma<\Isom(\HH^n)$ un sottogruppo. Fissiamo un punto $x\in\HH^n$. Definiamo $L(\Gamma)$ come l'insieme dei punti limite in $\del\HH^n$ dell'orbita $\Gamma\cdot x$. Poniamo inoltre $O(\Gamma)=\del\HH^n\setminus L(\Gamma)$.
+\end{definition*}
+
+Mostriamo che questa definizione è ben posta (ossia non dipende dalla scelta del punto $x$).
+\begin{proposition*}
+Siano $x,x'\in\HH^n$. Sia $y\in\del\HH^n$ un punto limite dell'orbita $\Gamma\cdot x$. Allora $y$ è anche un punto limite dell'orbita $\Gamma\cdot x'$.
+\end{proposition*}
+\begin{proof}
+Per ipotesi esiste una successione di isometrie $\{g_i\}_{i\ge 0}\subs\Gamma$ tali che $g_i(x)\to y$. Essendo $g_i$ un'isometria di $\HH^n$, vale $\dist(g_i(x),g_i(x'))=\dist(x,x')$, pertanto anche $g_i(x')\to y$.
+\end{proof}
+
+È evidente che $L(\Gamma)$ è un chiuso $\Gamma$-invariante. Inoltre abbiamo la seguente.
+\begin{proposition*}
+Supponiamo che $\Gamma$ non sia elementare. Sia $S\subs\del\HH^n$ un chiuso non vuoto $\Gamma$-invariante. Allora $L(\Gamma)\subs S$.
+\end{proposition*}
+\begin{proof}
+Sia $K\subs\overline{\HH^n}$ l'inviluppo convesso di $S$. Poiché $\Gamma$ non è elementare, $S$ contiene almeno due punti, dunque $K\cap\HH^n$ è non vuoto. Scegliamo un $x\in K\cap\HH^n$; poiché $S$ è chiuso e $\Gamma$-invariante, lo stesso vale per $K$. Ma allora l'insieme dei punti limite di $\Gamma\cdot x$ che giacciono in $\del\HH^n$ (ossia $L(\Gamma)$ è contenuto in $K\cap\del\HH^n=S$, da cui la tesi.
+\end{proof}
+
+\begin{comment}
+\begin{proposition*}
+Supponiamo che $\Gamma$ agisca su $\HH^n$ in modo libero e propriamente discontinuo. Allora $\Gamma$ agisce liberamente anche su $O(\Gamma)$.
+\end{proposition*}
+\begin{proof}
+È sufficiente mostrare che tutti i punti fissi di elementi di $\Gamma$ giacciono in $L(\Gamma)$. Sia $g\in\Gamma$; distinguiamo due casi.
+\begin{itemize}
+\item Se $g$ è iperbolico, considerando il modello del semispazio $H^n$ si vede immediatamente che i due punti fissi di $g$ sono anche punti limite di $\langle g\rangle$.
+\item Se $g$ è parabolico, consideriamo una qualunque orbita $\langle g\rangle \cdot x$. Poiché $\overline{\HH^n}$ è metrizzabile e compatto, necessariamente questa orbita ammette un punto limite, il quale risulta fissato da $g$; ma $g$ ha un unico punto fisso, che dunque è anche un punto limite.\qedhere
+\end{itemize}
+\end{proof}
+\end{comment}
+
+\begin{definition*}
+Sia $K\subs\del\HH^n$ un convesso chiuso contenente almeno due punti (dunque non tutto contenuto in $\del\HH^n$). Definiamo l'applicazione $\map{\rho_K}{\overline{\HH^n}}{K}$ come segue:
+\begin{itemize}
+\item se $x\in\HH^n$, allora $\rho_K(x)$ è il punto di $K\cap\HH^n$ di minima distanza da $x$;
+\item se $x\in\del\HH^n$, allora $\rho_K(x)$ è l'unico punto di $K$ giacente sulla minima orosfera centrata in $x$ che interseca $K$.
+\end{itemize}
+\end{definition*}
+Osserviamo che questa definizione è ben posta poiché $K$ è convesso e chiuso. Inoltre si verifica facilmente che $\rho_K$ è continua su $\HH^n\cup(\del\HH^n\setminus K)$ e soddisfa $\rho_{g(K)}\circ g=g\circ\rho_K$ per ogni isometria $g$ di $\HH^n$.
+
+\begin{proposition*}
+Supponiamo che $\Gamma$ agisca in modo libero e propriamente discontinuo su $\HH^n$. Allora $\Gamma$ agisce allo stesso modo su $\HH^n\cup O(\Gamma)$.
+\end{proposition*}
+\begin{proof}
+Sia $K\subs\overline{\HH^n}$ l'inviluppo convesso di $L(\Gamma)$; poiché $L(\Gamma)$ è un chiuso $\Gamma$-invariante, lo stesso vale per $K$. Consideriamo l'applicazione $\map{\rho}{\HH^n\cup O(\Gamma)}{\HH^n}$ definita come la restrizione a $\HH^n\cup O(\Gamma)$ di $\rho_K$. Per quanto abbiamo osservato, $\rho$ è continua e soddisfa $\rho\circ g=g\circ\rho$ per ogni $g\in\Gamma$.
+
+\begin{itemize}
+\item \textbf{L'azione di $\Gamma$ su $\HH^n\cup O(\Gamma)$ è libera.} Sia $y\in O(\Gamma)$. Se $g(y)=y$ per un qualche $g\in\Gamma$, allora anche $g(\rho(y))=\rho(g(y))=\rho(y)$, da cui (essendo l'azione di $\Gamma$ libera su $\HH^n$) $g=\id$.
+\item \textbf{L'azione di $\Gamma$ su $\HH^n\cup O(\Gamma)$ è propriamente discontinua.} Siano $y,y'\in\HH^n\cup O(\Gamma)$. Poiché l'azione di $\Gamma$ su $\HH^n$ è propriamente discontinua, esistono intorni $U$, $U'$ di $\rho(y)$, $\rho(y')$ rispettivamente tali che $U\cap g(U')\neq\emptyset$ solo per un numero finito di $g\in\Gamma$. Scegliamo $W=\rho^{-1}(U)$ e $W'=\rho^{-1}(U')$ come intorni, rispettivamente, di $y$ e $y'$. Si verifica facilmente che se $U\cap g(U')=\emptyset$ allora $W\cap g(W')=\emptyset$, da cui la tesi.\qedhere
+\end{itemize}
+\end{proof}
+
+\begin{theorem*}
+Supponiamo che la varietà iperbolica completa $M=\HH^n/\Gamma$ abbia volume finito. Sia
+\[
+S=\bigcup_{g\in\Gamma}\Fix(g)\subs\del\HH^n.
+\]
+Allora $S$ è denso in $\del\HH^n$.
+\end{theorem*}
+\begin{proof}
+Osserviamo innanzitutto che $\Gamma$ non è elementare, altrimenti $M$ avrebbe volume infinito. Notiamo poi che $\overline{S}\subs\del\HH^n$ è un chiuso non vuoto $\Gamma$-invariante, dunque contiene $L(\Gamma)$. Se per assurdo $S$ non fosse denso in $\del\HH^n$, allora $O(\Gamma)$ sarebbe non vuoto. Sia dunque $y\in O(\Gamma)$; poiché l'azione di $\Gamma$ su $\HH^n\cup O(\Gamma)$ è libera e propriamente discontinua, esiste un intorno $W\subs\HH^n\cup O(\Gamma)$ di $y$ tale che $W\cap g(W)=\emptyset$ per ogni $g\in\Gamma$ diverso dall'identità. Poiché $y$ ha un sistema fondamentale di intorni costituito da semispazi, possiamo supporre che $W$ sia un semispazio. Ma $\map{\pi|_{W\cap\HH^n}}{W\cap\HH^n}{M}$ è un'isometria locale iniettiva (dove $\map{\pi}{\HH^n}{M}$ è il rivestimento), il che è assurdo, avendo $M$ volume finito.
+\end{proof}

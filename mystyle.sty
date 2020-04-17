@@ -1,0 +1,104 @@
+\ProvidesPackage{mystyle}
+
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+
+\usepackage{comment}
+
+%Style packages
+\usepackage{geometry}
+\usepackage{titlesec}
+\newcommand{\sectionbreak}{\clearpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Geometria Iperbolica}
+\chead{\textbf{Filippo Gianni Baroni}}
+\rhead{550122}
+
+% Math packages
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{bbm}
+\usepackage{mathrsfs}
+
+%TikZ
+\usepackage{tkz-euclide}
+
+% Diagrams
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\newenvironment*{diagram}[1][]{$$\begin{tikzcd}[#1]}{\end{tikzcd}$$}
+
+
+% References
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{theoremref}
+
+% Theorem environments
+\theoremstyle{definition}
+\newtheorem*{definition*}{Definizione}
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}
+\newtheorem*{theorem*}{Teorema}
+\newtheorem{proposition}{Proposizione}
+\newtheorem*{proposition*}{Proposizione}
+\newtheorem*{corollary*}{Corollario}
+\newtheorem*{lemma*}{Lemma}
+\newcommand*{\defterm}[1]{\emph{#1}}
+
+% Operators
+\newcommand*{\tensor}{\otimes}
+\newcommand*{\dirsum}{\oplus}
+
+% Letters
+\newcommand*{\1}{\mathbbm{1}}
+\newcommand*{\NN}{\mathbb{N}}
+\newcommand*{\RR}{\mathbb{R}}
+\newcommand*{\ZZ}{\mathbb{Z}}
+\newcommand*{\CC}{\mathbb{C}}
+\newcommand*{\HH}{\mathbb{H}}
+
+% Relations
+\newcommand*{\subs}{\subseteq}
+\newcommand*{\iso}{\simeq}
+
+% Other aliases
+\newcommand*{\del}{\partial}
+\newcommand*{\phantomop}{\phantom{{}={}}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\scal}[2]{\left\langle#1,#2\right\rangle}
+
+% Maps
+\newcommand*{\map}[3]{#1\colon#2\to#3}
+\newcommand*{\Map}[5]{%
+\begin{align*}
+#1:#2&\longrightarrow#3\\
+#4&\longmapsto#5
+\end{align*}
+}
+
+
+% Lists
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label={(\roman*)}}
+\setlist[itemize,1]{label=\tiny\(\blacksquare\)}
+
+
+% DeclareMathOperator
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Isom}{Isom}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\spa}{span}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\Fix}{Fix}

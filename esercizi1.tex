@@ -1,0 +1,53 @@
+\section*{Esercizi del 14 marzo}
+
+\subsection*{Esercizio 1.4}
+Sia $K>0$ tale che le palle iperboliche di raggio $K$ abbiano area maggiore di $2\pi$; mostriamo che tale $K$ soddisfa la condizione richiesta.
+
+Sia $\Delta\subs\HH^2$ un triangolo, $p\in\Delta$ un punto giacente su un lato $\ell$. Se $p$ è un vertice la tesi è ovvia, dunque supponiamo che non lo sia. Sia $\mathcal{A}$ il semipiano (aperto) delimitato da $\ell$ su cui giace il triangolo. Definiamo $B\subs\HH^2$ come l'intersezione di $\mathcal{A}$ con la palla di centro $p$ e raggio $K$; osserviamo che $B$ ha area maggiore di $2\pi/2=\pi$. Di conseguenza, essendo l'area di $\Delta$ al più $\pi$, necessariamente $B$ non è contenuto in $\Delta$. Poiché $B$ interseca $\Delta$ ed è connesso, deve esistere un punto di $q\in B$ che giace sul bordo di $\Delta$. Giacché $\mathcal{A}$ e $\ell$ sono disgiunti, $q$ deve appartenere a uno degli altri due lati; essendo la distanza fra $p$ e $q$ al più $K$, otteniamo la tesi.
+
+\subsection*{Esercizio 1.5}
+Utilizziamo il modello $H^2=\{(x,y)\in\RR^2:y>0\}$ del semipiano.
+Siano $\ell_1$, $\ell_2$, $\ell_3$ i lati del triangolo. A meno di isometria, possiamo supporre che $\ell_1$ giaccia sulla circonferenza centrata in $(0,0)$ di raggio $r>0$, e che $\ell_2$ giaccia su una retta verticale.
+
+\begin{tikzpicture}[scale=2]
+\tkzDefPoint(0,0){O}
+\tkzDefPoint(1,0){K}
+\tkzDefPoint(0.6,0){U0}
+\tkzDefPointWith[orthogonal](U0,O)\tkzGetPoint{U1}
+\tkzInterLC(U0,U1)(O,K)\tkzGetFirstPoint{U}
+\tkzDefPoint(-0.8,0){V0}
+\tkzDefPointWith[orthogonal](V0,O)\tkzGetPoint{V1}
+\tkzInterLC(V0,V1)(O,K)\tkzGetSecondPoint{V}
+\tkzDefPointOnLine[pos=4](V0,V)\tkzGetPoint{W}
+\tkzDefLine[mediator](U,W)\tkzGetPoints{W0}{W1}
+\tkzInterLL(W0,W1)(O,K)\tkzGetPoint{O1}
+\tkzDrawSemiCircle(O,K)
+\tkzDrawLine[add=0 and 0.5cm,gray](V0,W)
+\tkzDrawArc[delta=10](O1,U)(W)
+\tkzDrawPoints(O,U,V,W)
+\end{tikzpicture}
+
+\subsection*{Esercizio 1.9}
+\begin{lemma*}
+Siano $A\in O(n)$ una matrice ortogonale, $b\in\RR^n$ un vettore. Definiamo $\varphi\in\Isom(\RR^n)$ come $\varphi(x)=Ax+b$. Supponiamo che $\varphi$ non abbia punti fissi. Allora esiste una retta affine di $\RR^n$ che è $\varphi$-invariante.
+\end{lemma*}
+\begin{proof}\leavevmode
+\begin{itemize}
+\item\textbf{Vale $\RR^n=\ker(A-I)\dirsum\im(A-I)$}.\\
+Per motivi di dimensione, è sufficiente mostrare che i due sottospazi hanno intersezione banale. Sia $v\in\ker(A-I)\cup\im(A-I)$; allora $v=Aw-w$ per un qualche $w\in\RR^n$. Allora
+\[
+\scal{v}{v}=\scal{Aw-w}{v}=\scal{Aw}{v}-\scal{w}{v}=\scal{w,Av}-\scal{w}{v}=\scal{w}{Av-v}=0,
+\]
+da cui $v=0$.
+\item\textbf{Vale $b\not\in\im(A-I)$.}\\
+Se per assurdo $b=Aw-w$, allora $\varphi(-w)=-Aw+b=-w$, dunque $\varphi$ avrebbe un punto fisso, il che è contro l'ipotesi.
+\item\textbf{L'isometria $\varphi$ ammette una retta invariante.}\\
+Utilizzando la decomposizione del primo punto, scriviamo $b=v+(Aw-w)$ con $Av=v$. Poiché $b\not\in\im(A-I)$, necessariamente $v\neq 0$. Mostriamo che la retta affine $\ell=-w+\spa(v)$ è $\varphi$-invariante. Per $t\in\RR$ vale
+\[
+\varphi(-w+tv)=-Aw+tAv+b=-Aw+tv+(v+Aw-w)=-w+(t+1)v\in\ell,
+\]
+da cui la tesi.\qedhere
+\end{itemize}
+\end{proof}
+
+Sia $\psi\in\Isom(\HH^n)$ un'isometria parabolica. Consideriamo il modello del semispazio $H^n$; possiamo supporre che $\psi$ fissi $\infty$. Allora $\psi$ si scrive come $\psi(x,t)=(Ax+b,t)$ per opportuni $A\in O(n-1)$, $b\in\RR^{n-1}$. Per il Lemma, esiste una retta euclidea $\ell=w+\spa(v)\subs\RR^{n-1}$ invariante per la mappa $(x\mapsto Ax+b)$. È allora evidente che il piano iperbolico $\{(w+sv,t):s\in\RR,t>0\}\subs H^n$ è $\psi$-invariante.
