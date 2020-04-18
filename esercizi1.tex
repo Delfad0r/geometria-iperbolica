@@ -7,13 +7,30 @@ Sia $\Delta\subs\HH^2$ un triangolo, $p\in\Delta$ un punto giacente su un lato $
 
 \subsection*{Esercizio 1.5}
 Utilizziamo il modello $H^2=\{(x,y)\in\RR^2:y>0\}$ del semipiano.
-Siano $\ell_1$, $\ell_2$, $\ell_3$ i lati del triangolo, con $\ell_1$ di lunghezza $l$. A meno di isometria, possiamo supporre che $\ell_1$ giaccia sulla circonferenza centrata in $(0,0)$ di raggio $r>0$, e che $\ell_2$ giaccia su una retta verticale (parallela all'asse $y$).
+Siano $\ell_1$, $\ell_2$, $\ell_3$ i lati del triangolo $\Delta$, con $\ell_1$ di lunghezza $l$. A meno di isometria, possiamo supporre che $\ell_1$ giaccia sulla circonferenza centrata in $(0,0)$ di raggio $r>0$, e che $\ell_2$ giaccia su una retta verticale (parallela all'asse $y$). Siano inoltre $\alpha$, $\beta$ gli angoli che le rette congiungenti $(0,0)$ agli estremi di $\ell_1$ formano con l'asse $x$.
+
+Una parametrizzazione di $\ell_1$ è data dalla curva
+\Map{\gamma}{[\alpha,\pi-\beta]}{H^2}{t}{r(\cos t,\sin t).}
+
+Pertanto la lunghezza di $\ell_1$ si può calcolare come
+\[
+l=\int_\alpha^{\pi-\beta}\frac{1}{r\sin t}\norm{\gamma'}_Edt=\int_\alpha^{\pi-\beta}\frac{1}{r\sin t}\cdot rdt=\int_\alpha^{\pi-\beta}\frac{1}{\sin t}dt>\pi-\beta-\alpha,
+\]
+dove $\norm{-}_E$ indica la norma euclidea. Denotiamo con $\mathcal{A}$ il cono sopra $\ell_1$ di vertice $\infty$, ossia
+\[
+\mathcal{A}=\{(x,y)\in H^2:-r\cos\beta\le x\le r\cos\alpha,x^2+y^2\ge r^2\}.
+\]
+È evidente che $\Delta$ è contenuto in $\mathcal{A}$; inoltre $\mathcal{A}$ è un triangolo con angoli $\alpha$, $\beta$ e $0$, dunque ha area $\pi-\alpha-\beta$. Ma allora
+\[
+l>\pi-\alpha-\beta=\Area(\mathcal{A})\ge\Area(\Delta).
+\]
+
 
 \begin{tikzpicture}[scale=2]
 \tkzDefPoint(0,0){O}
 \tkzDefPoint(1,0){K}
 \tkzDefPoint(0.6,0){U0}
-\tkzDefPointWith[orthogonal,K=-2](U0,O)\tkzGetPoint{U1}
+\tkzDefPointWith[orthogonal](U0,O)\tkzGetPoint{U1}
 \tkzInterLC(U0,U1)(O,K)\tkzGetFirstPoint{U}
 \tkzDefPoint(-0.8,0){V0}
 \tkzDefPointWith[orthogonal](V0,O)\tkzGetPoint{V1}
@@ -21,29 +38,37 @@ Siano $\ell_1$, $\ell_2$, $\ell_3$ i lati del triangolo, con $\ell_1$ di lunghez
 \tkzDefPointOnLine[pos=4](V0,V)\tkzGetPoint{W}
 \tkzDefLine[mediator](U,W)\tkzGetPoints{W0}{W1}
 \tkzInterLL(W0,W1)(O,K)\tkzGetPoint{O1}
-\tkzDefPointWith[orthogonal,K=-.3](U,O)\tkzGetPoint{U2}
-\tkzDefPointWith[orthogonal,K=.3](V,O)\tkzGetPoint{V2}
-\tkzFillAngles[size=.2,fill=blue!15](U0,O,U U1,U,U2)
-\tkzMarkAngles[size=.2](U0,O,U U1,U,U2)
-\tkzFillAngles[size=.2,fill=red!15](V,O,V0 V2,V,V1)
+\tkzDefPointWith[orthogonal,K=-.4](U,O)\tkzGetPoint{U2}
+\tkzDefPointWith[orthogonal,K=.4](V,O)\tkzGetPoint{V2}
+\tkzDefShiftPoint[W](0,0.5){W3}
+\tkzDefPointWith[colinear=at W3](V0,U0)\tkzGetPoint{U3}
+\tkzFillPolygon[green!10](V0,U0,U3,W3)
+\tkzFillSector[white,rotate](O,K)(180)
+\tkzFillAngles[size=.2,fill=blue!25](U0,O,U U3,U,U2)
+\tkzMarkAngles[size=.2](U0,O,U U3,U,U2)
+\tkzFillAngles[size=.2,fill=red!25](V,O,V0 V2,V,V1)
 \tkzMarkAngles[size=.2,mark=||](V,O,V0 V2,V,V1)
-\tkzDrawSemiCircle(O,K)
-\tkzDrawLine[add=0 and 0.5cm,gray](V0,W)
-\tkzDrawLine[add=0 and 0.5cm,gray](U0,U)
-\tkzDrawLine[add=0.5 and 0.5](V0,U0)
-\tkzDrawArc[purple](O1,U)(W)
-\tkzDrawSegment[purple](V,W)
-\tkzDrawArc[purple](O,U)(V)
-\tkzDrawSegments(O,U O,V)
+\tkzDrawSemiCircle[gray](O,K)
+\tkzDrawSegment[gray](V0,W3)
+\tkzDrawSegment[gray](U0,U3)
+\tkzDrawLine[gray,add=0.5 and 0.5](V0,U0)
+\tkzDrawArc[black,line width=.5pt](O1,U)(W)
+\tkzDrawSegment[black,line width=.5pt](V,W)
+\tkzDrawArc[black,line width=.5pt,postaction={decorate},decoration={markings,mark=between positions 0.2 and 0.8 step 0.2 with {\arrow[thick]{stealth}}}](O,U)(V)
+\tkzDrawSegments[gray](O,U O,V)
 \tkzDrawSegments[gray](U,U2 V,V2)
-\tkzDrawPoints(O,U,V,W)
+\tkzDrawPoint[black!70](O)
+\tkzDrawPoints[black](U,V,W)
 \tkzLabelSegment(V,W){$\ell_2$}
 \tkzLabelCircle[above](O,K)(100){$\ell_1$}
 \tkzLabelCircle[above](O1,U)(30){$\ell_3$}
-\tkzLabelSegment(O,U){$r$}
+\tkzLabelSegment[black!70,above](O,U){$r$}
 \tkzLabelAngles[blue,pos=.35](U0,O,U){$\alpha$}
 \tkzLabelAngles[red,pos=.35](V,O,V0){$\beta$}
+\tkzLabelSegment[pos=.9,green!40!black](U,U3){$\mathcal{A}$}
 \end{tikzpicture}
+
+
 
 \subsection*{Esercizio 1.9}
 \begin{lemma*}

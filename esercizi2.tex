@@ -20,7 +20,6 @@ Supponiamo che $\Gamma$ non sia elementare. Sia $S\subs\del\HH^n$ un chiuso non 
 Sia $K\subs\overline{\HH^n}$ l'inviluppo convesso di $S$. Poiché $\Gamma$ non è elementare, $S$ contiene almeno due punti, dunque $K\cap\HH^n$ è non vuoto. Scegliamo un $x\in K\cap\HH^n$; poiché $S$ è chiuso e $\Gamma$-invariante, lo stesso vale per $K$. Ma allora l'insieme dei punti limite di $\Gamma\cdot x$ che giacciono in $\del\HH^n$ (ossia $L(\Gamma)$ è contenuto in $K\cap\del\HH^n=S$, da cui la tesi.
 \end{proof}
 
-\begin{comment}
 \begin{proposition*}
 Supponiamo che $\Gamma$ agisca su $\HH^n$ in modo libero e propriamente discontinuo. Allora $\Gamma$ agisce liberamente anche su $O(\Gamma)$.
 \end{proposition*}
@@ -31,7 +30,6 @@ Supponiamo che $\Gamma$ agisca su $\HH^n$ in modo libero e propriamente disconti
 \item Se $g$ è parabolico, consideriamo una qualunque orbita $\langle g\rangle \cdot x$. Poiché $\overline{\HH^n}$ è metrizzabile e compatto, necessariamente questa orbita ammette un punto limite, il quale risulta fissato da $g$; ma $g$ ha un unico punto fisso, che dunque è anche un punto limite.\qedhere
 \end{itemize}
 \end{proof}
-\end{comment}
 
 \begin{definition*}
 Sia $K\subs\del\HH^n$ un convesso chiuso contenente almeno due punti (dunque non tutto contenuto in $\del\HH^n$). Definiamo l'applicazione $\map{\rho_K}{\overline{\HH^n}}{K}$ come segue:
@@ -43,15 +41,12 @@ Sia $K\subs\del\HH^n$ un convesso chiuso contenente almeno due punti (dunque non
 Osserviamo che questa definizione è ben posta poiché $K$ è convesso e chiuso. Inoltre si verifica facilmente che $\rho_K$ è continua su $\HH^n\cup(\del\HH^n\setminus K)$ e soddisfa $\rho_{g(K)}\circ g=g\circ\rho_K$ per ogni isometria $g$ di $\HH^n$.
 
 \begin{proposition*}
-Supponiamo che $\Gamma$ agisca in modo libero e propriamente discontinuo su $\HH^n$. Allora $\Gamma$ agisce allo stesso modo su $\HH^n\cup O(\Gamma)$.
+Supponiamo che $L(\Gamma)$ contenga almeno due punti e che $\Gamma$ agisca in modo propriamente discontinuo su $\HH^n$. Allora $\Gamma$ agisce allo stesso modo su $\HH^n\cup O(\Gamma)$.
 \end{proposition*}
 \begin{proof}
 Sia $K\subs\overline{\HH^n}$ l'inviluppo convesso di $L(\Gamma)$; poiché $L(\Gamma)$ è un chiuso $\Gamma$-invariante, lo stesso vale per $K$. Consideriamo l'applicazione $\map{\rho}{\HH^n\cup O(\Gamma)}{\HH^n}$ definita come la restrizione a $\HH^n\cup O(\Gamma)$ di $\rho_K$. Per quanto abbiamo osservato, $\rho$ è continua e soddisfa $\rho\circ g=g\circ\rho$ per ogni $g\in\Gamma$.
 
-\begin{itemize}
-\item \textbf{L'azione di $\Gamma$ su $\HH^n\cup O(\Gamma)$ è libera.} Sia $y\in O(\Gamma)$. Se $g(y)=y$ per un qualche $g\in\Gamma$, allora anche $g(\rho(y))=\rho(g(y))=\rho(y)$, da cui (essendo l'azione di $\Gamma$ libera su $\HH^n$) $g=\id$.
-\item \textbf{L'azione di $\Gamma$ su $\HH^n\cup O(\Gamma)$ è propriamente discontinua.} Siano $y,y'\in\HH^n\cup O(\Gamma)$. Poiché l'azione di $\Gamma$ su $\HH^n$ è propriamente discontinua, esistono intorni $U$, $U'$ di $\rho(y)$, $\rho(y')$ rispettivamente tali che $U\cap g(U')\neq\emptyset$ solo per un numero finito di $g\in\Gamma$. Scegliamo $W=\rho^{-1}(U)$ e $W'=\rho^{-1}(U')$ come intorni, rispettivamente, di $y$ e $y'$. Si verifica facilmente che se $U\cap g(U')=\emptyset$ allora $W\cap g(W')=\emptyset$, da cui la tesi.\qedhere
-\end{itemize}
+Mostriamo che l'azione di $\Gamma$ su $\HH^n\cup O(\Gamma)$ è propriamente discontinua. Siano $y,y'\in\HH^n\cup O(\Gamma)$. Poiché l'azione di $\Gamma$ su $\HH^n$ è propriamente discontinua, esistono intorni $U$, $U'$ di $\rho(y)$, $\rho(y')$ rispettivamente tali che $U\cap g(U')\neq\emptyset$ solo per un numero finito di $g\in\Gamma$. Scegliamo $W=\rho^{-1}(U)$ e $W'=\rho^{-1}(U')$ come intorni, rispettivamente, di $y$ e $y'$. Si verifica facilmente che se $U\cap g(U')=\emptyset$ allora $W\cap g(W')=\emptyset$, da cui la tesi.
 \end{proof}
 
 \begin{theorem*}
@@ -62,7 +57,9 @@ S=\bigcup_{g\in\Gamma}\Fix(g)\subs\del\HH^n.
 Allora $S$ è denso in $\del\HH^n$.
 \end{theorem*}
 \begin{proof}
-Osserviamo innanzitutto che $\Gamma$ non è elementare, altrimenti $M$ avrebbe volume infinito. Notiamo poi che $\overline{S}\subs\del\HH^n$ è un chiuso non vuoto $\Gamma$-invariante, dunque contiene $L(\Gamma)$. Se per assurdo $S$ non fosse denso in $\del\HH^n$, allora $O(\Gamma)$ sarebbe non vuoto. Sia dunque $y\in O(\Gamma)$; poiché l'azione di $\Gamma$ su $\HH^n\cup O(\Gamma)$ è libera e propriamente discontinua, esiste un intorno $W\subs\HH^n\cup O(\Gamma)$ di $y$ tale che $W\cap g(W)=\emptyset$ per ogni $g\in\Gamma$ diverso dall'identità. Poiché $y$ ha un sistema fondamentale di intorni costituito da semispazi, possiamo supporre che $W$ sia un semispazio. Ma allora $\vol(M)\ge\vol(W)=\infty$, il che contraddice l'ipotesi.
+Osserviamo innanzitutto che $\Gamma$ non è elementare, altrimenti $M$ avrebbe volume infinito. Notiamo poi che $\overline{S}\subs\del\HH^n$ è un chiuso non vuoto $\Gamma$-invariante, dunque contiene $L(\Gamma)$. Allo stesso tempo, poiché $\Gamma$ agisce su $O(\Gamma)$ senza punti fissi, necessariamente $S\subs L(\Gamma)$; in particolare, essendo $\Gamma$ non elementare, $L(\Gamma)$ contiene almeno due punti.
+
+Supponiamo ora per assurdo che $S$ non sia denso in $\HH^n$. Poiché $L(\Gamma)\subs\overline{S}$, segue che $O(\Gamma)$ è non vuoto. Sia dunque $y\in O(\Gamma)$; poiché l'azione di $\Gamma$ su $\HH^n\cup O(\Gamma)$ è libera e propriamente discontinua, esiste un intorno $W\subs\HH^n\cup O(\Gamma)$ di $y$ tale che $W\cap g(W)=\emptyset$ per ogni $g\in\Gamma$ diverso dall'identità. Poiché $y$ ha un sistema fondamentale di intorni costituito da semispazi, possiamo supporre che $W$ sia un semispazio. Ma allora $\vol(M)\ge\vol(W)=\infty$, il che contraddice l'ipotesi.
 \end{proof}
 
 \subsection*{Esercizio 2.1}
