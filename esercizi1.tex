@@ -7,13 +7,13 @@ Sia $\Delta\subs\HH^2$ un triangolo, $p\in\Delta$ un punto giacente su un lato $
 
 \subsection*{Esercizio 1.5}
 Utilizziamo il modello $H^2=\{(x,y)\in\RR^2:y>0\}$ del semipiano.
-Siano $\ell_1$, $\ell_2$, $\ell_3$ i lati del triangolo. A meno di isometria, possiamo supporre che $\ell_1$ giaccia sulla circonferenza centrata in $(0,0)$ di raggio $r>0$, e che $\ell_2$ giaccia su una retta verticale.
+Siano $\ell_1$, $\ell_2$, $\ell_3$ i lati del triangolo, con $\ell_1$ di lunghezza $l$. A meno di isometria, possiamo supporre che $\ell_1$ giaccia sulla circonferenza centrata in $(0,0)$ di raggio $r>0$, e che $\ell_2$ giaccia su una retta verticale (parallela all'asse $y$).
 
 \begin{tikzpicture}[scale=2]
 \tkzDefPoint(0,0){O}
 \tkzDefPoint(1,0){K}
 \tkzDefPoint(0.6,0){U0}
-\tkzDefPointWith[orthogonal](U0,O)\tkzGetPoint{U1}
+\tkzDefPointWith[orthogonal,K=-2](U0,O)\tkzGetPoint{U1}
 \tkzInterLC(U0,U1)(O,K)\tkzGetFirstPoint{U}
 \tkzDefPoint(-0.8,0){V0}
 \tkzDefPointWith[orthogonal](V0,O)\tkzGetPoint{V1}
@@ -21,10 +21,28 @@ Siano $\ell_1$, $\ell_2$, $\ell_3$ i lati del triangolo. A meno di isometria, po
 \tkzDefPointOnLine[pos=4](V0,V)\tkzGetPoint{W}
 \tkzDefLine[mediator](U,W)\tkzGetPoints{W0}{W1}
 \tkzInterLL(W0,W1)(O,K)\tkzGetPoint{O1}
+\tkzDefPointWith[orthogonal,K=-.3](U,O)\tkzGetPoint{U2}
+\tkzDefPointWith[orthogonal,K=.3](V,O)\tkzGetPoint{V2}
+\tkzFillAngles[size=.2,fill=blue!15](U0,O,U U1,U,U2)
+\tkzMarkAngles[size=.2](U0,O,U U1,U,U2)
+\tkzFillAngles[size=.2,fill=red!15](V,O,V0 V2,V,V1)
+\tkzMarkAngles[size=.2,mark=||](V,O,V0 V2,V,V1)
 \tkzDrawSemiCircle(O,K)
 \tkzDrawLine[add=0 and 0.5cm,gray](V0,W)
-\tkzDrawArc[delta=10](O1,U)(W)
+\tkzDrawLine[add=0 and 0.5cm,gray](U0,U)
+\tkzDrawLine[add=0.5 and 0.5](V0,U0)
+\tkzDrawArc[purple](O1,U)(W)
+\tkzDrawSegment[purple](V,W)
+\tkzDrawArc[purple](O,U)(V)
+\tkzDrawSegments(O,U O,V)
+\tkzDrawSegments[gray](U,U2 V,V2)
 \tkzDrawPoints(O,U,V,W)
+\tkzLabelSegment(V,W){$\ell_2$}
+\tkzLabelCircle[above](O,K)(100){$\ell_1$}
+\tkzLabelCircle[above](O1,U)(30){$\ell_3$}
+\tkzLabelSegment(O,U){$r$}
+\tkzLabelAngles[blue,pos=.35](U0,O,U){$\alpha$}
+\tkzLabelAngles[red,pos=.35](V,O,V0){$\beta$}
 \end{tikzpicture}
 
 \subsection*{Esercizio 1.9}

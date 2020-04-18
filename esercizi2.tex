@@ -62,5 +62,20 @@ S=\bigcup_{g\in\Gamma}\Fix(g)\subs\del\HH^n.
 Allora $S$ è denso in $\del\HH^n$.
 \end{theorem*}
 \begin{proof}
-Osserviamo innanzitutto che $\Gamma$ non è elementare, altrimenti $M$ avrebbe volume infinito. Notiamo poi che $\overline{S}\subs\del\HH^n$ è un chiuso non vuoto $\Gamma$-invariante, dunque contiene $L(\Gamma)$. Se per assurdo $S$ non fosse denso in $\del\HH^n$, allora $O(\Gamma)$ sarebbe non vuoto. Sia dunque $y\in O(\Gamma)$; poiché l'azione di $\Gamma$ su $\HH^n\cup O(\Gamma)$ è libera e propriamente discontinua, esiste un intorno $W\subs\HH^n\cup O(\Gamma)$ di $y$ tale che $W\cap g(W)=\emptyset$ per ogni $g\in\Gamma$ diverso dall'identità. Poiché $y$ ha un sistema fondamentale di intorni costituito da semispazi, possiamo supporre che $W$ sia un semispazio. Ma $\map{\pi|_{W\cap\HH^n}}{W\cap\HH^n}{M}$ è un'isometria locale iniettiva (dove $\map{\pi}{\HH^n}{M}$ è il rivestimento), il che è assurdo, avendo $M$ volume finito.
+Osserviamo innanzitutto che $\Gamma$ non è elementare, altrimenti $M$ avrebbe volume infinito. Notiamo poi che $\overline{S}\subs\del\HH^n$ è un chiuso non vuoto $\Gamma$-invariante, dunque contiene $L(\Gamma)$. Se per assurdo $S$ non fosse denso in $\del\HH^n$, allora $O(\Gamma)$ sarebbe non vuoto. Sia dunque $y\in O(\Gamma)$; poiché l'azione di $\Gamma$ su $\HH^n\cup O(\Gamma)$ è libera e propriamente discontinua, esiste un intorno $W\subs\HH^n\cup O(\Gamma)$ di $y$ tale che $W\cap g(W)=\emptyset$ per ogni $g\in\Gamma$ diverso dall'identità. Poiché $y$ ha un sistema fondamentale di intorni costituito da semispazi, possiamo supporre che $W$ sia un semispazio. Ma allora $\vol(M)\ge\vol(W)=\infty$, il che contraddice l'ipotesi.
 \end{proof}
+
+\subsection*{Esercizio 2.1}
+Per assurdo, sia $\varphi\in\Isom(\HH^n)$ un'isometria che commuta con tutti gli elementi di $\Gamma$. Distinguiamo due casi.
+\begin{itemize}
+\item Se $\varphi$ è parabolica o iperbolica, per un Lemma visto a lezione segue che $\Fix(\varphi)=\Fix(g)$ per ogni $g\in\Gamma$ non banale, ossia tutti gli elementi di $\Gamma$ non banali hanno gli stessi punti fissi. Per un altro Lemma visto a lezione, ciò implica che $\Gamma$ è elementare, il che contraddice l'ipotesi di finitezza del volume di $M$.
+\item Se $\varphi$ è ellittica, denotiamo con $S\subs\overline{\HH^n}$ il sottospazio dei punti fissi di $\varphi$ (si tratta di un sottospazio proprio e non vuoto). Sia $g\in\Gamma$ non banale; mostriamo che $\Fix(g)\subs S$.
+\begin{itemize}
+\item Se $g$ è parabolica, poiché $\varphi$ e $g$ commutano abbiamo che $\varphi(\Fix(g))=\Fix(g)$, ossia l'unico punto fisso di $g$ è fissato da $\varphi$, da cui $\Fix(g)\subs S$.
+\item Se $g$ è iperbolica, poiché $\varphi$ e $g$ commutano abbiamo che $g(S)=S$. Consideriamo il modello del semispazio $H^n$, in cui i punti fissi di $g$ siano $0$ e $\infty$. Ricordando che $\varphi$ si scrive come $(x,t)\mapsto\lambda(Ax,t)$, si vede immediatamente che $S$ deve necessariamente essere un'iperpiano ortogonale a $\del H^n$, ossia $\infty\in S$. Scambiando $0$ e $\infty$ otteniamo che entrambi i punti fissi di $g$ appartengono a $S$.
+\end{itemize}
+Poiché $S$ è un sottospazio proprio, $S\cap\del\HH^n$ non può essere denso in $\del\HH^n$, il che contraddice il Teorema.
+\end{itemize}
+
+\subsection*{Esercizio 2.5}
+Poiché $M$ è compatta, tutti gli elementi di $\Gamma$ sono iperbolici. Dal Teorema segue immediatamente che $S$ è denso in $\del\HH^n$.
