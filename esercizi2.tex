@@ -32,7 +32,7 @@ Supponiamo che $\Gamma$ agisca su $\HH^n$ in modo libero e propriamente disconti
 \end{proof}
 
 \begin{definition*}
-Sia $K\subs\del\HH^n$ un convesso chiuso contenente almeno due punti (dunque non tutto contenuto in $\del\HH^n$). Definiamo l'applicazione $\map{\rho_K}{\overline{\HH^n}}{K}$ come segue:
+Sia $K\subs\overline{\HH^n}$ un convesso chiuso contenente almeno due punti (dunque non tutto contenuto in $\del\HH^n$). Definiamo l'applicazione $\map{\rho_K}{\overline{\HH^n}}{K}$ come segue:
 \begin{itemize}
 \item se $x\in\HH^n$, allora $\rho_K(x)$ è il punto di $K\cap\HH^n$ di minima distanza da $x$;
 \item se $x\in\del\HH^n$, allora $\rho_K(x)$ è l'unico punto di $K$ giacente sulla minima orosfera centrata in $x$ che interseca $K$.
@@ -52,14 +52,14 @@ Mostriamo che l'azione di $\Gamma$ su $\HH^n\cup O(\Gamma)$ è propriamente disc
 \begin{theorem*}
 Supponiamo che la varietà iperbolica completa $M=\HH^n/\Gamma$ abbia volume finito. Sia
 \[
-S=\bigcup_{g\in\Gamma}\Fix(g)\subs\del\HH^n.
+S=\bigcup_{g\in\Gamma\setminus\{\id\}}\Fix(g)\subs\del\HH^n.
 \]
 Allora $S$ è denso in $\del\HH^n$.
 \end{theorem*}
 \begin{proof}
 Osserviamo innanzitutto che $\Gamma$ non è elementare, altrimenti $M$ avrebbe volume infinito. Notiamo poi che $\overline{S}\subs\del\HH^n$ è un chiuso non vuoto $\Gamma$-invariante, dunque contiene $L(\Gamma)$. Allo stesso tempo, poiché $\Gamma$ agisce su $O(\Gamma)$ senza punti fissi, necessariamente $S\subs L(\Gamma)$; in particolare, essendo $\Gamma$ non elementare, $L(\Gamma)$ contiene almeno due punti.
 
-Supponiamo ora per assurdo che $S$ non sia denso in $\HH^n$. Poiché $L(\Gamma)\subs\overline{S}$, segue che $O(\Gamma)$ è non vuoto. Sia dunque $y\in O(\Gamma)$; poiché l'azione di $\Gamma$ su $\HH^n\cup O(\Gamma)$ è libera e propriamente discontinua, esiste un intorno $W\subs\HH^n\cup O(\Gamma)$ di $y$ tale che $W\cap g(W)=\emptyset$ per ogni $g\in\Gamma$ diverso dall'identità. Poiché $y$ ha un sistema fondamentale di intorni costituito da semispazi, possiamo supporre che $W$ sia un semispazio. Ma allora $\vol(M)\ge\vol(W)=\infty$, il che contraddice l'ipotesi.
+Supponiamo ora per assurdo che $S$ non sia denso in $\del\HH^n$. Poiché $L(\Gamma)\subs\overline{S}$, segue che $O(\Gamma)$ è non vuoto. Sia dunque $y\in O(\Gamma)$; poiché l'azione di $\Gamma$ su $\HH^n\cup O(\Gamma)$ è libera e propriamente discontinua, esiste un intorno $W\subs\HH^n\cup O(\Gamma)$ di $y$ tale che $W\cap g(W)=\emptyset$ per ogni $g\in\Gamma$ diverso dall'identità. Poiché $y$ ha un sistema fondamentale di intorni costituito da semispazi, possiamo supporre che $W$ sia un semispazio. Ma allora $\vol(M)\ge\vol(W)=\infty$, il che contraddice l'ipotesi.
 \end{proof}
 
 \subsection*{Esercizio 2.1}
@@ -72,6 +72,30 @@ Per assurdo, sia $\varphi\in\Isom(\HH^n)$ un'isometria che commuta con tutti gli
 \item Se $g$ è iperbolica, poiché $\varphi$ e $g$ commutano abbiamo che $g(S)=S$. Consideriamo il modello del semispazio $H^n$, in cui i punti fissi di $g$ siano $0$ e $\infty$. Ricordando che $\varphi$ si scrive come $(x,t)\mapsto\lambda(Ax,t)$, si vede immediatamente che $S$ deve necessariamente essere un'iperpiano ortogonale a $\del H^n$, ossia $\infty\in S$. Scambiando $0$ e $\infty$ otteniamo che entrambi i punti fissi di $g$ appartengono a $S$.
 \end{itemize}
 Poiché $S$ è un sottospazio proprio, $S\cap\del\HH^n$ non può essere denso in $\del\HH^n$, il che contraddice il Teorema.
+\end{itemize}
+
+\subsection*{Esercizio 2.4}
+La proiezione $\map{\phi}{\ZZ[i]}{\ZZ[i]/2\ZZ[i]}$ induce un omomorfismo di gruppi
+\[
+\map{\Phi}{\PSL(2,\ZZ[i])}{\PSL(2,\ZZ[i]/2\ZZ[i])}
+\]
+applicando $\phi$ a ogni entrata della matrice. Sia $\Gamma<\PSL(2,\ZZ[i])$ il nucleo di $\Phi$. Poiché $\PSL(2,\ZZ[i]/2\ZZ[i])$ è finito, $\Gamma$ ha indice finito in $\PSL(2,\ZZ[i])$. Osserviamo che
+\[
+\Gamma=\left\{\mattwo{1+2a}{2b}{2c}{1+2d}\in\PSL(2,\ZZ[i]):a,b,c,d,\in\ZZ[i]\right\}.
+\]
+(con lieve abuso di notazione, trattiamo gli elementi di $\PSL(2,\ZZ[i])$ come matrici invece che come classi di equivalenza).
+\begin{itemize}
+\item\textbf{$\Gamma$ non contiene elementi ellittici.} Supponiamo per assurdo che un elemento $\mattwo{1+2a}{2b}{2c}{1+2d}$ di $\Gamma$ sia ellittico, ossia abbia traccia reale minore di $2$ in modulo. Allora $2+2a+2d$ è un numero reale, intero, pari e minore di $2$ in modulo, dunque è necessariamente nullo. La condizione sul determinante diventa allora
+\[
+1=\det\mattwo{1+2a}{2b}{2c}{-1-2a}=-(1+4a+4a^2+4bc),
+\]
+ossia
+\[
+1+2a+2a^2+2bc=0,
+\]
+il che è assurdo (ad esempio guardando la parità della parte reale).
+\item \textbf{La varietà iperbolica $\HH^3/\Gamma$ ha volume finito.} Dall'Esercizio 2.3 sappiamo che il gruppo $\PSL(2,\ZZ[i])$ ha un dominio fondamentale $D$ di volume finito. Poiché $\Gamma$ ha indice finito in $\PSL(2,\ZZ[i])$, allora esiste un dominio fondamentale (in senso lato) per $\Gamma$ di volume finito, che si ottiene prendendo l'unione dei domini $g\cdot D$ al variare di $g$ in un insieme di rappresentanti per $\PSL(2,\ZZ[i])/\Gamma$.
+\item\textbf{La varietà iperbolica $\HH^3/\Gamma$ non è compatta.} Basta osservare che $\Gamma$ contiene l'elemento parabolico $\mattwo{3}{-2}{2}{-1}$.
 \end{itemize}
 
 \subsection*{Esercizio 2.5}
