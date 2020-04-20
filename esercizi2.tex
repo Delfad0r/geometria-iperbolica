@@ -38,7 +38,55 @@ Sia $K\subs\overline{\HH^n}$ un convesso chiuso contenente almeno due punti (dun
 \item se $x\in\del\HH^n$, allora $\rho_K(x)$ è l'unico punto di $K$ giacente sulla minima orosfera centrata in $x$ che interseca $K$.
 \end{itemize}
 \end{definition*}
-Osserviamo che questa definizione è ben posta poiché $K$ è convesso e chiuso. Inoltre si verifica facilmente che $\rho_K$ è continua su $\HH^n\cup(\del\HH^n\setminus K)$ e soddisfa $\rho_{g(K)}\circ g=g\circ\rho_K$ per ogni isometria $g$ di $\HH^n$.
+Osserviamo che questa definizione è ben posta poiché $K$ è convesso e chiuso. Inoltre si verifica facilmente che vale l'uguaglianza $\rho_{g(K)}\circ g=g\circ\rho_K$ per ogni isometria $g$ di $\HH^n$.
+
+\begin{proposition*}
+La restrizione
+\[
+\map{\rho_K}{\HH^n\cup(\del\HH^n\setminus K)}{\HH^n}
+\]
+è continua.
+\end{proposition*}
+\begin{proof}
+Utilizziamo il modello del disco. Sia $x\in\HH^n\cup(\del\HH^n\setminus K)$. Poiché $x\not\in\del\HH^n\cap K$, sicuramente $\rho_K(x)\in\HH^n$. A meno di isometria, possiamo supporre che $\rho_K(x)=0$. Sia ora $y\in\HH^n\cup(\del\HH^n\setminus K)$. Mostreremo che $\norm{\rho_K(y)}_E\le\norm{y-x}_E$, dove $\norm{-}_E$ indica la norma euclidea sul disco: questo sarà sufficiente per concludere.
+
+Se $\rho_K(y)=0$ la disuguaglianza è sicuramente verificata, dunque possiamo supporre $\rho_K(y)\neq 0$. Osserviamo che tutto il segmento euclideo (che è anche un segmento iperbolico) $[0,\rho_K(y)]$ è contenuto in $K$, essendo $K$ convesso. Poiché $0$ è il punto di $K$ più vicino a $x$, allora necessariamente l'angolo fra $[0,\rho_K(y)]$ e $[0,x]$ è ottuso, dunque $\scal{x}{\rho_K(y)}\le 0$ (questa disuguaglianza è vera anche se $x=0$, nel qual caso l'angolo citato non è ben definito). Allo stesso modo, spostando $\rho_K(y)$ in $0$ e ricordando che le isometrie sono (anti)conformi, anche l'angolo fra $[\rho_K(y),0]$ e il segmento iperbolico fra $\rho_K(y)$ e $y$ è ottuso, dunque a maggior ragione anche l'angolo fra $[\rho_K(y),0]$ e $[\rho_K(y),y]$ (segmento euclideo) lo è. Segue che $\scal{\rho_K(y)-y}{\rho_K(y)}\le 0$ (di nuovo, questa disuguaglianza è vera anche se $y=\rho_K(y)$). Combinando le due disuguaglianze trovate otteniamo che
+\[
+\norm{\rho_K(y)}^2_E\le\scal{\rho_K(y)}{y-x}\le\norm{\rho_K(y)}_E\cdot\norm{y-x}_E,
+\]
+dove abbiamo applicato la disuguaglianza di Cauchy-Schwarz. La tesi segue immediatamente.
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[scale=4]
+\tkzDefPoint(0,0){o}
+\tkzDefPointOnCircle[angle=120,center=o,radius=.8]\tkzGetPoint{x}
+\tkzDefPointOnCircle[angle=30,center=o,radius=1]\tkzGetPoint{u_1}
+\tkzDefPointOnCircle[angle=-50,center=o,radius=1]\tkzGetPoint{u_2}
+\tkzDefPointWith[orthogonal](u_1,o)\tkzGetPoint{u_3}
+\tkzDefPointWith[orthogonal](u_2,o)\tkzGetPoint{u_4}
+\tkzInterLL(u_1,u_3)(u_2,u_4)\tkzGetPoint{u}
+\tkzCalcLength[cm](u,u_1)
+\tkzDefPointOnCircle[angle=130,center=u,radius=\tkzLengthResult cm]\tkzGetPoint{y}
+\tkzDefPointOnCircle[angle=160,center=u,radius=\tkzLengthResult cm]\tkzGetPoint{py}
+\tkzDefPointWith[orthogonal,K=.25](py,u)\tkzGetPoint{v}
+\tkzFillAngles[fill=blue!25,size=.1](py,o,x v,py,o)
+\tkzMarkAngle[size=.1](py,o,x)
+\tkzMarkAngle[size=.1,mark=||](v,py,o)
+\tkzDrawCircle[R,gray](o,1cm)
+\tkzDrawArc[gray](u,u_1)(u_2)
+\tkzDrawSegment[black,line width=.7pt](x,o)
+\tkzDrawArc[black,line width=.7pt](u,y)(py)
+\tkzDrawSegment[blue,line width=.7pt](o,py)
+\tkzDrawSegment[blue!50,line width=.7pt, dashed](x,y)
+\tkzDrawSegment[gray](py,v)
+\tkzDrawPoints(o,x,y,py)
+\tkzLabelPoint[below](o){$0$}
+\tkzLabelPoint[above](x){$x$}
+\tkzLabelPoint[above](y){$y$}
+\tkzLabelPoint(py){$\rho_K(y)$}
+\end{tikzpicture}
+\end{figure}
+\end{proof}
 
 \begin{proposition*}
 Supponiamo che $L(\Gamma)$ contenga almeno due punti e che $\Gamma$ agisca in modo propriamente discontinuo su $\HH^n$. Allora $\Gamma$ agisce allo stesso modo su $\HH^n\cup O(\Gamma)$.
