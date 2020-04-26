@@ -1,5 +1,31 @@
 \section*{Esercizi dell'11 aprile}
 
+\subsection*{Esercizio 3.2}
+Per fissare la notazione, ricordiamo come si definiscono i Dehn twist. Sia $\map{\alpha}{S^1}{S}$ una curva semplice chiusa. Sia $A=S^1\times[-1,1]$ con l'orientazione indotta da quelle standard di $S^1$ e $[0,1]$. Fissiamo un intorno regolare di $\alpha$, ossia un embedding $\map{\psi}{A}{S}$ tale che $\psi(x,0)=\alpha(x)$ per ogni $x\in S^1$; scegliamolo in modo che $\psi$ preservi l'orientazione. Fissiamo infine una funzione $\map{f}{[-1,1]}{[0,2\pi]}$ tale che
+$f(t)=0$ per $t\le-\frac{1}{2}$ e $f(t)=2\pi$ per $t\ge\frac{1}{2}$, e definiamo
+\Map{\theta}{A}{A}{(e^{ix},t)}{(e^{i(x+f(t))},t).}
+Possiamo ora definire il Dehn twist intorno a $\alpha$ come il diffeomorfismo $\map{T_\alpha}{S}{S}$ tale che
+\[
+T_\alpha(p)=\begin{cases}
+p&p\not\in\psi(A)\\
+(\psi\circ\theta\circ\psi^{-1})(p)&p\in\psi(A).
+\end{cases}
+\]
+Come visto a lezione, la classe di isotopia di $T_\alpha$ non dipende dalla scelta dell'intorno regolare $\psi$ né della funzione $f$.
+\begin{enumerate}[(1)]
+\item \begin{itemize}
+\item Cominciamo a mostrare che la classe di isotopia di $T_\alpha$ non dipende dall'orientazione di $\alpha$. Sia dunque $\map{\alpha}{S^1}{S}$ una curva semplice chiusa, e sia $\map{\overline\alpha}{S^1}{S}$ la curva inversa, ossia quella definita da $\overline\alpha(e^{ix})=\alpha(e^{-ix})$. Se $\map{\psi}{A}{S}$ è un intorno regolare orientato di $\alpha$, allora
+\Map{\overline\psi}{A}{S}{(e^{ix},t)}{\psi(e^{-ix},-t)}
+è un intorno regolare orientato per $\overline\alpha$. Poiché la classe di isotopia dei Dehn twist non dipende dalla scelta di $f$, non è restrittivo supporre che $f(-t)=2\pi-f(t)$. Mostriamo allora che $T_\alpha(p)=T_{\overline\alpha}(p)$ per ogni $p\in S$ (dunque in particolare sono isotopi). La tesi è ovvia per $p\not\in\psi(A)$, dunque supponiamo $p\in\psi(A)$; è sufficiente far vedere che $\psi\circ\theta\circ\psi^{-1}\circ\overline\psi=\overline\psi\circ\theta$. Effettivamente:
+\begin{align*}
+(\psi\circ\theta\circ\psi^{-1}\circ\overline\psi)(e^{ix},t)&=\psi(\theta(e^{-ix},-t))=\psi(e^{i(-x+f(-t))},-t)=\psi(e^{-i(x+f(t))},-t);\\
+(\overline\psi\circ\theta)(e^{ix},t)&=\overline\psi(e^{i(x+f(t))},t)=\psi(e^{-i(x+f(t))},-t).
+\end{align*}
+\item Supponiamo che le curve semplici chiuse $\map{\alpha,\beta}{S^1}{S}$ siano due rappresentanti della stessa classe di isotopia, ossia che esista un'isotopia (ambiente) $\map{F}{S\times[0,1]}{S}$ tale che $F_0=\id_S$ e $F_1\circ\alpha=\beta$. Osserviamo che, per quanto abbiamo dimostrato, possiamo orientare $\alpha$ e $\beta$ in modo che una tale isotopia esista. Sia $\map{\psi}{A}{S}$ un intorno regolare orientato di $\alpha$; notiamo che $F_1\circ\psi$ è un intorno regolare orientato di $\beta$. È allora evidente che un Dehn twist intorno a $\beta$ è dato da $T_\beta=F_1\circ T_\alpha\circ F_1^{-1}$, che è ovviamente isotopo a $T_\alpha$. Questo mostra che $T_\beta=T_\alpha$ in $\MCG(S)$.
+\item 
+\end{itemize}
+\end{enumerate}
+
 \subsection*{Esercizio 3.5}
 \usetikzlibrary{backgrounds}
 \usetikzlibrary{math}
