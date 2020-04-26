@@ -1,0 +1,95 @@
+\section*{Esercizi dell'11 aprile}
+
+\subsection*{Esercizio 3.5}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{math}
+\newcommand{\ngon}[3][0]{
+\tikzmath{
+\g = #2;
+\r = #3;
+\n = \g * 4;
+\twog = \g * 2;
+}
+\foreach \i [evaluate=\i as \an using 180*((2*\i-1)/\n+1)] in {1,...,\n} {
+    \tkzDefPoint(\an:\r){x_\i}
+    \tikzmath{\an1 = \an + #1;}
+    \tkzLabelPoint[label=\an1:$x_{\i}$,anchor=base](x_\i){}
+}
+\begin{scope}[on background layer]
+\tkzFillPolygon[blue!10](x_1,x_...,x_\n)
+\end{scope}
+\foreach \i in {1,...,\twog} {
+    \tikzmath{
+        \j = \i + 1;
+        \l = \twog + \i;
+        \k = \l + 1;
+        if \k > \n then {
+            \k = 1;
+        };
+        if Mod(\i, 2) == 0 then {
+            let \col = white;
+        } else {
+            let \col = black;
+        };
+        \s = .15 * 3 / (\r * 5.1 * sin(180 / \n));
+        \t = (\i + Mod(\i, 2) - 2) / 2;
+    }
+    \foreach \b/\e in {\i/\j,\k/\l} {
+        \tkzDrawSegment[postaction={decorate},decoration={markings,mark=between positions (0.5+\s*0.75-\s/2*\t) and (0.51+\s*0.75+\s/2*\t) step \s with {\arrow[scale=1.2,\col]{Triangle}\arrow[scale=1.2,black]{Triangle[open]}}}](x_\b,x_\e)
+    }
+}
+\tkzDrawPoints(x_1,x_...,x_\n)
+}
+
+Consideriamo la superficie chiusa ottenuta incollando lati opposti di un $4g$-gono regolare con orientazioni parallele. Più precisamente, detti $x_1,\ldots,x_{4g}$ i vertici del poligono regolare, incolliamo il segmento $x_ix_{i+1}$ con il segmento $x_{2g+i+1}x_{2g+i}$. La superficie $\Sigma$ così ottenuta ha una struttura di CW-complesso con una $0$-cella, $2g$ $1$-celle e una $2$-cella.
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\ngon{3}{3}
+\begin{scope}[on background layer]
+\foreach \i [evaluate=\i as \j using \i-1] in {4,...,\n} {
+    \tkzDrawSegment[thin,gray](x_1,x_\j)
+}
+\end{scope}
+\end{tikzpicture}
+\end{figure}
+\begin{itemize}
+\item\textbf{$\Sigma$ è orientabile.} Questo si vede immediatamente triangolando il poligono regolare e osservando che le identificazioni fra lati invertono l'orientazione.
+\item\textbf{Una base per $H_1(\Sigma,\ZZ)$ è data dai segmenti $x_ix_{i+1}$ per $1\le i<2g$.} Questo si vede facilmente calcolando l'omologia cellulare: infatti i segmenti $x_ix_{i+1}$ sono esattamente le $1$-celle, e hanno tutte bordo nullo. Al contempo, anche l'unica $2$-cella ha bordo nullo, dunque $H_1(\Sigma,\ZZ)\iso\ZZ^{2g}$ con base data dalle $1$-celle.
+\end{itemize}
+In particolare, $\Sigma$ è una superficie chiusa orientabile di genere $g$.
+
+Per ogni $1\le i<2g$, sia $\alpha_i\in H_1(\Sigma,\ZZ)$ la classe rappresentata in omologia dal segmento $x_ix_{i+1}$. Consideriamo l'automorfismo $\map{f}{\Sigma}{\Sigma}$ indotto dalla rotazione di angolo $\pi$ intorno al centro del poligono regolare. Osserviamo che il segmento $x_ix_{i+1}$ viene mandato da $f$ nel segmento $x_{2g+i}x_{2g+i+1}$, dunque $f_*(\alpha_i)=-\alpha_i$. Poiché gli $\alpha_i$ formano una base di $H_1(\Sigma,\ZZ)$, abbiamo che $f_*=-\id_{H_1(\Sigma,\ZZ)}$. Ovviamente $f$ ha ordine $2$ e preserva l'orientazione, dunque $[f]\in\MCG(\Sigma)$ è l'involuzione iperellittica cercata.
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\begin{scope}[xshift=-4cm]
+\ngon{2}{2}
+\tkzDefPoint(0,0){o}
+\tkzDrawPoint(o)
+\tkzDefMidPoint(x_1,x_2)\tkzGetPoint{u_0}
+\tkzDefPointWith[linear, K=.3](o,u_0)\tkzGetPoint{u_1}
+\tkzDrawArc[thick,rotate,->,>=Triangle,orange!50!red](o,u_1)(180)
+\begin{scope}[on background layer]
+\tkzFillPolygon[orange!50](o,x_1,x_2)
+\end{scope}
+\end{scope}
+
+\begin{scope}[xshift=4cm,rotate=180]
+\ngon[180]{2}{2}
+\tkzDefPoint(0,0){o}
+\tkzDrawPoint(o)
+\begin{scope}[on background layer]
+\tkzFillPolygon[orange!50](o,x_1,x_2)
+\end{scope}
+\end{scope}
+\draw[thick,->,orange!50!red] (-1,0) -- node[above]{$f$} (1,0);
+\end{tikzpicture}
+\end{figure}
+
+\newpage
+\subsection*{Esercizio 3.6}
+Siano $[f]\in\MCG(S_g)$, $[m]\in\Teich(S_g)$ tali che $[f_*m]=[m]$. Ciò significa che esiste un diffeomorfismo $h$ di $S_g$ isotopo all'identità e tale che $f_*m=h_*m$. Ma allora $(h^{-1}\circ f)_*m=m$; poiché $h^{-1}\circ f$ e $f$ sono isotopi, essi rappresentano la stessa classe in $\MCG(S_g)$, dunque possiamo supporre (a meno di cambiare rappresentante) che $f_*m=m$. Ciò significa precisamente che $f$ è un'isometria per la superficie $S_g$ con la metrica $m$.
+
+I punti singolari dello spazio dei moduli sono precisamente le (classi di) metriche che sono fissate da elementi non banali di $\MCG(S_g)$. Come abbiamo visto, se elemento $\varphi\in\MCG(S_g)$ fissa una classe $[m]\in\Teich(S_g)$, allora esiste un rappresentante $f$ di $\varphi$ (che non sarà isotopo all'identità se $\varphi$ è non banale) che è un'isometria per $S_g$ munita della metrica $m$.
