@@ -1,7 +1,7 @@
 \section*{Esercizi dell'11 aprile}
 
-\subsection*{Esercizio 3.2}
-Per fissare la notazione, ricordiamo come si definiscono i Dehn twist. Sia $\map{\alpha}{S^1}{S}$ una curva semplice chiusa. Sia $A=S^1\times[-1,1]$ con l'orientazione indotta da quelle standard di $S^1$ e $[0,1]$. Fissiamo un intorno regolare di $\alpha$, ossia un embedding $\map{\psi}{A}{S}$ tale che $\psi(x,0)=\alpha(x)$ per ogni $x\in S^1$; scegliamolo in modo che $\psi$ preservi l'orientazione. Fissiamo infine una funzione $\map{f}{[-1,1]}{[0,2\pi]}$ tale che
+\subsection*{Dehn twist}
+Per fissare la notazione, ricordiamo come si definiscono i Dehn twist. Siano $S$ una superficie chiusa orientabile, $\map{\alpha}{S^1}{S}$ una curva semplice chiusa non banale. Sia $A=S^1\times[-1,1]$ con l'orientazione indotta da quelle standard di $S^1$ e $[-1,1]$. Fissiamo un intorno regolare di $\alpha$, ossia un embedding $\map{\psi}{A}{S}$ tale che $\psi(x,0)=\alpha(x)$ per ogni $x\in S^1$; scegliamolo in modo che $\psi$ preservi l'orientazione. Fissiamo infine una funzione $\map{f}{[-1,1]}{[0,2\pi]}$ tale che
 $f(t)=0$ per $t\le-\frac{1}{2}$ e $f(t)=2\pi$ per $t\ge\frac{1}{2}$, e definiamo
 \Map{\theta}{A}{A}{(e^{ix},t)}{(e^{i(x+f(t))},t).}
 Possiamo ora definire il Dehn twist intorno a $\alpha$ come il diffeomorfismo $\map{T_\alpha}{S}{S}$ tale che
@@ -11,7 +11,72 @@ p&p\not\in\psi(A)\\
 (\psi\circ\theta\circ\psi^{-1})(p)&p\in\psi(A).
 \end{cases}
 \]
-Come visto a lezione, la classe di isotopia di $T_\alpha$ non dipende dalla scelta dell'intorno regolare $\psi$ né della funzione $f$.
+Come visto a lezione, la classe di isotopia di $T_\alpha$ non dipende dalla scelta dell'intorno regolare $\psi$ né della funzione $f$. Mostreremo inoltre nell'Esercizio 3.2 che la classe di isotopia di $T_\alpha$ non cambia invertendo l'orientazione di $\alpha$ o sostituendo $\alpha$ con una curva a lei isotopa: è dunque ben definito l'elemento $T_a\in\MCG(S)$ per $a\in\mathcal{S}$.
+
+\subsection*{Esercizio 3.1}
+\begin{lemma}\thlabel{intersection-number-dehn-twist}
+Siano $a,b$ classi di isotopia di curve, con $b$ non banale. Allora
+\[
+i(a,T_b(a))=i(a,b)^2.
+\]
+\end{lemma}
+\begin{proof}
+Siano $\alpha$, $\beta$ rappresentati di $a$, $b$ in posizione minimale. Se $\alpha$ e $\beta$ non si intersecano la tesi è ovvia, dunque supponiamo che si intersechino almeno in un punto. Scegliamo un intorno regolare $U$ di $\beta$ abbastanza stretto da intersecare $\alpha$ in $i(a,b)$ archi disgiunti, ciascuno dei quali interseca $\beta$ esattamente una volta. Definiamo un rappresentante $\gamma$ della classe $T_b(a)$ come segue: consideriamo una curva $\alpha'$ parallela a $\alpha$, ottenuta traslando $\alpha$ lungo un suo intorno regolare, e poniamo $\gamma=T_\beta(\alpha')$. Possiamo orientare $\alpha$ in modo che
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[scale=4]
+\usetikzlibrary{shapes.misc}
+
+\tikzmath{
+function f(\x) {
+    if \x < -1 then {
+        return 1 / (1 + exp(5));
+    } else {
+        if \x > 1 then {
+            return 1 / (1 + exp(-5));
+        } else {
+            return 1 / (1 + exp(-\x * 5));
+        };
+    };
+};
+}
+\newcommand{\drawlines}{
+\draw[black] (0,-1) -- (0,1);
+\foreach \h/\dir/\del [count=\i] in {-.5/0/1,.1/180/-1,.6/0/1} {
+    \draw[name path global=alpha\i,blue,thick,postaction={decorate},decoration={markings,mark=between positions 0 and 1 step .5cm with {\arrow[rotate=\dir]{stealth}}}] (-2,\h) -- (2,\h);
+    \foreach \de [count=\j] in {0,-2} {
+        \draw[name path global=gamma\i\j,red,thick,domain=-2:2,samples=100,postaction={decorate},decoration={markings,mark=between positions 0 and 1 step .5cm with {\arrow[rotate=\dir]{stealth}}}] plot({\x},{.1*\del+\de+\h+2*f(\x)});
+    }
+}
+};
+\begin{scope}[style={opacity=0.5}]
+\clip (-1.2,-1) rectangle (1.2,1);
+\drawlines
+\end{scope}
+\draw[fill=gray!5] (-1,-1) rectangle (1,1);
+\begin{scope}
+\clip (-1,-1) rectangle (1,1);
+\drawlines
+\foreach \i in {1,2,3} \foreach \ii in {1,2,3} \foreach \j in {1,2} {
+    \fill[white,name intersections={of={alpha\i} and {gamma\ii\j},total=\t}] {\ifnum \t>0 (intersection-1) circle (.75pt) node[black,cross out,draw,scale=.5,very thick] {}\fi};
+}
+\end{scope}
+\draw[gray] (-1,-1) rectangle (1,1);
+\node[red,above] at (-.8,-.43) {$\gamma$};
+\node[blue,below] at (-.8,-.65) {$\alpha$};
+\node[black,right] at (0,.2) {$\beta$};
+\node[black!70] at (.8,.9) {$U$};
+\end{tikzpicture}
+\end{figure}
+
+È immediato verificare che $\alpha$ e $\gamma$ si intersecano esattamente in $i(a,b)^2$ punti. Mostriamo dunque che $\alpha$ e $\gamma$ sono in posizione minimale, ossia che non formano bigoni. Se $i(a,b)=1$ non c'è nulla da dimostrare ($\alpha$ e $\gamma$ si intersecano solo in un punto), quindi supponiamo $i(a,b)\ge 2$. Supponiamo per assurdo che esista un bigono $D$, e siano $\hat\alpha$, $\hat\gamma$ i lati di $D$ che giacciono rispettivamente su $\alpha$ e $\gamma$. Distinguiamo alcuni casi.
+\end{proof}
+
+
+\subsection*{Esercizio 3.2}
+\begin{lemma}\thlabel{existence-discerning-curve}
+Siano $\alpha$, $\beta$ due curve semplici chiuse non banali e non isotope. Allora esiste una curva semplice chiusa $\gamma$ tale che $i(\alpha,\gamma)\neq i(\beta,\gamma)$.
+\end{lemma}
 \begin{enumerate}[(1)]
 \item \begin{itemize}
 \item Cominciamo a mostrare che la classe di isotopia di $T_\alpha$ non dipende dall'orientazione di $\alpha$. Sia dunque $\map{\alpha}{S^1}{S}$ una curva semplice chiusa, e sia $\map{\overline\alpha}{S^1}{S}$ la curva inversa, ossia quella definita da $\overline\alpha(e^{ix})=\alpha(e^{-ix})$. Se $\map{\psi}{A}{S}$ è un intorno regolare orientato di $\alpha$, allora
@@ -21,14 +86,17 @@ Come visto a lezione, la classe di isotopia di $T_\alpha$ non dipende dalla scel
 (\psi\circ\theta\circ\psi^{-1}\circ\overline\psi)(e^{ix},t)&=\psi(\theta(e^{-ix},-t))=\psi(e^{i(-x+f(-t))},-t)=\psi(e^{-i(x+f(t))},-t);\\
 (\overline\psi\circ\theta)(e^{ix},t)&=\overline\psi(e^{i(x+f(t))},t)=\psi(e^{-i(x+f(t))},-t).
 \end{align*}
-\item Supponiamo che le curve semplici chiuse $\map{\alpha,\beta}{S^1}{S}$ siano due rappresentanti della stessa classe di isotopia, ossia che esista un'isotopia (ambiente) $\map{F}{S\times[0,1]}{S}$ tale che $F_0=\id_S$ e $F_1\circ\alpha=\beta$. Osserviamo che, per quanto abbiamo dimostrato, possiamo orientare $\alpha$ e $\beta$ in modo che una tale isotopia esista. Sia $\map{\psi}{A}{S}$ un intorno regolare orientato di $\alpha$; notiamo che $F_1\circ\psi$ è un intorno regolare orientato di $\beta$. È allora evidente che un Dehn twist intorno a $\beta$ è dato da $T_\beta=F_1\circ T_\alpha\circ F_1^{-1}$, che è ovviamente isotopo a $T_\alpha$. Questo mostra che $T_\beta=T_\alpha$ in $\MCG(S)$.
-\item 
+\item Supponiamo che le curve semplici chiuse non banali $\map{\alpha,\beta}{S^1}{S}$ siano due rappresentanti della stessa classe di isotopia, ossia che esista un'isotopia (ambiente) $\map{F}{S\times[0,1]}{S}$ tale che $F_0=\id_S$ e $F_1\circ\alpha=\beta$. Osserviamo che, per quanto abbiamo dimostrato, possiamo orientare $\alpha$ e $\beta$ in modo che una tale isotopia esista. Sia $\map{\psi}{A}{S}$ un intorno regolare orientato di $\alpha$; notiamo che $F_1\circ\psi$ è un intorno regolare orientato di $\beta$. È allora evidente che un Dehn twist intorno a $\beta$ è dato da $T_\beta=F_1\circ T_\alpha\circ F_1^{-1}$, che è ovviamente isotopo a $T_\alpha$. Questo mostra che $T_\beta=T_\alpha$ in $\MCG(S)$.
+\item Siano ora $\map{\alpha,\beta}{S^1}{S}$ due curve semplici chiuse non banali e non isotope. Per il \thref{existence-discerning-curve}, esiste una curva semplice chiusa $\gamma$ tale che $i(\alpha,\gamma)\neq i(\beta,\gamma)$. Siano $a$, $b$, $c$ le classi di isotopia di $\alpha$, $\beta$, $\gamma$ rispettivamente. Dal \thref{intersection-number-dehn-twist} otteniamo
+\[
+i(c,T_a(c))=i(c,a)^2\neq i(c,b)^2=i(c,T_b(c)),
+\]
+da cui $T_a\neq T_b$ come elementi di $\MCG(S)$.
 \end{itemize}
+\item Per non creare conflitti di notazione, siano $h\in\MCG(S)$, $a\in\mathcal{S}$. Sia $\map{\alpha}{S^1}{S}$ un rappresentante di $a$, e con lieve abuso di notazione trattiamo $h$ come un diffeomorfismo di $S$. Sia $\map{\psi}{A}{S}$ un intorno regolare di $\alpha$: notiamo che $f\circ\psi$ è un intorno regolare di $f\circ\alpha$. Ma allora è evidente che $f\circ T_\alpha\circ f^{-1}$ è un Dehn twist intorno a $f\circ\alpha$, da cui la tesi.
 \end{enumerate}
 
 \subsection*{Esercizio 3.5}
-\usetikzlibrary{backgrounds}
-\usetikzlibrary{math}
 \newcommand{\ngon}[3][0]{
 \tikzmath{
 \g = #2;
@@ -114,7 +182,6 @@ Per ogni $1\le i<2g$, sia $\alpha_i\in H_1(\Sigma,\ZZ)$ la classe rappresentata 
 \end{tikzpicture}
 \end{figure}
 
-\newpage
 \subsection*{Esercizio 3.6}
 Siano $[f]\in\MCG(S_g)$, $[m]\in\Teich(S_g)$ tali che $[f_*m]=[m]$. Ciò significa che esiste un diffeomorfismo $h$ di $S_g$ isotopo all'identità e tale che $f_*m=h_*m$. Ma allora $(h^{-1}\circ f)_*m=m$; poiché $h^{-1}\circ f$ e $f$ sono isotopi, essi rappresentano la stessa classe in $\MCG(S_g)$, dunque possiamo supporre (a meno di cambiare rappresentante) che $f_*m=m$. Ciò significa precisamente che $f$ è un'isometria per la superficie $S_g$ con la metrica $m$.
 

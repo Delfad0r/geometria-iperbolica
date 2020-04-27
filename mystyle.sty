@@ -25,11 +25,16 @@
 \usepackage{bbm}
 \usepackage{mathrsfs}
 
-%TikZ
-\usepackage{tkz-euclide}
+% Logic
+\usepackage{xifthen}
 
-% Diagrams
+% Graphics
+\usepackage{tkz-euclide}
 \usepackage{tikz}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{math}
+\usetikzlibrary{decorations.markings}
+
 \usepackage{tikz-cd}
 \newenvironment*{diagram}[1][]{$$\begin{tikzcd}[#1]}{\end{tikzcd}$$}
 
@@ -54,6 +59,7 @@
 \newtheorem{proposition}{Proposizione}
 \newtheorem*{proposition*}{Proposizione}
 \newtheorem*{corollary*}{Corollario}
+\newtheorem{lemma}{Lemma}
 \newtheorem*{lemma*}{Lemma}
 \newcommand*{\defterm}[1]{\emph{#1}}
 
