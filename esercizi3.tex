@@ -14,6 +14,26 @@ p&p\not\in\psi(A)\\
 Come visto a lezione, la classe di isotopia di $T_\alpha$ non dipende dalla scelta dell'intorno regolare $\psi$ né della funzione $f$. Mostreremo inoltre nell'Esercizio 3.2 che la classe di isotopia di $T_\alpha$ non cambia invertendo l'orientazione di $\alpha$ o sostituendo $\alpha$ con una curva a lei isotopa: è dunque ben definito l'elemento $T_a\in\MCG(S)$ per $a\in\mathcal{S}$.
 
 \subsection*{Esercizio 3.1}
+\tikzset{every plot/.style={smooth}}
+\tikzset{bigon/.style={orange!60!yellow,opacity=.5}}
+\newcommand{\definef}{
+\tikzmath{
+function f(\x) {
+    if \x < -1 then {
+        return 2 / (1 + exp(5));
+    } else {
+        if \x > 1 then {
+            return 2 / (1 + exp(-5));
+        } else {
+            return 2 / (1 + exp(-\x * 5));
+        };
+    };
+};
+}
+}
+\newcommand{\exerciseIntersectLines}[2]{
+\fill[white,name intersections={of={#1} and {#2},total=\t}] {\ifnum \t>0 \foreach \k in {1,...,\t} {(intersection-\k) circle (.75pt) node[black,cross out,draw,scale=.5,very thick] {}}\fi};
+}
 \begin{lemma}\thlabel{intersection-number-dehn-twist}
 Siano $a,b$ classi di isotopia di curve, con $b$ non banale. Allora
 \[
@@ -21,79 +41,201 @@ i(a,T_b(a))=i(a,b)^2.
 \]
 \end{lemma}
 \begin{proof}
-Siano $\alpha$, $\beta$ rappresentati di $a$, $b$ in posizione minimale. Se $\alpha$ e $\beta$ non si intersecano la tesi è ovvia, dunque supponiamo che si intersechino almeno in un punto. Scegliamo un intorno regolare $U$ di $\beta$ abbastanza stretto da intersecare $\alpha$ in $i(a,b)$ archi disgiunti, ciascuno dei quali interseca $\beta$ esattamente una volta. Definiamo un rappresentante $\gamma$ della classe $T_b(a)$ come segue: consideriamo una curva $\alpha'$ parallela a $\alpha$, ottenuta traslando $\alpha$ lungo un suo intorno regolare, e poniamo $\gamma=T_\beta(\alpha')$. Possiamo orientare $\alpha$ in modo che
+Siano $\alpha$, $\beta$ rappresentati di $a$, $b$ in posizione minimale. Se $\alpha$ e $\beta$ non si intersecano la tesi è ovvia, dunque supponiamo che si intersechino almeno in un punto. Scegliamo un intorno regolare $U$ di $\beta$ abbastanza stretto da intersecare $\alpha$ in $i(a,b)$ archi disgiunti, ciascuno dei quali interseca $\beta$ esattamente una volta. Definiamo un rappresentante $\gamma$ della classe $T_b(a)$ come segue: consideriamo una curva $\alpha'$ parallela a $\alpha$, ottenuta traslando $\alpha$ lungo un suo intorno regolare, e poniamo $\gamma=T_\beta(\alpha')$. Possiamo orientare $\alpha$ e $\gamma$ in modo che siano coorientate e che entrando in $U$ si allontanino.
+
+\begin{comment}
 \begin{figure}[h!]
 \centering
 \begin{tikzpicture}[scale=4]
 \usetikzlibrary{shapes.misc}
-
-\tikzmath{
-function f(\x) {
-    if \x < -1 then {
-        return 1 / (1 + exp(5));
-    } else {
-        if \x > 1 then {
-            return 1 / (1 + exp(-5));
-        } else {
-            return 1 / (1 + exp(-\x * 5));
-        };
-    };
-};
-}
+\definef{}
 \newcommand{\drawlines}{
 \draw[black] (0,-1) -- (0,1);
 \foreach \h/\dir/\del [count=\i] in {-.5/0/1,.1/180/-1,.6/0/1} {
     \draw[name path global=alpha\i,blue,thick,postaction={decorate},decoration={markings,mark=between positions 0 and 1 step .5cm with {\arrow[rotate=\dir]{stealth}}}] (-2,\h) -- (2,\h);
     \foreach \de [count=\j] in {0,-2} {
-        \draw[name path global=gamma\i\j,red,thick,domain=-2:2,samples=100,postaction={decorate},decoration={markings,mark=between positions 0 and 1 step .5cm with {\arrow[rotate=\dir]{stealth}}}] plot({\x},{.1*\del+\de+\h+2*f(\x)});
+        \draw[name path global=gamma\i\j,red,thick,domain=-2:2,samples=100,postaction={decorate},decoration={markings,mark=between positions 0 and 1 step .5cm with {\arrow[rotate=\dir]{stealth}}}] plot({\x},{.1*\del+\de+\h+f(\x)});
     }
 }
 };
-\begin{scope}[style={opacity=0.5}]
+\begin{scope}[style={opacity=0.3}]
 \clip (-1.2,-1) rectangle (1.2,1);
 \drawlines
 \end{scope}
-\draw[fill=gray!5] (-1,-1) rectangle (1,1);
+\fill[gray!10] (-1,-1) rectangle (1,1);
 \begin{scope}
 \clip (-1,-1) rectangle (1,1);
 \drawlines
 \foreach \i in {1,2,3} \foreach \ii in {1,2,3} \foreach \j in {1,2} {
-    \fill[white,name intersections={of={alpha\i} and {gamma\ii\j},total=\t}] {\ifnum \t>0 (intersection-1) circle (.75pt) node[black,cross out,draw,scale=.5,very thick] {}\fi};
+    %\fill[white,name intersections={of={alpha\i} and {gamma\ii\j},total=\t}] {\ifnum \t>0 (intersection-1) circle (.75pt) node[black,cross out,draw,scale=.5,very thick] {}\fi};
+    \exerciseIntersectLines{alpha\i}{gamma\ii\j}
 }
 \end{scope}
 \draw[gray] (-1,-1) rectangle (1,1);
-\node[red,above] at (-.8,-.43) {$\gamma$};
-\node[blue,below] at (-.8,-.65) {$\alpha$};
-\node[black,right] at (0,.2) {$\beta$};
+\node[red,above] at (-.8,-.33) {$\gamma$};
+\node[blue,below] at (-.8,-.55) {$\alpha$};
+\node[black,right] at (0,.3) {$\beta$};
 \node[black!70] at (.8,.9) {$U$};
 \end{tikzpicture}
 \end{figure}
+\end{comment}
 
-È immediato verificare che $\alpha$ e $\gamma$ si intersecano esattamente in $i(a,b)^2$ punti. Mostriamo dunque che $\alpha$ e $\gamma$ sono in posizione minimale, ossia che non formano bigoni. Se $i(a,b)=1$ non c'è nulla da dimostrare ($\alpha$ e $\gamma$ si intersecano solo in un punto), quindi supponiamo $i(a,b)\ge 2$. Supponiamo per assurdo che esista un bigono $D$, e siano $\hat\alpha$, $\hat\gamma$ i lati di $D$ che giacciono rispettivamente su $\alpha$ e $\gamma$. Distinguiamo alcuni casi.
+È immediato verificare che $\alpha$ e $\gamma$ si intersecano esattamente in $i(a,b)^2$ punti. Mostriamo dunque che $\alpha$ e $\gamma$ sono in posizione minimale, ossia che non formano bigoni. Se $i(a,b)=1$ non c'è nulla da dimostrare ($\alpha$ e $\gamma$ si intersecano solo in un punto, dunque hanno intersezione algebrica dispari), quindi supponiamo $i(a,b)\ge 2$. Supponiamo per assurdo che esista un bigono $D$, e siano $\hat\alpha$, $\hat\gamma$ i lati di $D$ che giacciono rispettivamente su $\alpha$ e $\gamma$. Distinguiamo alcuni casi.
+\begin{itemize}
+\item Se $\hat\gamma$ è tutto contenuto in $U$, allora $\alpha$ e $\beta$ formano un bigono, ma ciò è impossibile, dato che sono in posizione minimale.
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[scale=2.5]
+\definef{}
+\tikzmath{
+\h1 = -.4;
+\h2 = .3;
+\r = (\h2 - \h1) / 2;
+}
+
+\newcommand{\setupfigure}{
+\path[name path global=alpha] (1,\h2)-- (-1,\h2) arc (90:270:\r) -- (1,\h1);
+\path[save path=\gammapath,domain=-1:1,name path global=gamma] plot({\x},{-1.0+f(\x)});
+
+\clip (-1.6,-.8) rectangle (.5,.7);
+\fill[gray!10] (-1,-1) rectangle (1,1);
+\draw[gray] (-1,-1) rectangle(1,1);
+\begin{scope}[opacity=.5]
+\clip (-1,-1) rectangle (1,1);
+\draw[black,name path global=beta] (0,-1) -- (0,1);
+\draw[blue] (-1,\h1) -- (1,\h1);
+\draw[blue] (-1,\h2) -- (1,\h2);
+\draw[red,use path=\gammapath];
+\end{scope}
+}
+
+
+\begin{scope}[xshift=-1.3cm]
+\setupfigure{}
+\fill[bigon,intersection segments={of=alpha and gamma,sequence={L2--R2}}];
+\begin{scope}
+\clip (-1,-1) rectangle (1,1);
+\draw[red,very thick,intersection segments={of=alpha and gamma,sequence={R2}}];
+\draw[blue,very thick,intersection segments={of=alpha and gamma,sequence={L2}}];
+\end{scope}
+\draw[blue,very thick,dashed] (-1,\h2) arc (90:270:\r);
+\exerciseIntersectLines{alpha}{gamma};
+\node[above,blue] at (-.4,.3) {$\hat\alpha$};
+\node[right,red] at (.05,.0) {$\hat\gamma$};
+\end{scope}
+
+\begin{scope}[xshift=2.1cm]
+\setupfigure{}
+\fill[bigon,intersection segments={of=alpha and beta,sequence={L2--R2}}];
+\begin{scope}
+\clip (-1,-1) rectangle (1,1);
+\draw[blue,very thick,intersection segments={of=alpha and beta,sequence={L2}}];
+\draw[black,very thick,intersection segments={of=alpha and beta,sequence={R2}}];
+\end{scope}
+\draw[blue,very thick,dashed] (-1,\h2) arc (90:270:\r);
+\node[above,blue] at (-.4,.3) {$\hat\alpha_1$};
+\node[right,black] at (.0,.0) {$\hat\beta$};
+\end{scope}
+
+\draw[thick,-implies,double equal sign distance] (-.3,0) -- (.3,0);
+\end{tikzpicture}
+\end{figure}
+\item Se $\hat\alpha$ è tutto contenuto in $U$, allora di nuovo $\alpha$ e $\beta$ formano un bigono (ricordiamo che $\alpha$ e $\gamma$ sono parallele fuori da $U$).
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[scale=2.5]
+\definef{}
+\tikzmath{
+\h1 = -.5;
+\h2 = .4;
+\r = (\h2 - \h1) / 2;
+}
+
+\newcommand{\setupfigure}{
+\path[save path=\alphapath,name path global=alpha] (1,\h2) -- (-1,\h2) arc (90:270:\r) -- (1,\h1);
+\path[save path=\gammapath,domain=-1:1,name path global=gamma] plot({-\x},{\h2-.1+f(-\x)}) arc (90:270:{\r-.1}) -- plot({\x},{\h1+.1+f(\x)});
+
+\clip (-1.6,-.8) rectangle (.5,.7);
+\fill[gray!5] (-1,-1) rectangle (1,1);
+\draw[gray] (-1,-1) rectangle(1,1);
+\begin{scope}[opacity=.5]
+\clip (-2,-1) rectangle (1,1);
+\draw[black,name path global=beta] (0,-1) -- (0,1);
+\begin{scope}
+\clip (-1,-1) rectangle (1,1);
+\draw[blue,use path=\alphapath];
+\draw[red,use path=\gammapath];
+\end{scope}
+\end{scope}
+}
+
+
+\begin{scope}[xshift=-1.3cm]
+\setupfigure{}
+\fill[bigon,intersection segments={of=alpha and gamma,sequence={L2--R2}}];
+\begin{scope}
+\clip (-1,-1) rectangle (1,1);
+\draw[red,very thick,intersection segments={of=alpha and gamma,sequence={R2}}];
+\draw[blue,very thick,intersection segments={of=alpha and gamma,sequence={L2}}];
+\end{scope}
+\begin{scope}
+\clip (-2,-1) rectangle (-1,1);
+\draw[blue,dashed,opacity=.5,use path=\alphapath];
+\draw[red,dashed,very thick,intersection segments={of=alpha and gamma,sequence={R2}}];
+\end{scope}
+\exerciseIntersectLines{alpha}{gamma};
+\node[above,blue] at (-.3,.4) {$\hat\alpha$};
+\node[right,red] at (-.2,.0) {$\hat\gamma$};
+\end{scope}
+
+\begin{scope}[xshift=2.1cm]
+\setupfigure{}
+\begin{scope}[opacity=.5]
+\clip (-2,-1) rectangle(-1,1);
+\draw[red,dashed,use path=\gammapath];
+\end{scope}
+\fill[bigon,intersection segments={of=alpha and beta,sequence={L2--R2}}];
+\begin{scope}
+\clip (-1,-1) rectangle (1,1);
+\draw[blue,very thick,intersection segments={of=alpha and beta,sequence={L2}}];
+\draw[black,very thick,intersection segments={of=alpha and beta,sequence={R2}}];
+\end{scope}
+\begin{scope}
+\clip (-2,-1) rectangle (-1,1);
+\draw[blue,dashed,very thick,intersection segments={of=alpha and beta,sequence={L2}}];
+\end{scope}
+\node[above,blue] at (-.3,.4) {$\hat\alpha$};
+\node[right,black] at (.0,.0) {$\hat\beta$};
+\end{scope}
+
+\draw[thick,-implies,double equal sign distance] (-.3,0) -- (.3,0);
+\end{tikzpicture}
+\end{figure}
+\end{itemize}
 \end{proof}
 
-
+\newpage
 \subsection*{Esercizio 3.2}
 \begin{lemma}\thlabel{existence-discerning-curve}
-Siano $\alpha$, $\beta$ due curve semplici chiuse non banali e non isotope. Allora esiste una curva semplice chiusa $\gamma$ tale che $i(\alpha,\gamma)\neq i(\beta,\gamma)$.
+Siano $a,b\in\mathcal{S}$ due classi di isotopia distinte. Allora esiste una classe $c\in\mathcal{S}$ tale che $i(a,c)\neq i(b,c)$.
 \end{lemma}
 \begin{enumerate}[(1)]
 \item \begin{itemize}
 \item Cominciamo a mostrare che la classe di isotopia di $T_\alpha$ non dipende dall'orientazione di $\alpha$. Sia dunque $\map{\alpha}{S^1}{S}$ una curva semplice chiusa, e sia $\map{\overline\alpha}{S^1}{S}$ la curva inversa, ossia quella definita da $\overline\alpha(e^{ix})=\alpha(e^{-ix})$. Se $\map{\psi}{A}{S}$ è un intorno regolare orientato di $\alpha$, allora
 \Map{\overline\psi}{A}{S}{(e^{ix},t)}{\psi(e^{-ix},-t)}
-è un intorno regolare orientato per $\overline\alpha$. Poiché la classe di isotopia dei Dehn twist non dipende dalla scelta di $f$, non è restrittivo supporre che $f(-t)=2\pi-f(t)$. Mostriamo allora che $T_\alpha(p)=T_{\overline\alpha}(p)$ per ogni $p\in S$ (dunque in particolare sono isotopi). La tesi è ovvia per $p\not\in\psi(A)$, dunque supponiamo $p\in\psi(A)$; è sufficiente far vedere che $\psi\circ\theta\circ\psi^{-1}\circ\overline\psi=\overline\psi\circ\theta$. Effettivamente:
+è un intorno regolare orientato di $\overline\alpha$. Poiché la classe di isotopia dei Dehn twist non dipende dalla scelta di $f$, non è restrittivo supporre che $f(-t)=2\pi-f(t)$. Mostriamo allora che $T_\alpha(p)=T_{\overline\alpha}(p)$ per ogni $p\in S$ (dunque in particolare sono isotopi). La tesi è ovvia per $p\not\in\psi(A)$, dunque supponiamo $p\in\psi(A)$; è sufficiente far vedere che $\psi\circ\theta\circ\psi^{-1}\circ\overline\psi=\overline\psi\circ\theta$. Effettivamente:
 \begin{align*}
 (\psi\circ\theta\circ\psi^{-1}\circ\overline\psi)(e^{ix},t)&=\psi(\theta(e^{-ix},-t))=\psi(e^{i(-x+f(-t))},-t)=\psi(e^{-i(x+f(t))},-t);\\
 (\overline\psi\circ\theta)(e^{ix},t)&=\overline\psi(e^{i(x+f(t))},t)=\psi(e^{-i(x+f(t))},-t).
 \end{align*}
 \item Supponiamo che le curve semplici chiuse non banali $\map{\alpha,\beta}{S^1}{S}$ siano due rappresentanti della stessa classe di isotopia, ossia che esista un'isotopia (ambiente) $\map{F}{S\times[0,1]}{S}$ tale che $F_0=\id_S$ e $F_1\circ\alpha=\beta$. Osserviamo che, per quanto abbiamo dimostrato, possiamo orientare $\alpha$ e $\beta$ in modo che una tale isotopia esista. Sia $\map{\psi}{A}{S}$ un intorno regolare orientato di $\alpha$; notiamo che $F_1\circ\psi$ è un intorno regolare orientato di $\beta$. È allora evidente che un Dehn twist intorno a $\beta$ è dato da $T_\beta=F_1\circ T_\alpha\circ F_1^{-1}$, che è ovviamente isotopo a $T_\alpha$. Questo mostra che $T_\beta=T_\alpha$ in $\MCG(S)$.
-\item Siano ora $\map{\alpha,\beta}{S^1}{S}$ due curve semplici chiuse non banali e non isotope. Per il \thref{existence-discerning-curve}, esiste una curva semplice chiusa $\gamma$ tale che $i(\alpha,\gamma)\neq i(\beta,\gamma)$. Siano $a$, $b$, $c$ le classi di isotopia di $\alpha$, $\beta$, $\gamma$ rispettivamente. Dal \thref{intersection-number-dehn-twist} otteniamo
+\item Siano ora $\map{\alpha,\beta}{S^1}{S}$ due curve semplici chiuse non banali e non isotope, e siano $a,b\in\mathcal{S}$ le corrispondenti classi di isotopia. Per il \thref{existence-discerning-curve}, esiste una classe $c\in\mathcal{S}$ tale che $i(a,c)\neq i(b,c)$. Dal \thref{intersection-number-dehn-twist} otteniamo
 \[
 i(c,T_a(c))=i(c,a)^2\neq i(c,b)^2=i(c,T_b(c)),
 \]
 da cui $T_a\neq T_b$ come elementi di $\MCG(S)$.
 \end{itemize}
-\item Per non creare conflitti di notazione, siano $h\in\MCG(S)$, $a\in\mathcal{S}$. Sia $\map{\alpha}{S^1}{S}$ un rappresentante di $a$, e con lieve abuso di notazione trattiamo $h$ come un diffeomorfismo di $S$. Sia $\map{\psi}{A}{S}$ un intorno regolare di $\alpha$: notiamo che $f\circ\psi$ è un intorno regolare di $f\circ\alpha$. Ma allora è evidente che $f\circ T_\alpha\circ f^{-1}$ è un Dehn twist intorno a $f\circ\alpha$, da cui la tesi.
+\item Per non creare conflitti di notazione, siano $h\in\MCG(S)$, $a\in\mathcal{S}$. Sia $\map{\alpha}{S^1}{S}$ un rappresentante di $a$, e con lieve abuso di notazione trattiamo $h$ come un diffeomorfismo di $S$. Sia $\map{\psi}{A}{S}$ un intorno regolare di $\alpha$: notiamo che $h\circ\psi$ è un intorno regolare di $h\circ\alpha$. Ma allora è evidente che $h\circ T_\alpha\circ h^{-1}$ è un Dehn twist intorno a $h\circ\alpha$, da cui la tesi.
 \end{enumerate}
 
 \subsection*{Esercizio 3.5}
