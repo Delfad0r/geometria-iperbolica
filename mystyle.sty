@@ -26,13 +26,13 @@
 \usepackage{mathrsfs}
 
 % Logic
-\usepackage{xifthen}
+\usepackage{ifthen}
 
 % Graphics
 \usepackage{tkz-euclide}
 \usepackage{tikz}
 \usetikzlibrary{backgrounds}
-\usetikzlibrary{math}
+\usetikzlibrary{math,calc}
 \usetikzlibrary{decorations.markings}
 \usetikzlibrary{fadings}
 \usepackage{pgfplots}
@@ -40,6 +40,121 @@
 
 \usepackage{tikz-cd}
 \newenvironment*{diagram}[1][]{$$\begin{tikzcd}[#1]}{\end{tikzcd}$$}
+
+% Closed surfaces
+\pgfkeys{/closed surface/.cd,
+radius/.initial=1,
+thickness/.initial=.29,
+name/.initial=,
+g/.initial=1,
+left/.initial=0,
+right/.initial=0
+}
+\tikzset{
+arc with diameter/.style args={#1:#2:#3 and #4}{
+to path={
+let \p1=(\tikztostart),\p2=(\tikztotarget),\n1={veclen(\x1-\x2,\y1-\y2)/2/abs(sin((#1-#2)/2))} in arc[start angle=#1,end angle=#2,y radius={\n1*#4},x radius={\n1*#3}] \tikztonodes (\tikztotarget)
+}},
+vertical torus arc/.style args={#1:#2}{arc with diameter={#1:#2:cos(75) and 1}},
+left vertical torus arc/.style={vertical torus arc={90:270}},
+right vertical torus arc/.style={vertical torus arc={90:-90}},
+vertical torus circle/.style={vertical torus arc={90:450}},
+horizontal torus arc/.style args={#1:#2}{arc with diameter={#1:#2:1 and cos(70)}},
+pics/closed surface/.style args={#1}{
+code={
+\bgroup
+\pgfkeys{/closed surface/.cd,#1}
+\tikzmath{
+\magic = cos(70); % magic number
+\r1 = \pgfkeysvalueof{/closed surface/radius};
+\r2 = \r1 * \pgfkeysvalueof{/closed surface/thickness};
+\lw = \expandafter\the\dimexpr2\pgflinewidth;
+\leftHoles = \pgfkeysvalueof{/closed surface/left};
+\rightHoles = \pgfkeysvalueof{/closed surface/right};
+}
+\def\surfname{\pgfkeysvalueof{/closed surface/name}}
+\def\g{\pgfkeysvalueof{/closed surface/g}}
+\providecolor{pgffillcolor}{rgb}{1,1,1}
+\begin{scope}[
+    yscale=\magic,
+    outer/.style={draw, line width={\lw+2*\r2}},
+    inner/.style={draw=pgffillcolor,line width={2*\r2}}
+]
+
+\foreach \i in {1,...,\g} {
+    \tikzmath{\xx = 2 * \r1 * (\i - 1);}
+    \coordinate (\surfname-\i-t-1) at (\xx pt,{\r1 pt+(\r2 pt+\lw/4)/\magic});
+    \coordinate (\surfname-\i-t-2) at (\xx pt,{\r1 pt-(\r2 pt+\lw/4)/\magic});
+    \coordinate (\surfname-\i-b-1) at (\xx pt,{-\r1 pt+(\r2 pt+\lw/4)/\magic});
+    \coordinate (\surfname-\i-b-2) at (\xx pt,{-\r1 pt-(\r2 pt+\lw/4)/\magic});
+}
+\coordinate (\surfname-l) at ({-\r1 pt-\r2 pt-\lw/4},0);
+\coordinate (\surfname-r) at ({(2*\g-1)*\r1 pt+\r2 pt},0);
+\tikzmath{
+\a = 1 / \magic;
+\lo = 0;
+\hi = \r1;
+int \i;
+for \i in {1,...,20}{
+    \x = (\lo + \hi) / 2;
+    \y = sqrt(\r1 ^ 2 - \x ^ 2) / \a;
+    \s = \r1 / \x - 1;
+    if \s * veclen(\x, \a ^ 2 * \y) < \r2 + \lw / 4 then {\hi = \x;} else {\lo = \x;};
+};
+\yy = (\s * \a ^ 2 + 1) * \y * \a;
+for \i in {0,...,\g}{
+    \xx = \r1 * (2 * \i - 1);
+    {\coordinate (\surfname-\i-i-1) at (\xx pt,\yy pt);
+    \coordinate (\surfname-\i-i-2) at (\xx pt,-\yy pt);};
+};
+\lo = 0;
+\hi = \r1;
+for \i in {1,...,20}{
+    \xx = (\lo + \hi) / 2;
+    \yy = sqrt(\r1 ^ 2 - \xx ^ 2) / \a;
+    \lambd = (\r2 + \lw / 4) / veclen(\xx, \yy * \a ^ 2);
+    \x = \xx - \xx * \lambd;
+    \y = -\yy + \yy * \a ^ 2 * \lambd;
+    if veclen(\r1 - \x, \y) < \r2 * 1.1 + \lw / 2 then {\hi = \xx;} else {\lo = \xx;};
+};
+for \i in {1,...,\g}{
+    \xx = \r1 * 2 * (\i - 1);
+    {\coordinate (\surfname-\i-l) at (\xx pt-\x pt,\y pt * \a);
+    \coordinate (\surfname-\i-r) at (\xx pt+\x pt,\y pt * \a);};
+};
+}
+\begin{scope}
+\tikzmath{
+if \leftHoles == 0 then {\lclip = -2 * \r1;} else {if \leftHoles == 1 then {\lclip = -\r1;} else {\lclip = 0;};};
+if \rightHoles == 0 then {\rclip = 2 * \g * \r1;} else {if \rightHoles == 1 then {\rclip = (2 * \g - 1) * \r1;} else {\rclip = 2 * (\g - 1) * \r1;};};
+}
+\begin{pgfinterruptboundingbox}
+\clip (\lclip pt,-2*\r1 pt) rectangle (\rclip pt,2*\r1 pt);
+\end{pgfinterruptboundingbox}
+\draw[outer][postaction={inner}] \foreach \i in {1,...,\g} {({2*\r1 pt*(\i-1)},0) circle (\r1 pt)};
+\draw[outer][postaction={inner,line cap=round}] \foreach \i in {1,...,\g} {({\r1 pt*(2*\i-3)},0) arc (180:360:\r1 pt)};
+\end{scope}
+\end{scope}
+\ifthenelse{\leftHoles=1}{\def\surfList{{0-i}}}{\ifthenelse{\leftHoles=2}{\def\surfList{{1-t,1-b}}}{}}
+\tikzmath{
+if \leftHoles > 0 then {{
+    \foreach \w in \surfList{
+    \fill[pgffillcolor] (\surfname-\w-1) to[left vertical torus arc] (\surfname-\w-2) (\surfname-\w-1) to[right vertical torus arc] (\surfname-\w-2);
+    \draw[opacity=.4,dashed] (\surfname-\w-1) to[right vertical torus arc] (\surfname-\w-2);
+    \draw[line cap=round] (\surfname-\w-1) to[left vertical torus arc] (\surfname-\w-2);
+    };};
+};}
+\ifthenelse{\rightHoles=1}{\def\surfList{{\g-i}}}{\ifthenelse{\rightHoles=2}{\def\surfList{{\g-t,\g-b}}}{}}
+\tikzmath{
+if \rightHoles > 0 then {{
+    \foreach \w in \surfList{
+    \fill[pgffillcolor][postaction={fill,black,opacity=.3,path fading=east}] (\surfname-\w-1) to[left vertical torus arc] (\surfname-\w-2) (\surfname-\w-1) to[right vertical torus arc] (\surfname-\w-2);
+    \draw (\surfname-\w-1) to[left vertical torus arc] (\surfname-\w-2) (\surfname-\w-1) to[right vertical torus arc] (\surfname-\w-2);
+    };};
+};
+}
+\egroup
+}}}
 
 
 % References
@@ -69,6 +184,7 @@
 % Operators
 \newcommand*{\tensor}{\otimes}
 \newcommand*{\dirsum}{\oplus}
+\newcommand*{\cut}{\mathrel{\setminus\mkern-4mu\setminus}}
 
 % Letters
 \newcommand*{\1}{\mathbbm{1}}

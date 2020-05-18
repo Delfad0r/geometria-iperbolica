@@ -17,6 +17,7 @@ Come visto a lezione, la classe di isotopia di $T_\alpha$ non dipende dalla scel
 \subsection*{Esercizio 3.1}
 \tikzset{every plot/.style={smooth}}
 \tikzset{bigon/.style={orange!60!yellow,opacity=.5}}
+\tikzset{surface color/.style={fill={rgb:yellow,2.5;red,.5;white,4;gray,.5}}}
 \newcommand{\definef}{
 \tikzmath{
 function f(\x) {
@@ -35,14 +36,21 @@ function f(\x) {
 \newcommand{\exerciseIntersectLines}[3]{
 \fill[white,name intersections={of={#1} and {#2},total=\t}] {\ifnum \t>0 \foreach \k in {1,...,\t} {(intersection-\k) circle (#3 pt) node[black,cross out,draw,scale=.5,very thick] {}}\fi};
 }
+\begin{tikzfadingfrompicture}[name=ex 3-1 fading 5]
+\begin{scope}[scale=5]
+\shade[left color=transparent!100,right color=transparent!0] (-1.2,-1) rectangle (-1,1);
+\shade[left color=transparent!0,right color=transparent!100] (1,-1) rectangle (1.2,1);
+\fill[transparent!0] (-1,-1) rectangle (1,1);
+\end{scope}
+\end{tikzfadingfrompicture}
 \begin{lemma}\thlabel{intersection-number-dehn-twist}
-Siano $a$, $b$ classi di isotopia di curve, con $b$ non banale. Allora
+Siano $a$, $b$ classi di isotopia di curve, con $b$ non banale, e sia $k\ge 0$. Allora
 \[
-i(a,T_b(a))=i(a,b)^2.
+i(a,T_b^k(a))=k\cdot i(a,b)^2.
 \]
 \end{lemma}
 \begin{proof}
-Siano $\alpha$, $\beta$ rappresentanti di $a$, $b$ in posizione minimale. Se $\alpha$ e $\beta$ non si intersecano la tesi è ovvia, dunque supponiamo che si intersechino almeno in un punto. Scegliamo un intorno regolare $U$ di $\beta$ abbastanza stretto da intersecare $\alpha$ in $i(a,b)$ archi disgiunti, ciascuno dei quali interseca $\beta$ esattamente una volta. Definiamo un rappresentante $\gamma$ della classe $T_b(a)$ come segue: consideriamo una curva $\alpha'$ parallela a $\alpha$, ottenuta traslando $\alpha$ lungo un suo intorno regolare, e poniamo $\gamma=T_\beta(\alpha')$. Possiamo orientare $\alpha$ e $\gamma$ in modo che siano coorientate e che entrando in $U$ si allontanino.
+Siano $\alpha$, $\beta$ rappresentanti di $a$, $b$ in posizione minimale. Se $\alpha$ e $\beta$ non si intersecano la tesi è ovvia, dunque supponiamo che si intersechino almeno in un punto. Scegliamo un intorno regolare $U$ di $\beta$ abbastanza stretto da intersecare $\alpha$ in $i(a,b)$ archi disgiunti, ciascuno dei quali interseca $\beta$ esattamente una volta. Definiamo un rappresentante $\gamma$ della classe $T_b^k(a)$ come segue: consideriamo una curva $\alpha'$ parallela a $\alpha$, ottenuta traslando $\alpha$ lungo un suo intorno regolare, e poniamo $\gamma=T_\beta^k(\alpha')$. Possiamo orientare $\alpha$ e $\gamma$ in modo che siano coorientate e che entrando in $U$ si allontanino.
 
 
 \begin{center}
@@ -60,19 +68,20 @@ Siano $\alpha$, $\beta$ rappresentanti di $a$, $b$ in posizione minimale. Se $\a
     }
 }
 };
-\begin{scope}
-\clip (-1.2,-1) rectangle (-1,1);
-\path[scope fading=west] (-1.2,-1) rectangle (-1,1);
-\drawlines
-\end{scope}
-\begin{scope}
-\clip (1,-1) rectangle (1.2,1);
-\path[scope fading=east] (1,-1) rectangle (1.2,1);
-\drawlines
-\end{scope}
+%\begin{scope}
+%\clip (-1.2,-1) rectangle (-1,1);
+%\path[scope fading=west] (-1.2,-1) rectangle (-1,1);
+%\drawlines
+%\end{scope}
+%\begin{scope}
+%\clip (1,-1) rectangle (1.2,1);
+%\path[scope fading=east] (1,-1) rectangle (1.2,1);
+%\drawlines
+%\end{scope}
 \fill[gray!10] (-1,-1) rectangle (1,1);
 \begin{scope}
-\clip (-1,-1) rectangle (1,1);
+%\clip (-1,-1) rectangle (1,1);
+\path[scope fading=ex 3-1 fading 5,fit fading=false,use as bounding box] (-1.2,-1.1) rectangle (1.2,1.1);
 \drawlines
 \foreach \i in {1,2,3} \foreach \ii in {1,2,3} \foreach \j in {1,2} {
     \exerciseIntersectLines{alpha\i}{gamma\ii\j}{.6}s
@@ -86,7 +95,7 @@ Siano $\alpha$, $\beta$ rappresentanti di $a$, $b$ in posizione minimale. Se $\a
 \end{tikzpicture}
 \end{center}
 
-È immediato verificare che $\alpha$ e $\gamma$ si intersecano esattamente in $i(a,b)^2$ punti. È dunque sufficiente mostrare che $\alpha$ e $\gamma$ sono in posizione minimale, ossia che non formano bigoni. Se $i(a,b)=1$ non c'è nulla da dimostrare ($\alpha$ e $\gamma$ si intersecano solo in un punto, dunque hanno intersezione algebrica dispari), quindi supponiamo $i(a,b)\ge 2$. Supponiamo per assurdo che esista un bigono $D$, e siano $\hat\alpha$, $\hat\gamma$ i lati di $D$ che giacciono rispettivamente su $\alpha$ e $\gamma$. Distinguiamo alcuni casi.
+È immediato verificare che $\alpha$ e $\gamma$ si intersecano esattamente in $k\cdot i(a,b)^2$ punti. È dunque sufficiente mostrare che $\alpha$ e $\gamma$ sono in posizione minimale, ossia che non formano bigoni. Se $i(a,b)=1$ allora $\alpha $ e $\gamma$ non possono formare bigoni (si intersecano sempre con la stessa orientazione), quindi supponiamo $i(a,b)\ge 2$. Supponiamo per assurdo che esista un bigono $D$, e siano $\hat\alpha$, $\hat\gamma$ i lati di $D$ che giacciono rispettivamente su $\alpha$ e $\gamma$. Distinguiamo alcuni casi.
 \newpage
 \begin{itemize}
 \item Se $\hat\gamma$ è tutto contenuto in $U$, allora $\alpha$ e $\beta$ formano un bigono, ma ciò è impossibile, dato che sono in posizione minimale.
@@ -236,14 +245,15 @@ Siano $\alpha$, $\beta$ rappresentanti di $a$, $b$ in posizione minimale. Se $\a
 
 \fill[gray!10] (-1,-1) rectangle (1,1);
 \draw[gray] (-1,-1) rectangle (1,1);
-\foreach \f in {1,0} {
+%\foreach \f in {1,0} {
 \begin{scope}
-\ifnum\f=1
-    \clip (1,-1) rectangle (2,1);
-    \path[scope fading=east] (1,-1) rectangle (1.2,1);
-\else
-    \clip (-1,-1) rectangle (1,1);
-\fi
+%\ifnum\f=1
+%    \clip (1,-1) rectangle (2,1);
+%    \path[scope fading=east] (1,-1) rectangle (1.2,1);
+%\else
+%    \clip (-1,-1) rectangle (1,1);
+%\fi
+\path[scope fading=ex 3-1 fading 5,fit fading=false] (0,0);
 \fill[bigon,intersection segments={of=alpha and gamma,sequence={R3--L3[reverse]}}];
 \begin{scope}
 \clip[use path=\gammapath -- cycle];
@@ -254,7 +264,7 @@ Siano $\alpha$, $\beta$ rappresentanti di $a$, $b$ in posizione minimale. Se $\a
 \draw[red,thick,intersection segments={of=alpha and gamma,sequence={R3}},postaction={decorate},decoration={markings,mark=between positions 0.1 and 1 step .4cm with {\arrow[scale=.8]{stealth}}}];
 \draw[blue,thick,intersection segments={of=alpha and gamma,sequence={L3}},postaction={decorate},decoration={markings,mark=between positions 0.1 and 1 step .4cm with {\arrow[scale=.8]{stealth}}}];
 \end{scope}
-}
+%}
 \path[name path=alpha2] (-1,\h2) -- (1,\h2);
 \exerciseIntersectLines{alpha}{gamma}{.5};
 \end{scope}
@@ -279,15 +289,15 @@ Osserviamo che la regione in rosa non può essere un bigono, in quanto il suo la
 \fill[gray!10] (-1,-1) rectangle (1,1);
 \draw[gray] (-1,-1) rectangle (1,1);
 
-\foreach \f in {1,0} {
+%\foreach \f in {1,0} {
 \begin{scope}
-\ifnum\f=1
-    \clip (-2,-1) rectangle (-1,1);
-    \path[scope fading=west] (-1.2,-1) rectangle (-1,1);
-\else
-    \clip (-1,-1) rectangle (1,1);
-\fi
-
+%\ifnum\f=1
+%    \clip (-2,-1) rectangle (-1,1);
+%    \path[scope fading=west] (-1.2,-1) rectangle (-1,1);
+%\else
+%    \clip (-1,-1) rectangle (1,1);
+%\fi
+\path[scope fading=ex 3-1 fading 5,fit fading=false] (0,0);
 \begin{scope}
 \path[name path global=bigonside,save path=\bigonside] (-2,\h1) rectangle (1,\h2);
 \clip[intersection segments={of=bigonside and gamma,sequence={L1--R2--L3}}];
@@ -298,7 +308,7 @@ Osserviamo che la regione in rosa non può essere un bigono, in quanto il suo la
 \draw[red,thick,postaction={decorate},decoration={markings,mark=between positions .2 and 1. step .4cm with {\arrow[scale=.8]{stealth}}},intersection segments={of=bigonside and gamma,sequence={R2}}];
 \draw[blue,thick,postaction={decorate},decoration={markings,mark=between positions 0.1 and 1 step .4cm with {\arrow[scale=.8]{stealth}}}] (-2,\h1) -- (1,\h1);
 \end{scope}
-}
+%}
 \exerciseIntersectLines{alpha}{gamma}{.5};
 \end{scope}
 \node[red,above] at (-1.2,\h1+.1) {$\hat\gamma$};
@@ -308,11 +318,68 @@ Osserviamo che la regione in rosa non può essere un bigono, in quanto il suo la
 Dopo essere entrati in $U$, $\hat\alpha$ e $\hat\gamma$ si allontanano, dunque non è possibile che la prima intersezione di $\hat\gamma$ con $\alpha$ sia il secondo estremo di $\hat\alpha$; è pertanto impossibile che $\hat\alpha$ e $\hat\gamma$ siano lati di un bigono.\qedhere
 \end{itemize}
 \end{proof}
+Sia $b\in\mathcal{S}$ una classe di isotopia non banale, e $\map{\beta}{S^1}{S}$ una curva che la rappresenta. Mostriamo che esiste $a\in\mathcal{S}$ tale che $i(a,b)\neq 0$.
+\begin{itemize}
+\item \textbf{Supponiamo che $\beta$ sia separante.} In questo caso $S\cut\beta$ è unione disgiunta di due superfici $S_1$ e $S_2$, ciascuna con una componente di bordo. Naturalmente $S_1$ e $S_2$ hanno genere almeno $1$, altrimenti $\beta$ sarebbe omotopicamente banale.
+\begin{center}
+\begin{tikzpicture}
+\pic[surface color,thick] {closed surface={radius=1.2cm,name=S1,g=1,right=1}};
+\pic[surface color,thick] at (3,0) {closed surface={radius=1.2cm,name=S2,g=2,left=1}};
+\begin{scope}[red,very thick]
+\draw (S1-1-i-1) to[left vertical torus arc] (S1-1-i-2) (S1-1-i-1) to[right vertical torus arc] (S1-1-i-2);
+\draw (S2-0-i-1) to[left vertical torus arc] (S2-0-i-2);
+\draw[dashed,opacity=.4] (S2-0-i-1) to[right vertical torus arc] (S2-0-i-2);
+\end{scope}
+\node[red] at ($(S1-1-i-2)!.5!(S2-0-i-2)+(0,-.2)$) {$\beta$};
+\node at ($(S1-l)+(-.5,0)$) {$S_1$};
+\node at ($(S2-r)+(.5,0)$) {$S_2$};
+\end{tikzpicture}
+\end{center}
+Allora possiamo prendere come $a$ la classe di isotopia della curva $\alpha$ ottenuta come in figura.
+\begin{center}
+\begin{tikzpicture}
+\pic[surface color,thick] {closed surface={radius=1.2cm,name=S,g=3}};
+\begin{scope}[red,very thick]
+\draw (S-1-i-1) to[left vertical torus arc] (S-1-i-2);
+\draw[dashed,opacity=.4] (S-1-i-1) to[right vertical torus arc] (S-1-i-2);
+\end{scope}
+\begin{scope}[blue,very thick]
+\draw (S-1-r) to[arc with diameter={170:10:1 and .8}] (S-2-l);
+\draw[dashed,opacity=.4] (S-1-r) to[arc with diameter={170:370:1 and .8}] (S-2-l);
+\end{scope}
+\node[red] at ($(S-1-i-2)+(0,-.4)$) {$\beta$};
+\node[blue] at ($(S-2-l)+(.2,.3)$) {$\alpha$};
+\end{tikzpicture}
+\end{center}
+Mediante il criterio del bigono è facile vedere che $\alpha$ e $\beta$ sono in posizione minimale, dunque $i(a,b)=2$.
+\item\textbf{Supponiamo che $\beta$ non sia separante}. In questo caso esiste una curva $\alpha$ che interseca $\beta$ esattamente una volta.
+\begin{center}
+\begin{tikzpicture}
+\pic[surface color,thick] {closed surface={radius=1.5cm,name=S,g=2}};
+\begin{scope}[red,very thick]
+\draw (S-1-b-1) to[left vertical torus arc] (S-1-b-2);
+\draw[dashed,opacity=.4] (S-1-b-1) to[right vertical torus arc] (S-1-b-2);
+\end{scope}
+\draw[blue,very thick] ($(S-1-t-1)!.3!(S-1-t-2)$) to[arc with diameter={90:270:{1/cos(70)} and 1}] ($(S-1-b-1)!.3!(S-1-b-2)$) to[out=0,in=180] ($(S-1-i-2)!.4!(S-1-i-1)$) to[out=0,in=180] ($(S-2-b-1)!.3!(S-2-b-2)$) to[arc with diameter={-90:90:{1/cos(70)} and 1}] ($(S-2-t-1)!.3!(S-2-t-2)$) to[out=180,in=0] ($(S-1-i-1)!.15!(S-1-i-2)$) to[out=180,in=0] ($(S-1-t-1)!.3!(S-1-t-2)$);
+\node[red] at ($(S-1-b-2)+(0,-.4)$) {$\beta$};
+\node[blue] at ($(S-l)+(-.2,.5)$) {$\alpha$};
+\end{tikzpicture}
+\end{center}
+Prendendo come $a$ la classe di isotopia di $\alpha$, otteniamo che $i(a,b)=1$.
+\end{itemize}
+Dal \thref{intersection-number-dehn-twist} sappiamo che
+\[
+i(a,T_b^k(a))=k\cdot i(a,b)^2
+\]
+per ogni $k>0$, dunque in particolare $T_b^k(a)\neq a$. Pertanto l'azione di $T_b^k$ su $\mathcal{S}$ è non banale, e in particolare $T_b$ non è banale.
 
 \subsection*{Esercizio 3.2}
 \begin{lemma}\thlabel{existence-discerning-curve}
-Siano $a,b\in\mathcal{S}$ due classi di isotopia distinte. Allora esiste una classe $c\in\mathcal{S}$ tale che $i(a,c)\neq i(b,c)$.
+Siano $a,b\in\mathcal{S}$ due classi di isotopia non banali distinte. Allora esiste una classe $c\in\mathcal{S}$ tale che $i(a,c)\neq i(b,c)$.
 \end{lemma}
+\begin{proof}
+
+\end{proof}
 \begin{enumerate}[(1)]
 \item \begin{itemize}
 \item Cominciamo a mostrare che la classe di isotopia di $T_\alpha$ non dipende dall'orientazione di $\alpha$. Sia dunque $\map{\alpha}{S^1}{S}$ una curva semplice chiusa, e sia $\map{\overline\alpha}{S^1}{S}$ la curva inversa, ossia quella definita da $\overline\alpha(e^{ix})=\alpha(e^{-ix})$. Se $\map{\psi}{A}{S}$ è un intorno regolare orientato di $\alpha$, allora
