@@ -1,0 +1,53 @@
+\section*{Esercizi del 2 maggio}
+
+\subsection*{Esercizio 4.2}
+A meno di restringere $\nu K$, operazione che preserva il tipo di omotopia di $M$, possiamo supporre che la chiusura di $\nu K$ sia contenuta nella parte interna di un intorno tubolare compatto $D^2\times S^1\subs S^3$ di $K$.
+
+\begin{itemize}
+\item Consideriamo gli aperti $U=\interior M$, $V=\interior (D^2\times S^1)$ di $S^3$. Osserviamo che $U$ è omotopicamente equivalente a $M$, $V$ è omotopicamente equivalente a $S^1$, e $U\cap V$ è omotopicamente equivalente a $T^2$. Scriviamo una parte della successione esatta di Mayer-Vietoris relativa a $U$ e $V$:
+\begin{diagram}
+H_2(S^3)\rar&H_1(T^2)\rar&H_1(S^1)\dirsum H_1(M)\rar&H_1(S^3),
+\end{diagram}
+da cui
+\begin{diagram}
+0\rar&\ZZ\dirsum\ZZ\rar&\ZZ\dirsum H_1(M)\rar&0.
+\end{diagram}
+Poiché $H_1(M)$ è abeliano e finitamente generato ($M$ è compatta), segue immediatamente che $H_1(M)\iso\ZZ$.
+\item Mostriamo che l'omomorfismo $H_1(T^2)\to H_1(M)$ indotto dall'inclusione è suriettivo.
+\begin{itemize}
+\item\textbf{Vale $H_1(S^3,\overline{\nu K})=0$.} Infatti dalla successione esatta lunga in omologia relativa per la coppia $(S^3,\overline{\nu K})$ otteniamo
+\begin{diagram}
+H_1(S^3)\rar&H_1(S^3,\overline{\nu K})\rar&\widetilde{H}_0(\overline{\nu K}),
+\end{diagram}
+da cui (osservando che $H_1(S^3)=\widetilde{H}_0(\overline{\nu K})=0$) la tesi.
+\item\textbf{Vale $H_1(M,T^2)=0$.} Poiché $M=S^3\setminus\nu K$ e $T^2=\overline{\nu K}\setminus\nu K$, per escissione otteniamo
+\[
+H_1(M,T^2)=H_1(S^3\setminus\nu K,\overline{\nu K}\setminus\nu K)\iso H_1(S^3,\overline{\nu K})=0.
+\]
+\item\textbf{L'omomorfismo $H_1(T^2)\to H_1(M)$ è suriettivo.} Infatti dalla successione esatta lunga della coppia $(M,T^2)$ otteniamo
+\begin{diagram}
+H_1(T^2)\rar&H_1(M)\rar&H_1(M,T^2)=0.
+\end{diagram}
+\end{itemize}
+Ma allora il nucleo di questo omomorfismo è un sottogruppo ciclico di $H_1(T^2)\iso\ZZ\dirsum\ZZ$ generato da un elemento primitivo, diciamo $\alpha\in H_1(T^2)$. Sappiamo che tale $\alpha$ è rappresentato (a meno dell'orientazione) da un'unica classe di isotopia di curve semplici chiuse, il che permette di definire la \defterm{longitudine}.
+\item Si vede facilmente che l'omomorfismo $H_1(T_2)\to H_1(D^2\times S^1)$ è suriettivo, poiché ogni curva chiusa in $D^2\times S^1$ che rappresenta un generatore di $H_1(D^2\times S^1)$ è omotopa a una curva con supporto contenuto in $T_2$. Allora, esattamente come nel punto precedente, il nucleo di tale omomorfismo è generato da un elemento primitivo di $H_1(T^2)$, al quale corrisponde (a meno dell'orientazione) un'unica classe di isotopia di curve semplici chiuse. Questo permette di definire il \defterm{meridiano}.
+\end{itemize}
+
+\newpage
+\subsection*{Esercizio 4.3}
+Ricordiamo che una struttura iperbolica sul complementare del nodo figura otto è data dall'incollamento secondo il seguente schema di due tetraedri ideali regolari iperbolici (le facce dello stesso colore vengono identificate, in modo da rispettare le orientazioni e i colori rappresentati sugli spigoli).
+
+Per fissare la notazione, siano $M$ il complementare del nodo figura otto, $T_1$, $T_2$ i due tetraedri, $\sim$ la relazione di equivalenza descritta dall'incollamento, in modo che $M=T_1\sqcup T_2/\sim$. Ricordiamo che, in un tetraedro ideale regolare, ogni permutazione dei vertici è indotta da un'unica isometria di $\HH^n$. Sia allora $\map{h_1}{T_1}{T_1}$ l'isometria che induce la permutazione $\sigma=(1\;2)(3\;4)$ (più precisamente, $a_i\mapsto a_{\sigma(i)}$); definiamo in modo analogo $\map{h_2}{T_2}{T_2}$. Sia infine $\map{s}{T_1\sqcup T_2}{T_2\sqcup T_2}$ l'applicazione che "scambia" $T_1$ e $T_2$ mediante l'identità, ossia manda $x\in T_1$ in $x\in T_2$ e viceversa.
+
+Definiamo
+\[
+\map{f=(h_1\sqcup h_2)\circ s}{T_1\sqcup T_2}{T_1\sqcup T_2.}
+\]
+In altre parole, $f$ scambia $T_1$ e $T_2$, e poi applica su ognuno dei tetraedri l'isometria che induce la permutazione sopra descritta. È facile verificare che $f$ è compatibile con la relazione di equivalenza $\sim$: poiché $h_1$ e $h_2$ agiscono allo stesso modo, l'unico fatto non ovvio è la compatibilità sugli spigoli, ma si può vedere per verifica diretta che $f$ manda spigoli rossi in spigoli blu e viceversa, preservandone l'orientazione.
+Segue che $f$ induce un'applicazione al quoziente $\map{\overline{f}}{M}{M}$ che risulta essere un'isometria, in quanto composizione di isometrie. Verifichiamo che $\overline{f}$ non ha punti fissi.
+\begin{itemize}
+\item Se $x$ appartiene alla parte interna di $T_1$, allora non è un punto fisso di $\overline{f}$, poiché $f(x)$ appartiene alla parte interna di $T_2$.
+\item Poiché $\sigma$ agisce senza punti fissi sulle facce dei tetraedri, se $x$ appartiene alla parte interna di una faccia allora non può essere un punto fisso di $\overline{f}$.
+\item Come già osservato, $f$ manda spigoli rossi in spigoli blu e viceversa, dunque non ci sono punti fissi per $\overline{f}$ sugli spigoli.
+\end{itemize}
+Osserviamo infine che $\overline{f}$ ha ordine $2$. Possiamo allora definire $N=M/\langle\overline{f}\rangle$, che risulta essere una $3$-varietà iperbolica completa, non compatta e di volume finito, doppiamente rivestita dal complementare del nodo figura otto. L'immagine di $T_1$ mediante la proiezione al quoziente fornisce una tassellazione di $N$ con un tetraedro ideale regolare iperbolico. Dalla costruzione che abbiamo effettuato, è facile risalire esplicitamente alla suddetta tassellazione.

@@ -39,7 +39,7 @@
 \usepgfplotslibrary{fillbetween}
 
 \usepackage{tikz-cd}
-\newenvironment*{diagram}[1][]{$$\begin{tikzcd}[#1]}{\end{tikzcd}$$}
+\newenvironment*{diagram}[1][]{\begin{equation*}\begin{tikzcd}[#1]}{\end{tikzcd}\end{equation*}\ignorespacesafterend}
 
 % Closed surfaces
 \pgfkeys{/closed surface/.cd,
@@ -250,3 +250,4 @@ if \rightHoles == 2 then {{
 \DeclareMathOperator{\PSL}{\mathbb{P}SL}
 \DeclareMathOperator{\MCG}{MCG}
 \DeclareMathOperator{\Teich}{Teich}
+\DeclareMathOperator{\interior}{int}

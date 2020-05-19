@@ -83,7 +83,7 @@ i(a,c)=1\neq0=i(b,c).
 \end{tikzpicture}
 \end{center}
 
-Osserviamo che $S_1$ e $S_2$ hanno genere almeno $1$, altrimenti $\alpha$ e $\beta$ coborderebbero un anello e sarebbero dunque isotope. È allora facile costruire una curva $\gamma$ la cui classe di isotopia $c$ soddisfa la tesi.
+Osserviamo che $S_1$ e $S_2$ hanno genere almeno $1$, altrimenti $\alpha$ e $\beta$ coborderebbero un anello e sarebbero dunque isotope. È allora facile individuare una curva $\gamma$ la cui classe di isotopia $c$ soddisfa la tesi.
 \begin{center}
 \begin{tikzpicture}
 \pic[surface color,thick] {closed surface={radius=1.2cm,name=S,g=3}};
@@ -102,4 +102,49 @@ Grazie al criterio del bigono, si verifica che $\alpha$ e $\gamma$ sono in posiz
 i(a,c)=2\neq0=i(b,c).
 \]
 \end{itemize}
+\item \textbf{Supponiamo che $\beta$ non sia separante.} Possiamo allora ripetere il ragionamento del punto precedente, scambiando i ruoli di $\alpha$ e $\beta$, ottenendo una classe $c$ tale che $i(a,c)\neq i(b,c)$.
+\item \textbf{Supponiamo che $\alpha$ e $\beta$ siano separanti.} Allora $S\cut\alpha\cut\beta$ è unione disgiunta di tre superfici $S_1$, $S_2$ e $S_3$; $S_1$ ha una componente di bordo lungo $\alpha$, $S_3$ ha una componente di bordo lungo $\beta$, e $S_2$ ha due componenti di bordo, una lungo $\alpha$ e una lungo $\beta$.
+
+\begin{center}
+\begin{tikzpicture}
+\pic[surface color,thick] {closed surface={radius=1.2cm,name=S1,g=1,right=1}};
+\pic[surface color,thick] at ($(S1-r)+(1.6,0)$)  {closed surface={radius=1.2cm,name=S2,g=1,left=1,right=1}};
+\pic[surface color,thick] at ($(S2-r)+(1.6,0)$)  {closed surface={radius=1.2cm,name=S3,g=1,left=1}};
+\foreach \w/\ww/\col in {S1/S2/red,S2/S3/blue} {
+\begin{scope}[\col,very thick]
+\draw (\w-1-i-1) to[left vertical torus arc] (\w-1-i-2) (\w-1-i-1) to[right vertical torus arc] (\w-1-i-2);
+\draw[dashed,opacity=.4] (\ww-0-i-1) to[right vertical torus arc] (\ww-0-i-2);
+\draw (\ww-0-i-1) to[left vertical torus arc] (\ww-0-i-2);
+\end{scope}
+}
+\node at ($(S1-1-b-2)+(0,-.4)$) {$S_1$};
+\node at ($(S2-1-b-2)+(0,-.4)$) {$S_2$};
+\node at ($(S3-1-b-2)+(0,-.4)$) {$S_3$};
+\node[red] at ($(S1-1-i-1)!.5!(S2-0-i-1)+(0,.2)$) {$\alpha$};
+\node[blue] at ($(S2-1-i-1)!.5!(S3-0-i-1)+(0,.2)$) {$\beta$};
+\end{tikzpicture}
+\end{center}
+
+Osserviamo che $S_1$ e $S_3$ hanno genere almeno $1$, altrimenti $\alpha$ o $\beta$ sarebbero omotopicamente banali, e che anche $S_2$ ha genere almeno $1$, altrimenti sarebbero isotope. È allora facile individuare una curva $\gamma$ la cui classe di isotopia $c$ soddisfa la tesi.
+
+\begin{center}
+\begin{tikzpicture}
+\pic[surface color,thick] {closed surface={radius=1.2cm,name=S,g=3}};
+\foreach \w/\col in {S-1-i/red,S-2-i/blue} {
+\begin{scope}[\col,very thick]
+\draw[dashed,opacity=.4] (\w-1) to[right vertical torus arc] (\w-2);
+\draw (\w-1) to[left vertical torus arc] (\w-2);
+\end{scope}
+}
+\draw[green!80!blue,very thick] ($(S-2-i-1)!.15!(S-2-i-2)$) to[out=0,in=180] ($(S-3-t-1)!.3!(S-3-t-2)$) to[arc with diameter={90:-90:{1/cos(70)} and 1}] ($(S-3-b-1)!.3!(S-3-b-2)$) to[out=180,in=0] ($(S-2-i-1)!.6!(S-2-i-2)$) to ($(S-2-b-1)!.3!(S-2-b-2)$) to[arc with diameter={270:90:{1/cos(70)-2} and 1}] ($(S-2-t-1)!.3!(S-2-t-2)$) to[out=0,in=180] ($(S-2-i-1)!.15!(S-2-i-2)$);
+\node[red] at ($(S-1-i-1)+(0,.4)$) {$\alpha$};
+\node[blue] at ($(S-2-i-1)+(0,.4)$) {$\beta$};
+\node[green!80!blue] at ($(S-r)+(.2,.3)$) {$\gamma$};
+\end{tikzpicture}
+\end{center}
+
+Grazie al criterio del bigono, si verifica che $\beta$ e $\gamma$ sono in posizione minimale, da cui
+\[
+i(a,c)=0\neq 2=i(b,c).
+\]
 \end{itemize}
