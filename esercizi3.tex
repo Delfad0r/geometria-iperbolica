@@ -321,6 +321,7 @@ Dopo essere entrati in $U$, $\hat\alpha$ e $\hat\gamma$ si allontanano, dunque n
 Sia $b\in\mathcal{S}$ una classe di isotopia non banale, e $\map{\beta}{S^1}{S}$ una curva che la rappresenta. Mostriamo che esiste $a\in\mathcal{S}$ tale che $i(a,b)\neq 0$.
 \begin{itemize}
 \item \textbf{Supponiamo che $\beta$ sia separante.} In questo caso $S\cut\beta$ è unione disgiunta di due superfici $S_1$ e $S_2$, ciascuna con una componente di bordo. Naturalmente $S_1$ e $S_2$ hanno genere almeno $1$, altrimenti $\beta$ sarebbe omotopicamente banale.
+
 \begin{center}
 \begin{tikzpicture}
 \pic[surface color,thick] {closed surface={radius=1.2cm,name=S1,g=1,right=1}};
@@ -335,7 +336,9 @@ Sia $b\in\mathcal{S}$ una classe di isotopia non banale, e $\map{\beta}{S^1}{S}$
 \node at ($(S2-r)+(.5,0)$) {$S_2$};
 \end{tikzpicture}
 \end{center}
+
 Allora possiamo prendere come $a$ la classe di isotopia della curva $\alpha$ ottenuta come in figura.
+
 \begin{center}
 \begin{tikzpicture}
 \pic[surface color,thick] {closed surface={radius=1.2cm,name=S,g=3}};
@@ -351,8 +354,10 @@ Allora possiamo prendere come $a$ la classe di isotopia della curva $\alpha$ ott
 \node[blue] at ($(S-2-l)+(.2,.3)$) {$\alpha$};
 \end{tikzpicture}
 \end{center}
+
 Mediante il criterio del bigono è facile vedere che $\alpha$ e $\beta$ sono in posizione minimale, dunque $i(a,b)=2$.
 \item\textbf{Supponiamo che $\beta$ non sia separante}. In questo caso esiste una curva $\alpha$ che interseca $\beta$ esattamente una volta.
+
 \begin{center}
 \begin{tikzpicture}
 \pic[surface color,thick] {closed surface={radius=1.5cm,name=S,g=2}};
@@ -365,6 +370,7 @@ Mediante il criterio del bigono è facile vedere che $\alpha$ e $\beta$ sono in 
 \node[blue] at ($(S-l)+(-.2,.5)$) {$\alpha$};
 \end{tikzpicture}
 \end{center}
+
 Prendendo come $a$ la classe di isotopia di $\alpha$, otteniamo che $i(a,b)=1$.
 \end{itemize}
 Dal \thref{intersection-number-dehn-twist} sappiamo che

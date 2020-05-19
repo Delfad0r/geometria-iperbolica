@@ -135,19 +135,28 @@ if \rightHoles == 0 then {\rclip = 2 * \g * \r1;} else {if \rightHoles == 1 then
 \draw[outer][postaction={inner,line cap=round}] \foreach \i in {1,...,\g} {({\r1 pt*(2*\i-3)},0) arc (180:360:\r1 pt)};
 \end{scope}
 \end{scope}
-\ifthenelse{\leftHoles=1}{\def\surfList{{0-i}}}{\ifthenelse{\leftHoles=2}{\def\surfList{{1-t,1-b}}}{}}
 \tikzmath{
-if \leftHoles > 0 then {{
-    \foreach \w in \surfList{
+if \leftHoles == 1 then {{
+    \fill[pgffillcolor] (\surfname-0-i-1) to[left vertical torus arc] (\surfname-0-i-2) (\surfname-0-i-1) to[right vertical torus arc] (\surfname-0-i-2);
+    \draw[opacity=.4,dashed] (\surfname-0-i-1) to[right vertical torus arc] (\surfname-0-i-2);
+    \draw[line cap=round] (\surfname-0-i-1) to[left vertical torus arc] (\surfname-0-i-2);
+    };
+};
+if \leftHoles == 2 then {{
+    \foreach \w in {1-t,1-b}{
     \fill[pgffillcolor] (\surfname-\w-1) to[left vertical torus arc] (\surfname-\w-2) (\surfname-\w-1) to[right vertical torus arc] (\surfname-\w-2);
     \draw[opacity=.4,dashed] (\surfname-\w-1) to[right vertical torus arc] (\surfname-\w-2);
     \draw[line cap=round] (\surfname-\w-1) to[left vertical torus arc] (\surfname-\w-2);
     };};
 };}
-\ifthenelse{\rightHoles=1}{\def\surfList{{\g-i}}}{\ifthenelse{\rightHoles=2}{\def\surfList{{\g-t,\g-b}}}{}}
 \tikzmath{
-if \rightHoles > 0 then {{
-    \foreach \w in \surfList{
+if \rightHoles == 1 then {{
+    \fill[pgffillcolor][postaction={fill,black,opacity=.3,path fading=east}] (\surfname-\g-i-1) to[left vertical torus arc] (\surfname-\g-i-2) (\surfname-\g-i-1) to[right vertical torus arc] (\surfname-\g-i-2);
+    \draw (\surfname-\g-i-1) to[left vertical torus arc] (\surfname-\g-i-2) (\surfname-\g-i-1) to[right vertical torus arc] (\surfname-\g-i-2);
+    };
+};
+if \rightHoles == 2 then {{
+    \foreach \w in {\g-t,\g-b}{
     \fill[pgffillcolor][postaction={fill,black,opacity=.3,path fading=east}] (\surfname-\w-1) to[left vertical torus arc] (\surfname-\w-2) (\surfname-\w-1) to[right vertical torus arc] (\surfname-\w-2);
     \draw (\surfname-\w-1) to[left vertical torus arc] (\surfname-\w-2) (\surfname-\w-1) to[right vertical torus arc] (\surfname-\w-2);
     };};
