@@ -46,8 +46,20 @@ Definiamo
 In altre parole, $f$ scambia $T_1$ e $T_2$, e poi applica su ognuno dei tetraedri l'isometria che induce la permutazione sopra descritta. È facile verificare che $f$ è compatibile con la relazione di equivalenza $\sim$: poiché $h_1$ e $h_2$ agiscono allo stesso modo, l'unico fatto non ovvio è la compatibilità sugli spigoli, ma si può vedere per verifica diretta che $f$ manda spigoli rossi in spigoli blu e viceversa, preservandone l'orientazione.
 Segue che $f$ induce un'applicazione al quoziente $\map{\overline{f}}{M}{M}$ che risulta essere un'isometria, in quanto composizione di isometrie. Verifichiamo che $\overline{f}$ non ha punti fissi.
 \begin{itemize}
-\item Se $x$ appartiene alla parte interna di $T_1$, allora non è un punto fisso di $\overline{f}$, poiché $f(x)$ appartiene alla parte interna di $T_2$.
-\item Poiché $\sigma$ agisce senza punti fissi sulle facce dei tetraedri, se $x$ appartiene alla parte interna di una faccia allora non può essere un punto fisso di $\overline{f}$.
+\item Se $x$ appartiene alla parte interna di $T_1$, allora non è un punto fisso di $\overline{f}$, poiché $f(x)$ appartiene alla parte interna di $T_2$. Lo stesso vale ovviamente per i punti della parte interna di $T_2$.
+\item Poiché $\sigma$ agisce senza punti fissi sull'insieme delle facce di un tetraedro, se $x$ appartiene alla parte interna di una faccia allora non può essere un punto fisso di $\overline{f}$, in quanto $f(x)$ appartiene alla parte interna di un'altra faccia.
 \item Come già osservato, $f$ manda spigoli rossi in spigoli blu e viceversa, dunque non ci sono punti fissi per $\overline{f}$ sugli spigoli.
 \end{itemize}
-Osserviamo infine che $\overline{f}$ ha ordine $2$. Possiamo allora definire $N=M/\langle\overline{f}\rangle$, che risulta essere una $3$-varietà iperbolica completa, non compatta e di volume finito, doppiamente rivestita dal complementare del nodo figura otto. L'immagine di $T_1$ mediante la proiezione al quoziente fornisce una tassellazione di $N$ con un tetraedro ideale regolare iperbolico. Dalla costruzione che abbiamo effettuato, è facile risalire esplicitamente alla suddetta tassellazione.
+Osserviamo infine che $\overline{f}$ ha ordine $2$. Possiamo allora definire $N=M/\langle\overline{f}\rangle$, che risulta essere una $3$-varietà iperbolica completa, non compatta e di volume finito, doppiamente rivestita dal complementare del nodo figura otto. L'immagine di $T_1$ mediante la proiezione al quoziente fornisce una tassellazione di $N$ con un tetraedro ideale regolare iperbolico. Dalla costruzione che abbiamo effettuato, è facile risalire esplicitamente alla suddetta tassellazione, che riportiamo per completezza.
+
+\newpage
+\subsection*{Esercizio 4.4}
+Ricordiamo la costruzione, vista a lezione, di una $3$-varietà iperbolica tassellata da quattro tetraedri ideali regolari iperbolici. Dopo aver colorato le facce degli ottaedri a scacchiera, le identifichiamo secondo il seguente schema, utilizzando come mappa di incollamento l'identità.
+
+Seguiamo ora un approccio simile a quello dell'esercizio precedente. Siano $O_1$, $O_2$, $O_3$, $O_4$ gli ottaedri, $M=O_1\sqcup O_2\sqcup O_3\sqcup O_4/\sim$ la varietà ottenuta mediante l'incollamento. Definiamo l'applicazione
+\[
+\map{f}{O_1\sqcup O_2\sqcup O_3\sqcup O_4}{O_1\sqcup O_2\sqcup O_3\sqcup O_4}
+\]
+che prima scambia $O_1\leftrightarrow O_4$ e $O_2\leftrightarrow O_3$, e poi applica a ogni ottaedro la ``mappa antipodale'', ossia l'isometria che scambia ogni vertice con quello diametralmente opposto. È immediato verificare che $f$ passa al quoziente, definendo un'isometria $\map{f}{M}{M}$. Tale isometria, inoltre, non ha punti fissi: infatti l'unico punto fisso della mappa antipodale appartiene alla parte interna dell'ottaedro, ma ovviamente $f$ agisce in modo libero su $\{O_1,O_2,O_3,O_4\}$, dunque nessun punto nelle parti interne degli ottaedri può essere fissato.
+
+Osserviamo infine che $\overline{f}$ ha ordine $2$, dunque possiamo definire la $3$-varietà iperbolica $N=M/\langle\overline{f}\rangle$. Le immagini di $O_1$ e $O_2$ mediante la proiezione al quoziente forniscono una tassellazione di $N$ con due ottaedri ideali regolari iperbolici. Dalla costruzione che abbiamo effettuato, è facile risalire esplicitamente alla suddetta tassellazione, che riportiamo per completezza.
