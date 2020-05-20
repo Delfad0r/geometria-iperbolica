@@ -1,37 +1,22 @@
 \section*{Esercizi del 2 maggio}
 
 \subsection*{Esercizio 4.2}
-A meno di restringere $\nu K$, operazione che preserva il tipo di omotopia di $M$, possiamo supporre che la chiusura di $\nu K$ sia contenuta nella parte interna di un intorno tubolare compatto $D^2\times S^1\subs S^3$ di $K$.
+Siano $K\subs S^3$ un nodo, $\nu K$ un intorno tubolare (aperto) di $K$ tale che $\overline{\nu K}$ sia diffeomorfo a $D^2\times S^1$. Allora $M=S^3\setminus\nu K$ è una $3$-varietà compatta il cui bordo $\del M=\overline{\nu K}\setminus \nu K$ è diffeomorfo al $2$-toro $T^2$. Per semplicità, poniamo $T^2=\del M$ e $D^2\times S^2=\nu K$.
 
-\begin{itemize}
-\item Consideriamo gli aperti $U=\interior M$, $V=\interior (D^2\times S^1)$ di $S^3$. Osserviamo che $U$ è omotopicamente equivalente a $M$, $V$ è omotopicamente equivalente a $S^1$, e $U\cap V$ è omotopicamente equivalente a $T^2$. Scriviamo una parte della successione esatta di Mayer-Vietoris relativa a $U$ e $V$:
-\begin{diagram}
-H_2(S^3)\rar&H_1(T^2)\rar&H_1(S^1)\dirsum H_1(M)\rar&H_1(S^3),
+Scriviamo una parte della successione esatta di Mayer-Vietoris\footnote{Nonostante $M$ e $D^2\times S^1$ non siano aperti in $S^3$, entrambi sono retratti per deformazione di un loro intorno aperto; inoltre tali intorni aperti si possono scegliere in modo che la loro intersezione si retragga per deformazione su $M\cap (D^2\times S^1)=T^2$.} per $S^3=M\cup (D^2\times S^1)$, dove $\map{i}{T^2}{M}$ e $\map{j}{T^2}{D^2\times S^1}$ indicano le inclusioni:
+\begin{diagram}[column sep=large]
+H_2(S^3)\rar&H_1(T^2)\rar["{(i_*,j_*)}"]&H_1(M)\dirsum H_1(D^2\times S^1)\rar&H_1(S^3).
 \end{diagram}
-da cui
-\begin{diagram}
-0\rar&\ZZ\dirsum\ZZ\rar&\ZZ\dirsum H_1(M)\rar&0.
+Ricordando che $H_2(S^3)=H_1(S^3)=0$ otteniamo l'isomorfismo
+\begin{diagram}[column sep=large]
+0\rar&H_1(T^2)\rar["{(i_*,j_*)}","\iso"']&H_1(M)\dirsum H_1(D^2\times S^1)\rar&0.
 \end{diagram}
-Poiché $H_1(M)$ è abeliano e finitamente generato ($M$ è compatta), segue immediatamente che $H_1(M)\iso\ZZ$.
-\item Mostriamo che l'omomorfismo $H_1(T^2)\to H_1(M)$ indotto dall'inclusione è suriettivo.
-\begin{itemize}
-\item\textbf{Vale $H_1(S^3,\overline{\nu K})=0$.} Infatti dalla successione esatta lunga in omologia relativa per la coppia $(S^3,\overline{\nu K})$ otteniamo
-\begin{diagram}
-H_1(S^3)\rar&H_1(S^3,\overline{\nu K})\rar&\widetilde{H}_0(\overline{\nu K}),
-\end{diagram}
-da cui (osservando che $H_1(S^3)=\widetilde{H}_0(\overline{\nu K})=0$) la tesi.
-\item\textbf{Vale $H_1(M,T^2)=0$.} Poiché $M=S^3\setminus\nu K$ e $T^2=\overline{\nu K}\setminus\nu K$, per escissione otteniamo
-\[
-H_1(M,T^2)=H_1(S^3\setminus\nu K,\overline{\nu K}\setminus\nu K)\iso H_1(S^3,\overline{\nu K})=0.
-\]
-\item\textbf{L'omomorfismo $H_1(T^2)\to H_1(M)$ è suriettivo.} Infatti dalla successione esatta lunga della coppia $(M,T^2)$ otteniamo
-\begin{diagram}
-H_1(T^2)\rar&H_1(M)\rar&H_1(M,T^2)=0.
-\end{diagram}
-\end{itemize}
-Ma allora il nucleo di questo omomorfismo è un sottogruppo ciclico di $H_1(T^2)\iso\ZZ\dirsum\ZZ$ generato da un elemento primitivo, diciamo $\alpha\in H_1(T^2)$. Sappiamo che tale $\alpha$ è rappresentato (a meno dell'orientazione) da un'unica classe di isotopia di curve semplici chiuse, il che permette di definire la \defterm{longitudine}.
-\item Si vede facilmente che l'omomorfismo $H_1(T_2)\to H_1(D^2\times S^1)$ è suriettivo, poiché ogni curva chiusa in $D^2\times S^1$ che rappresenta un generatore di $H_1(D^2\times S^1)$ è omotopa a una curva con supporto contenuto in $T_2$. Allora, esattamente come nel punto precedente, il nucleo di tale omomorfismo è generato da un elemento primitivo di $H_1(T^2)$, al quale corrisponde (a meno dell'orientazione) un'unica classe di isotopia di curve semplici chiuse. Questo permette di definire il \defterm{meridiano}.
-\end{itemize}
+Poiché $H_1(T^2)=\ZZ\dirsum\ZZ$ e $H_1(D^2\times S_1)=\ZZ$, otteniamo immediatamente che $H_1(M)=\ZZ$.
+
+Sia ora $l\in H_1(T^2)$ la classe di omologia, ben definita a meno del segno, tale che $i_*(l)=0\in H_1(M)$ e $j_*(l)$ generi $H_1(D^2\times S^1)$. Osserviamo che il nucleo dell'omomorfismo $\map{i_*}{H_1(T^2)}{H_1(M)}$ è precisamente il sottogruppo ciclico generato da $l$, e che $l$ è primitivo, in quanto $H_1(M)=\ZZ$ non ha torsione. Sappiamo allora che esiste un'unica classe di isotopia di curve semplici chiuse non orientate che rappresenta $l$ in omologia; poiché anche $-l$ è rappresentata dalla stessa classe di isotopia, otteniamo che è ben definita la \defterm{longitudine} come l'unica curva semplice chiusa di $T^2$ (a meno di isotopia e dell'orientazione) che in omologia genera il nucleo di $i_*$.
+
+Con un ragionamento del tutto analogo, possiamo ben definire il \defterm{meridiano} come l'unica curva semplice chiusa di $T^2$ (a meno di isotopia e dell'orientazione) che in omologia genera il nucleo dell'omomorfismo $\map{j_*}{H_1(T^2)}{H_1(D^2\times S^1)}$.
+
 
 \newpage
 \subsection*{Esercizio 4.3}
@@ -56,7 +41,7 @@ markings,
 mark=at position .5 with {\arrow[scale=1.5,#1]{latex}}
 }}},
 }
-Ricordiamo che una struttura iperbolica sul complementare del nodo figura otto è data dall'incollamento secondo il seguente schema di due tetraedri ideali regolari iperbolici aventi orientazione opposta (le facce dello stesso colore vengono identificate, in modo da rispettare le orientazioni e i colori rappresentati sugli spigoli).
+Ricordiamo che una struttura iperbolica sul complementare del nodo figura otto è data dall'incollamento secondo il seguente schema di due tetraedri ideali regolari iperbolici aventi orientazione opposta (le facce dello stesso colore vengono identificate, in modo da rispettare le frecce e i colori rappresentati sugli spigoli).
 
 \begin{center}
 \begin{tikzpicture}
@@ -104,16 +89,16 @@ Per fissare la notazione, siano $M$ il complementare del nodo figura otto, $T\ti
 }
 \end{tikzpicture}
 \end{center}
-Definiamo l'isometria.
+Definiamo l'isometria
 \Map{f}{T\times\{0,1\}}{T\times\{0,1\}}{(x,i)}{(g(x),1-i).}
-In altre parole, $f$ scambia $T\times\{0\}$ e $T\times\{1\}$, e poi applica su ognuno dei tetraedri l'isometria che induce la permutazione $\sigma$. In altre parole ancora, $f$ è l'unica isometria di $T\times\{0,1\}$ che effettua i seguenti scambi di vertici:
+In altre parole, $f$ scambia $T\times\{0\}$ e $T\times\{1\}$, e poi applica a ognuno dei tetraedri l'isometria che induce la permutazione $\sigma$. In altre parole ancora, $f$ è l'unica isometria di $T\times\{0,1\}$ che effettua i seguenti scambi di vertici:
 \begin{align*}
 a_1\leftrightarrow b_2&&a_2\leftrightarrow b_1&&a_3\leftrightarrow b_4&&a_4\leftrightarrow b_3.
 \end{align*}
 È facile verificare che $f$ è compatibile con la relazione di equivalenza $\sim$.
 \begin{itemize}
 \item Per quanto riguarda le facce, consideriamo ad esempio $a_1a_2a_3$ e $b_2b_3b_1$, identificate da $\sim$. La faccia $a_1a_2a_3$ viene mandata da $f$ in $b_2b_1b_4$, mentre $b_2b_3b_1$ viene mandata in $a_1a_4a_2$; le facce $a_1a_4a_2$ e $b_2b_1b_4$ risultano identificate da $\sim$. Analogamente si mostra che $f$ è compatibile con $\sim$ sulle parti interne di tutte le facce.
-\item Per quanto riguarda gli spigoli, una verifica diretta mostra che $f$ manda spigoli rossi in spigoli blu e viceversa, preservando la direzione delle frecce. Dunque $f$ risulta compatibile con $\sim$ anche sugli spigoli.
+\item Per quanto riguarda gli spigoli, una verifica diretta mostra che $f$ manda spigoli rossi in spigoli blu e viceversa, preservando la direzione delle frecce. Pertanto $f$ risulta compatibile con $\sim$ anche sugli spigoli.
 \end{itemize}
 Per passaggio al quoziente otteniamo dunque un'isometria $\map{\overline{f}}{M}{M}$. Verifichiamo che $\overline{f}$ non ha punti fissi.
 \begin{itemize}
@@ -121,6 +106,7 @@ Per passaggio al quoziente otteniamo dunque un'isometria $\map{\overline{f}}{M}{
 \item I punti delle parti interne delle facce non sono fissati da $\overline{f}$, poiché $g$ agisce in modo libero sull'insieme delle facce di $T$.
 \item I punti degli spigoli non sono fissati da $\overline{f}$, poiché (come già osservato) $f$ manda spigoli rossi in spigoli blu e viceversa.
 \end{itemize}
+
 Osserviamo infine che $\overline{f}$ ha ordine 2. Pertanto possiamo definire $N=M/\langle\overline{f}\rangle$, che risulta essere una varietà iperbolica di volume finito, doppiamente rivestita dal complementare del nodo figura otto. La proiezione al quoziente della tassellazione di $M$ fornisce una tassellazione di $N$ con un tetraedro ideale regolare iperbolico, che riportiamo per completezza.
 \begin{center}
 \begin{tikzpicture}
@@ -187,29 +173,23 @@ Ricordiamo la costruzione, vista a lezione, di una $3$-varietà iperbolica tasse
 \end{tikzpicture}
 \end{center}
 
-Seguiamo ora un approccio simile a quello dell'esercizio precedente. Siano $O\times\{0\}$, $O\times\{1\}$, $O\times\{2\}$, $O\times\{3\}$ gli ottaedri, $M=O\times\{0,1,2,3\}/\sim$ la varietà ottenuta mediante l'incollamento. Sia $\map{g}{O}{O}$ l'isometria data dalla riflessione lungo la retta che congiunge due vertici diametralmente opposti.
+Seguiamo ora un approccio simile a quello dell'esercizio precedente. Siano $O\times\{0\}$, $O\times\{1\}$, $O\times\{2\}$, $O\times\{3\}$ gli ottaedri, $M=O\times\{0,1,2,3\}/\sim$ la varietà ottenuta mediante l'incollamento. Sia $\map{g}{O}{O}$ l'isometria data dalla rotazione di un angolo piatto attorno alla retta che congiunge due vertici diametralmente opposti.
 \begin{center}
 \begin{tikzpicture}[z={(6pt,8pt)}]
 \pic[scale=1.8] {octahedron=a};
-%\foreach \i in {1,2,3,4,5,6}{\node at (a-\i) {$\i$};}
 \begin{scope}[thick,line join=round]
 \draw[dashed,opacity=.7] (a-1) -- (a-3) -- (a-6) (a-2) -- (a-3) -- (a-4);
-%\fill[opacity=.2,purple] (a-2) -- (a-3) -- (a-4) -- (a-5) -- cycle;
 \draw[purple,dashed] (a-1) -- (a-6);
 \draw[line join=round] (a-1) -- (a-2) -- (a-6) -- (a-4) -- (a-1) -- (a-5) -- (a-6) (a-2) -- (a-5) -- (a-4);
-%\draw[<->,purple,shorten <=10pt,shorten >=10pt] (a-2) to[out=-135,in=0] (0,0,-3) to[out=180,in=-60] (a-4);
-%\draw[<->,purple,shorten <=10pt,shorten >=10pt] (a-3) to[out=0,in=0,looseness=5] (a-5);
-
+\draw[->,purple] (0,0,-.5) to[out=0,in=0,looseness=5] (0,0,.5);
 \end{scope}
+\foreach \i in {1,...,6} {\draw[fill=white] (a-\i) circle (2pt);}
 \end{tikzpicture}
 \end{center}
+Definiamo l'isometria
+\Map{f}{O\times\{0,1,2,3\}}{O\times\{0,1,2,3\}}{(x,i)}{(g(x),3-i).}
+In altre parole, $f$ scambia $(O\times\{0\})\leftrightarrow (O\times\{3\})$ e $(O\times\{1\})\leftrightarrow (O\times\{2\})$, e poi applica $g$ a ciascun ottaedro. Si vede facilmente che $f$ è compatibile con la relazione di equivalenza $\sim$, grazie al fatto che $g$ preserva la colorazione a scacchiera (la compatibilità sugli spigoli si può verificare direttamente a parte). Per passaggio al quoziente otteniamo dunque un'isometria $\map{\overline{f}}{M}{M}$. Si vede immediatamente che $\overline{f}$ agisce su $M$ senza punti fissi. Infatti tutte le identificazioni in $O\times\{0,1,2,3\}$ sono del tipo $(x,i)\sim(x,i')$; se $(x,i)$ è tale che $f(x,i)\sim (x,i)$, allora necessariamente $g(x)=x$, dunque $x$  è un punto fisso per $g$ e di conseguenza appartiene alla parte interna di $O$. Poiché i punti nelle parti interne degli ottaedri non sono identificati con altri punti, dovrebbe valere che $3-i=i$, il che è assurdo.
 
-\vspace{1cm}
+Osserviamo infine che $\overline{f}$ ha ordine $2$. Pertanto possiamo definire $N=M/\langle\overline{f}\rangle$, che risulta essere una varietà iperbolica di volume finito, doppiamente rivestita da $M$. La proiezione al quoziente della tassellazione di $M$ fornisce una tassellazione di $N$ con due ottaedri ideali regolari iperbolici, che riportiamo per completezza.
 
-Definiamo l'applicazione
-\[
-\map{f}{O_1\sqcup O_2\sqcup O_3\sqcup O_4}{O_1\sqcup O_2\sqcup O_3\sqcup O_4}
-\]
-che prima scambia $O_1\leftrightarrow O_4$ e $O_2\leftrightarrow O_3$, e poi applica a ogni ottaedro la ``mappa antipodale'', ossia l'isometria che scambia ogni vertice con quello diametralmente opposto. È immediato verificare che $f$ passa al quoziente, definendo un'isometria $\map{\overline{f}}{M}{M}$. Tale isometria, inoltre, non ha punti fissi: infatti l'unico punto fisso della mappa antipodale appartiene alla parte interna dell'ottaedro, ma ovviamente $f$ agisce in modo libero su $\{O_1,O_2,O_3,O_4\}$, dunque nessun punto nelle parti interne degli ottaedri può essere fissato.
-
-Osserviamo infine che $\overline{f}$ ha ordine $2$, dunque possiamo definire $N=M/\langle\overline{f}\rangle$, che risulta essere una $3$-varietà iperbolica non compatta e di volume finito, doppiamente rivestita da $M$. Le immagini di $O_1$ e $O_2$ mediante la proiezione al quoziente forniscono una tassellazione di $N$ con due ottaedri ideali regolari iperbolici. Dalla costruzione che abbiamo effettuato, è facile risalire esplicitamente alla suddetta tassellazione, \sout{che riportiamo per completezza}.
+\huge{TODO}
