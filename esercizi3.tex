@@ -357,7 +357,7 @@ Allora possiamo prendere come $a$ la classe di isotopia della curva $\alpha$ ott
 \end{center}
 
 Mediante il criterio del bigono è facile vedere che $\alpha$ e $\beta$ sono in posizione minimale, dunque $i(a,b)=2$.
-\item\textbf{Supponiamo che $\beta$ non sia separante}. In questo caso esiste una curva $\alpha$ che interseca $\beta$ esattamente una volta.
+\item\textbf{Supponiamo che $\beta$ non sia separante}. In questo caso esiste una curva $\alpha$ che interseca $\beta$ esattamente una volta (basta collegare due punti di $S$ molto vicini a $\beta$ mediante un arco che non interseca $\beta$).
 
 \begin{center}
 \begin{tikzpicture}
@@ -376,7 +376,7 @@ Prendendo come $a$ la classe di isotopia di $\alpha$, otteniamo che $i(a,b)=1$.
 \end{itemize}
 Dal \thref{intersection-number-dehn-twist} sappiamo che
 \[
-i(a,T_b^k(a))=k\cdot i(a,b)^2
+i(a,T_b^k(a))=k\cdot i(a,b)^2\neq 0
 \]
 per ogni $k>0$, dunque in particolare $T_b^k(a)\neq a$. Pertanto l'azione di $T_b^k$ su $\mathcal{S}$ è non banale, e in particolare $T_b^k$ non è banale.
 \newpage
@@ -539,7 +539,7 @@ i(a,c)=0\neq 2=i(b,c).
 \item \begin{itemize}
 \item Cominciamo a mostrare che la classe di isotopia di $T_\alpha$ non dipende dall'orientazione di $\alpha$. Sia dunque $\map{\alpha}{S^1}{S}$ una curva semplice chiusa, e sia $\map{\overline\alpha}{S^1}{S}$ la curva inversa, ossia quella definita da $\overline\alpha(e^{ix})=\alpha(e^{-ix})$. Se $\map{\psi}{A}{S}$ è un intorno regolare orientato di $\alpha$, allora
 \Map{\overline\psi}{A}{S}{(e^{ix},t)}{\psi(e^{-ix},-t)}
-è un intorno regolare orientato di $\overline\alpha$. Poiché la classe di isotopia dei Dehn twist non dipende dalla scelta di $f$, non è restrittivo supporre che $f(-t)=2\pi-f(t)$. Mostriamo allora che $T_\alpha(p)=T_{\overline\alpha}(p)$ per ogni $p\in S$ (dunque in particolare sono isotopi). La tesi è ovvia per $p\not\in\psi(A)$, dunque supponiamo $p\in\psi(A)$; è sufficiente far vedere che $\psi\circ\theta\circ\psi^{-1}\circ\overline\psi=\overline\psi\circ\theta$. Effettivamente:
+è un intorno regolare orientato di $\overline\alpha$. Poiché la classe di isotopia dei Dehn twist non dipende dalla scelta di $f$, non è restrittivo supporre che $f(-t)=2\pi-f(t)$. Mostriamo allora che $T_\alpha(p)=T_{\overline\alpha}(p)$ per ogni $p\in S$ (dunque in particolare $T_\alpha$ e $T_{\overline \alpha}$ sono isotopi). La tesi è ovvia per $p\not\in\psi(A)$, dunque supponiamo $p\in\psi(A)$; è sufficiente far vedere che $\psi\circ\theta\circ\psi^{-1}\circ\overline\psi=\overline\psi\circ\theta$. Effettivamente:
 \begin{align*}
 (\psi\circ\theta\circ\psi^{-1}\circ\overline\psi)(e^{ix},t)&=\psi(\theta(e^{-ix},-t))=\psi(e^{i(-x+f(-t))},-t)=\psi(e^{-i(x+f(t))},-t);\\
 (\overline\psi\circ\theta)(e^{ix},t)&=\overline\psi(e^{i(x+f(t))},t)=\psi(e^{-i(x+f(t))},-t).
@@ -551,7 +551,7 @@ i(c,T_a(c))=i(c,a)^2\neq i(c,b)^2=i(c,T_b(c)),
 \]
 da cui $T_a\neq T_b$ come elementi di $\MCG(S)$.
 \end{itemize}
-\item Per non creare conflitti di notazione, siano $h\in\MCG(S)$, $a\in\mathcal{S}$. Sia $\map{\alpha}{S^1}{S}$ un rappresentante di $a$, e con lieve abuso di notazione trattiamo $h$ come un diffeomorfismo di $S$. Sia $\map{\psi}{A}{S}$ un intorno regolare di $\alpha$: notiamo che $h\circ\psi$ è un intorno regolare di $h\circ\alpha$. Ma allora è evidente che $h\circ T_\alpha\circ h^{-1}$ è un Dehn twist intorno a $h\circ\alpha$, da cui la tesi.
+\item Per non creare conflitti di notazione, siano $h\in\MCG(S)$, $a\in\mathcal{S}$. Sia $\map{\alpha}{S^1}{S}$ un rappresentante di $a$, e con lieve abuso di notazione trattiamo $h$ come un diffeomorfismo di $S$. Sia $\map{\psi}{A}{S}$ un intorno regolare di $\alpha$: notiamo che $h\circ\psi$ è un intorno regolare di $h\circ\alpha$. Ma allora è evidente che $h\circ T_\alpha\circ h^{-1}$ è un Dehn twist intorno a $h\circ\alpha$, ossia $T_{h(a)}=h\circ T_a\circ h^{-1}$. Segue che $h$ commuta con $T_a$ se e solo se $T_{h(a)}=T_a$, ossia (grazie al punto (1)) se e solo se $h(a)=a$.
 \end{enumerate}
 
 \newpage
@@ -607,11 +607,11 @@ Consideriamo la superficie chiusa ottenuta incollando lati opposti di un $4g$-go
 \end{center}
 \begin{itemize}
 \item\textbf{$\Sigma$ è orientabile.} Questo si vede immediatamente triangolando il poligono regolare e osservando che le identificazioni fra lati invertono l'orientazione.
-\item\textbf{Una base per $H_1(\Sigma,\ZZ)$ è data dai segmenti $x_ix_{i+1}$ per $1\le i<2g$.} Questo si vede facilmente calcolando l'omologia cellulare: infatti i segmenti $x_ix_{i+1}$ sono esattamente le $1$-celle, e hanno tutte bordo nullo. Al contempo, anche l'unica $2$-cella ha bordo nullo, dunque $H_1(\Sigma,\ZZ)\iso\ZZ^{2g}$ con base data dalle $1$-celle.
+\item\textbf{Una base per $H_1(\Sigma,\ZZ)$ è data dai segmenti $x_ix_{i+1}$ per $1\le i\le 2g$.} Questo si vede facilmente calcolando l'omologia cellulare: infatti i segmenti $x_ix_{i+1}$ sono esattamente le $1$-celle, e hanno tutte bordo nullo. Al contempo, anche l'unica $2$-cella ha bordo nullo, dunque $H_1(\Sigma,\ZZ)\iso\ZZ^{2g}$ con base data dalle $1$-celle.
 \end{itemize}
 In particolare, $\Sigma$ è una superficie chiusa orientabile di genere $g$.
 
-Per ogni $1\le i<2g$, sia $\alpha_i\in H_1(\Sigma,\ZZ)$ la classe rappresentata in omologia dal segmento $x_ix_{i+1}$. Consideriamo l'automorfismo $\map{f}{\Sigma}{\Sigma}$ indotto dalla rotazione di angolo $\pi$ intorno al centro del poligono regolare.
+Per ogni $1\le i\le 2g$, sia $\alpha_i\in H_1(\Sigma,\ZZ)$ la classe rappresentata in omologia dal segmento $x_ix_{i+1}$. Consideriamo l'automorfismo $\map{f}{\Sigma}{\Sigma}$ indotto dalla rotazione di angolo $\pi$ intorno al centro del poligono regolare.
 
 \begin{center}
 \begin{tikzpicture}

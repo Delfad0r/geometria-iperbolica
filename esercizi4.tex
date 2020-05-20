@@ -11,7 +11,7 @@ Ricordando che $H_2(S^3)=H_1(S^3)=0$ otteniamo l'isomorfismo
 \begin{diagram}[column sep=large]
 0\rar&H_1(T^2)\rar["{(i_*,j_*)}","\iso"']&H_1(M)\dirsum H_1(D^2\times S^1)\rar&0.
 \end{diagram}
-Poiché $H_1(T^2)=\ZZ\dirsum\ZZ$ e $H_1(D^2\times S_1)=\ZZ$, otteniamo immediatamente che $H_1(M)=\ZZ$.
+Poiché $H_1(T^2)=\ZZ\dirsum\ZZ$ e $H_1(D^2\times S^1)=\ZZ$, otteniamo immediatamente che $H_1(M)=\ZZ$.
 
 Sia ora $l\in H_1(T^2)$ la classe di omologia, ben definita a meno del segno, tale che $i_*(l)=0\in H_1(M)$ e $j_*(l)$ generi $H_1(D^2\times S^1)$. Osserviamo che il nucleo dell'omomorfismo $\map{i_*}{H_1(T^2)}{H_1(M)}$ è precisamente il sottogruppo ciclico generato da $l$, e che $l$ è primitivo, in quanto $H_1(M)=\ZZ$ non ha torsione. Sappiamo allora che esiste un'unica classe di isotopia di curve semplici chiuse non orientate che rappresenta $l$ in omologia; poiché anche $-l$ è rappresentata dalla stessa classe di isotopia, otteniamo che è ben definita la \defterm{longitudine} come l'unica curva semplice chiusa di $T^2$ (a meno di isotopia e dell'orientazione) che in omologia genera il nucleo di $i_*$.
 
@@ -41,7 +41,7 @@ markings,
 mark=at position .5 with {\arrow[scale=1.5,#1]{latex}}
 }}},
 }
-Ricordiamo che una struttura iperbolica sul complementare del nodo figura otto è data dall'incollamento secondo il seguente schema di due tetraedri ideali regolari iperbolici aventi orientazione opposta (le facce dello stesso colore vengono identificate, in modo da rispettare le frecce e i colori rappresentati sugli spigoli).
+Ricordiamo che una struttura iperbolica sul complementare del nodo figura otto è data dall'incollamento di due tetraedri ideali regolari iperbolici secondo il seguente schema (le facce dello stesso colore vengono identificate, in modo da rispettare le frecce e i colori rappresentati sugli spigoli).
 
 \begin{center}
 \begin{tikzpicture}
@@ -97,7 +97,7 @@ a_1\leftrightarrow b_2&&a_2\leftrightarrow b_1&&a_3\leftrightarrow b_4&&a_4\left
 \end{align*}
 È facile verificare che $f$ è compatibile con la relazione di equivalenza $\sim$.
 \begin{itemize}
-\item Per quanto riguarda le facce, consideriamo ad esempio $a_1a_2a_3$ e $b_2b_3b_1$, identificate da $\sim$. La faccia $a_1a_2a_3$ viene mandata da $f$ in $b_2b_1b_4$, mentre $b_2b_3b_1$ viene mandata in $a_1a_4a_2$; le facce $a_1a_4a_2$ e $b_2b_1b_4$ risultano identificate da $\sim$. Analogamente si mostra che $f$ è compatibile con $\sim$ sulle parti interne di tutte le facce.
+\item Per quanto riguarda le facce, consideriamo ad esempio $a_1a_2a_3$ e $b_2b_3b_1$, identificate da $\sim$. La faccia $a_1a_2a_3$ viene mandata da $f$ in $b_2b_1b_4$, mentre $b_2b_3b_1$ viene mandata in $a_1a_4a_2$; le facce $a_1a_4a_2$ e $b_2b_1b_4$ risultano identificate da $\sim$. Analogamente si mostra che $f$ è compatibile con $\sim$ sulle parti interne di tutte le altre facce.
 \item Per quanto riguarda gli spigoli, una verifica diretta mostra che $f$ manda spigoli rossi in spigoli blu e viceversa, preservando la direzione delle frecce. Pertanto $f$ risulta compatibile con $\sim$ anche sugli spigoli.
 \end{itemize}
 Per passaggio al quoziente otteniamo dunque un'isometria $\map{\overline{f}}{M}{M}$. Verifichiamo che $\overline{f}$ non ha punti fissi.
@@ -150,6 +150,7 @@ Ricordiamo la costruzione, vista a lezione, di una $3$-varietà iperbolica tasse
 \pic at (0,-4.5) {octahedron={o3}};
 \pic at (6,-4.5) {octahedron={o4}};
 \foreach \w in {o1,o2,o3,o4} {
+    \fill[opacity=.4,white] (\w-1) -- (\w-2) -- (\w-3) -- cycle (\w-3) -- (\w-4) -- (\w-6) -- cycle;
     \fill[opacity=.4,orange] (\w-1) -- (\w-3) -- (\w-4) -- cycle (\w-2) -- (\w-3) -- (\w-6) -- cycle;
     \draw[dashed,opacity=.7,line join=round] (\w-1) -- (\w-3) -- (\w-6) (\w-2) -- (\w-3) -- (\w-4);
     \draw[fill=white] (\w-3) circle (2pt);
@@ -181,7 +182,7 @@ Seguiamo ora un approccio simile a quello dell'esercizio precedente. Siano $O\ti
 \draw[dashed,opacity=.7] (a-1) -- (a-3) -- (a-6) (a-2) -- (a-3) -- (a-4);
 \draw[purple,dashed] (a-1) -- (a-6);
 \draw[line join=round] (a-1) -- (a-2) -- (a-6) -- (a-4) -- (a-1) -- (a-5) -- (a-6) (a-2) -- (a-5) -- (a-4);
-\draw[->,purple] (0,0,-.5) to[out=0,in=0,looseness=5] (0,0,.5);
+\draw[-{Latex[slant=0]},purple] (0,0,-.5) to[out=0,in=0,looseness=5] (0,0,.5);
 \end{scope}
 \foreach \i in {1,...,6} {\draw[fill=white] (a-\i) circle (2pt);}
 \end{tikzpicture}
@@ -192,4 +193,28 @@ In altre parole, $f$ scambia $(O\times\{0\})\leftrightarrow (O\times\{3\})$ e $(
 
 Osserviamo infine che $\overline{f}$ ha ordine $2$. Pertanto possiamo definire $N=M/\langle\overline{f}\rangle$, che risulta essere una varietà iperbolica di volume finito, doppiamente rivestita da $M$. La proiezione al quoziente della tassellazione di $M$ fornisce una tassellazione di $N$ con due ottaedri ideali regolari iperbolici, che riportiamo per completezza.
 
-\huge{TODO}
+\begin{center}
+\begin{tikzpicture}[z={(6pt,8pt)}]
+\pic[scale=1.8] {octahedron=a};
+\pic[scale=1.8] at (6,0) {octahedron=b};
+\foreach \w in {a,b} {
+    \fill[opacity=.4,white] (\w-1) -- (\w-2) -- (\w-3) -- cycle (\w-3) -- (\w-4) -- (\w-6) -- cycle;
+    \fill[opacity=.4,green!70!blue] (\w-1) -- (\w-3) -- (\w-4) -- cycle (\w-2) -- (\w-3) -- (\w-6) -- cycle;
+    \draw[dashed,opacity=.7,line join=round] (\w-1) -- (\w-3) -- (\w-6) (\w-2) -- (\w-3) -- (\w-4);
+    \draw[fill=white] (\w-3) circle (2pt);
+    \node[inner sep=5pt,anchor=north west] at (\w-3) {$\w_3$};
+    \fill[opacity=.4,white] (\w-2) -- (\w-5) -- (\w-6) -- cycle (\w-1) -- (\w-4) -- (\w-5) -- cycle;
+    \fill[opacity=.4,green!70!blue] (\w-4) -- (\w-5) -- (\w-6) -- cycle (\w-1) -- (\w-2) -- (\w-5) -- cycle;
+    \draw[line join=round] (\w-1) -- (\w-2) -- (\w-6) -- (\w-4) -- (\w-1) -- (\w-5) -- (\w-6) (\w-2) -- (\w-5) -- (\w-4);
+    \foreach \i/\pos in {1/south,2/north west,4/north east,5/north west,6/north} {
+        \draw[fill=white] (\w-\i) circle (2pt);
+        \node[inner sep=5pt,anchor=\pos] at (\w-\i) {$\w_{\i}$};
+    }
+}
+\end{tikzpicture}
+\end{center}
+
+Ogni faccia azzurra a sinistra si identifica con la corrispondente faccia azzurra a destra, usando l'identità come mappa di incollamento. Le facce bianche si identificano invece mediante il seguente schema:
+\begin{align*}
+a_1a_2a_3\leftrightarrow b_1b_4b_5&&a_1a_4a_5\leftrightarrow b_1b_2b_3&&a_6a_3a_4\leftrightarrow b_6b_5b_2&&a_6a_5a_2\leftrightarrow b_6b_3b_4.
+\end{align*}
