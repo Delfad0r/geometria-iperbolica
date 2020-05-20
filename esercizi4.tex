@@ -35,7 +35,58 @@ Ma allora il nucleo di questo omomorfismo è un sottogruppo ciclico di $H_1(T^2)
 
 \newpage
 \subsection*{Esercizio 4.3}
+\tikzfading[name=fade out,inner color=transparent!0,outer color=transparent!100]
+\tikzset{
+pics/tetrahedron/.style={
+code={
+\coordinate (#1-1) at (0,0);
+\coordinate (#1-2) at (1.8,-.7);
+\coordinate (#1-3) at (2.5,.4);
+\coordinate (#1-4) at (1,1.8);
+}},
+on each segment/.style={
+decorate,
+decoration={
+show path construction,
+lineto code={\path [#1] (\tikzinputsegmentfirst) -- (\tikzinputsegmentlast);},
+closepath code={\path [#1] (\tikzinputsegmentfirst) -- (\tikzinputsegmentlast);}
+}},
+mid arrow/.style={postaction={decorate,decoration={
+markings,
+mark=at position .5 with {\arrow[scale=1.5,#1]{latex}}
+}}},
+}
 Ricordiamo che una struttura iperbolica sul complementare del nodo figura otto è data dall'incollamento secondo il seguente schema di due tetraedri ideali regolari iperbolici (le facce dello stesso colore vengono identificate, in modo da rispettare le orientazioni e i colori rappresentati sugli spigoli).
+
+\begin{center}
+\begin{tikzpicture}
+\pic[scale=1.5] at (0,0) {tetrahedron=a};
+\pic[scale=1.5] at (6,0) {tetrahedron=b};
+\foreach \T in {a,b} {
+\begin{scope}[on background layer={opacity=.4}]
+\fill[orange] (\T-1) -- (\T-2) -- (\T-3) -- cycle;
+\fill[green] (\T-1) -- (\T-3) -- (\T-4) -- cycle;
+\end{scope}
+\begin{scope}[opacity=.3]
+\fill[white] (\T-1) -- (\T-2) -- (\T-4) -- cycle;
+\fill[black] (\T-2) -- (\T-3) -- (\T-4) -- cycle;
+\end{scope}
+}
+\draw[blue,thick,postaction={on each segment={mid arrow}}] (a-1) -- (a-2) (a-3) -- (a-2) (a-3) -- (a-4) (b-2) -- (b-3) (b-2) -- (b-4);
+\draw[red,thick,postaction={on each segment={mid arrow}}] (a-1) -- (a-4) (a-2) -- (a-4) (b-2) -- (b-1) (b-4) -- (b-1) (b-4) -- (b-3);
+\begin{scope}[on background layer={thick,opacity=.7,dashed}]
+\draw[blue,postaction={mid arrow}] (b-1) -- (b-3);
+\draw[red,postaction={mid arrow}] (a-1) -- (a-3);
+\end{scope}
+\foreach \T in {a,b} {
+\foreach \i/\pos in {1/east,2/north,3/west,4/south} {
+\draw[fill=white] (\T-\i) circle (2pt);
+\node[inner sep=5pt,anchor=\pos] at (\T-\i) {$\T_{\i}$};
+}}
+\node at ($(a-4)+(-1.5,-.5)$) {$T_1$};
+\node at ($(b-4)+(2,-.5)$) {$T_2$};
+\end{tikzpicture}
+\end{center}
 
 Per fissare la notazione, siano $M$ il complementare del nodo figura otto, $T_1$, $T_2$ i due tetraedri, $\sim$ la relazione di equivalenza descritta dall'incollamento, in modo che $M=T_1\sqcup T_2/\sim$. Ricordiamo che, in un tetraedro ideale regolare, ogni permutazione dei vertici è indotta da un'unica isometria di $\HH^n$. Sia allora $\map{h_1}{T_1}{T_1}$ l'isometria che induce la permutazione $\sigma=(1\;2)(3\;4)$ (più precisamente, $a_i\mapsto a_{\sigma(i)}$); definiamo in modo analogo $\map{h_2}{T_2}{T_2}$. Sia infine $\map{s}{T_1\sqcup T_2}{T_2\sqcup T_2}$ l'applicazione che "scambia" $T_1$ e $T_2$ mediante l'identità, ossia manda $x\in T_1$ in $x\in T_2$ e viceversa.
 
@@ -43,7 +94,11 @@ Definiamo
 \[
 \map{f=(h_1\sqcup h_2)\circ s}{T_1\sqcup T_2}{T_1\sqcup T_2.}
 \]
-In altre parole, $f$ scambia $T_1$ e $T_2$, e poi applica su ognuno dei tetraedri l'isometria che induce la permutazione sopra descritta. È facile verificare che $f$ è compatibile con la relazione di equivalenza $\sim$: poiché $h_1$ e $h_2$ agiscono allo stesso modo, l'unico fatto non ovvio è la compatibilità sugli spigoli, ma si può vedere per verifica diretta che $f$ manda spigoli rossi in spigoli blu e viceversa, preservandone l'orientazione.
+In altre parole, $f$ scambia $T_1$ e $T_2$, e poi applica su ognuno dei tetraedri l'isometria che induce la permutazione sopra descritta. In altre parole ancora, $f$ è l'unica isometria che effettua i seguenti scambi di vertici:
+\begin{align*}
+a_1\leftrightarrow b_2&&a_2\leftrightarrow b_1&&a_3\leftrightarrow b_4&&a_4\leftrightarrow b_3.
+\end{align*}
+È facile verificare che $f$ è compatibile con la relazione di equivalenza $\sim$: poiché $h_1$ e $h_2$ agiscono allo stesso modo, l'unico fatto non ovvio è la compatibilità sugli spigoli, ma si può vedere per verifica diretta che $f$ manda spigoli rossi in spigoli blu e viceversa, preservandone l'orientazione.
 Segue che $f$ induce un'applicazione al quoziente $\map{\overline{f}}{M}{M}$ che risulta essere un'isometria, in quanto composizione di isometrie. Verifichiamo che $\overline{f}$ non ha punti fissi.
 \begin{itemize}
 \item Se $x$ appartiene alla parte interna di $T_1$, allora non è un punto fisso di $\overline{f}$, poiché $f(x)$ appartiene alla parte interna di $T_2$. Lo stesso vale ovviamente per i punti della parte interna di $T_2$.
@@ -51,6 +106,23 @@ Segue che $f$ induce un'applicazione al quoziente $\map{\overline{f}}{M}{M}$ che
 \item Come già osservato, $f$ manda spigoli rossi in spigoli blu e viceversa, dunque non ci sono punti fissi per $\overline{f}$ sugli spigoli.
 \end{itemize}
 Osserviamo infine che $\overline{f}$ ha ordine $2$. Possiamo allora definire $N=M/\langle\overline{f}\rangle$, che risulta essere una $3$-varietà iperbolica completa, non compatta e di volume finito, doppiamente rivestita dal complementare del nodo figura otto. L'immagine di $T_1$ mediante la proiezione al quoziente fornisce una tassellazione di $N$ con un tetraedro ideale regolare iperbolico. Dalla costruzione che abbiamo effettuato, è facile risalire esplicitamente alla suddetta tassellazione, che riportiamo per completezza.
+
+\begin{center}
+\begin{tikzpicture}
+\pic[scale=1.5] {tetrahedron=a};
+\begin{scope}[on background layer={opacity=.4}]
+\fill[orange] (a-1) -- (a-2) -- (a-3) -- cycle;
+\end{scope}
+\begin{scope}[opacity=.4]
+\fill[orange] (a-1) -- (a-2) -- (a-4) -- cycle;
+\end{scope}
+\scoped[on background layer]\draw[blue,thick,postaction={mid arrow},dashed, opacity=.7] (a-1) -- (a-3);
+\draw[blue,thick,postaction={on each segment={mid arrow}}] (a-1) -- (a-2) (a-1) -- (a-4) (a-2) -- (a-4) (a-3) -- (a-2) (a-3) -- (a-4);
+\foreach \i in {1,2,3,4}{
+\draw[fill=white] (a-\i) circle (2pt);
+}
+\end{tikzpicture}
+\end{center}
 
 \newpage
 \subsection*{Esercizio 4.4}
@@ -62,4 +134,4 @@ Seguiamo ora un approccio simile a quello dell'esercizio precedente. Siano $O_1$
 \]
 che prima scambia $O_1\leftrightarrow O_4$ e $O_2\leftrightarrow O_3$, e poi applica a ogni ottaedro la ``mappa antipodale'', ossia l'isometria che scambia ogni vertice con quello diametralmente opposto. È immediato verificare che $f$ passa al quoziente, definendo un'isometria $\map{f}{M}{M}$. Tale isometria, inoltre, non ha punti fissi: infatti l'unico punto fisso della mappa antipodale appartiene alla parte interna dell'ottaedro, ma ovviamente $f$ agisce in modo libero su $\{O_1,O_2,O_3,O_4\}$, dunque nessun punto nelle parti interne degli ottaedri può essere fissato.
 
-Osserviamo infine che $\overline{f}$ ha ordine $2$, dunque possiamo definire la $3$-varietà iperbolica $N=M/\langle\overline{f}\rangle$. Le immagini di $O_1$ e $O_2$ mediante la proiezione al quoziente forniscono una tassellazione di $N$ con due ottaedri ideali regolari iperbolici. Dalla costruzione che abbiamo effettuato, è facile risalire esplicitamente alla suddetta tassellazione, che riportiamo per completezza.
+Osserviamo infine che $\overline{f}$ ha ordine $2$, dunque possiamo definire la $3$-varietà iperbolica $N=M/\langle\overline{f}\rangle$. Le immagini di $O_1$ e $O_2$ mediante la proiezione al quoziente forniscono una tassellazione di $N$ con due ottaedri ideali regolari iperbolici. Dalla costruzione che abbiamo effettuato, è facile risalire esplicitamente alla suddetta tassellazione, \sout{che riportiamo per completezza}.
