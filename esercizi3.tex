@@ -1,9 +1,39 @@
 \section*{Esercizi dell'11 aprile}
 
+\tikzset{surface color/.style={fill={rgb:yellow,2.5;red,.5;white,4;gray,.5}}}
+
 \subsection*{Dehn twist}
 Per fissare la notazione, ricordiamo come si definiscono i Dehn twist. Siano $S$ una superficie chiusa orientabile, $\map{\alpha}{S^1}{S}$ una curva semplice chiusa non banale. Sia $A=S^1\times[-1,1]$ con l'orientazione indotta da quelle standard di $S^1$ e $[-1,1]$. Fissiamo un intorno regolare di $\alpha$, ossia un embedding $\map{\psi}{A}{S}$ tale che $\psi(x,0)=\alpha(x)$ per ogni $x\in S^1$; scegliamolo in modo che $\psi$ preservi l'orientazione. Fissiamo infine una funzione $\map{f}{[-1,1]}{[0,2\pi]}$ tale che
 $f(t)=0$ per $t\le-\frac{1}{2}$ e $f(t)=2\pi$ per $t\ge\frac{1}{2}$, e definiamo
 \Map{\theta}{A}{A}{(e^{ix},t)}{(e^{i(x+f(t))},t).}
+\begin{center}
+\begin{tikzpicture}[scale=.5]
+\tikzmath{
+function f(\t){
+    if \t <= -1 then {
+        return 0;
+    } else { if \t >= 1 then {
+        return 360;
+    } else {
+        return 180 + 180 * sin(\t * 90);
+    };};
+};
+function id(\t){
+    return 0;
+};
+}
+\path[use as bounding box] (-3.5,-3.5) rectangle (15.5,3.5);
+\foreach \xsh/\fun in {0/id,12/f} {
+    \begin{scope}[xshift=\xsh cm]
+        \draw[even odd rule,fill=gray!10] (0,0) circle (3cm) circle (1cm);
+        \foreach \i in {3,6,...,60} {
+            \fill[red,opacity=.04,domain=-1:1,samples=100] plot ({\fun(\x)-\i}:{\x+2}) arc (-\i:\i:3) -- plot ({\fun(-\x)+\i}:{-\x+2}) arc (\i:-\i:1);
+        }
+    \end{scope}
+}
+\draw[->] (4.5,0) to["$\theta$"] (7.5,0);
+\end{tikzpicture}
+\end{center}
 Possiamo ora definire il Dehn twist intorno a $\alpha$ come il diffeomorfismo $\map{T_\alpha}{S}{S}$ tale che
 \[
 T_\alpha(p)=\begin{cases}
@@ -11,13 +41,27 @@ p&p\not\in\psi(A)\\
 (\psi\circ\theta\circ\psi^{-1})(p)&p\in\psi(A).
 \end{cases}
 \]
+
+\begin{center}
+\begin{tikzpicture}
+\path[use as bounding box] (-2,-1.6) rectangle (9,1.4);
+\pic[surface color,thick] {closed surface={radius=1.5cm,g=1,name=S0}};
+\pic[surface color,thick] at (7,0) {closed surface={radius=1.5cm,g=1,name=S}};
+\draw[red,very thick] ($(S-1-t-1)!.3!(S-1-t-2)$) to[out=180,in=180,out looseness=3.5,in looseness=1.5] (S-1-l) edge[out=0,in=180,out looseness=.5,dashed,opacity=.4] (S-1-b-2) (S-1-b-2) to[out=0,in=0,out looseness=2,in looseness=4] ($(S-1-t-1)!.3!(S-1-t-2)$);
+\foreach \w in {S0,S} {
+\draw[blue,very thick] (\w-1-b-1) edge[right vertical torus arc,dashed,opacity=.4]  (\w-1-b-2) (\w-1-b-1) edge[left vertical torus arc] (\w-1-b-2);
+\node[blue,anchor=north,inner sep=5pt] at (\w-1-b-2) {$\alpha$};
+}
+\draw[red,very thick] ($(S0-1-t-1)!.3!(S0-1-t-2)$) to[arc with diameter={90:-90:{1/cos(70)} and 1}] ($(S0-1-b-1)!.3!(S0-1-b-2)$) to[arc with diameter={270:90:{1/cos(70)} and 1}] ($(S0-1-t-1)!.3!(S0-1-t-2)$);
+\draw[->,shorten <=.7cm,shorten >=.7cm] (S0-r) to["$T_{\alpha}$"] (S-l);
+\end{tikzpicture}
+\end{center}
 Come visto a lezione, la classe di isotopia di $T_\alpha$ non dipende dalla scelta dell'intorno regolare $\psi$ né della funzione $f$. Mostreremo inoltre nell'Esercizio 3.2 che la classe di isotopia di $T_\alpha$ non cambia invertendo l'orientazione di $\alpha$ o sostituendo $\alpha$ con una curva a lei isotopa: è dunque ben definito l'elemento $T_a\in\MCG(S)$ per $a\in\mathcal{S}$.
 
 \newpage
 \subsection*{Esercizio 3.1}
 \tikzset{every plot/.style={smooth}}
 \tikzset{bigon/.style={orange!60!yellow,opacity=.5}}
-\tikzset{surface color/.style={fill={rgb:yellow,2.5;red,.5;white,4;gray,.5}}}
 \newcommand{\definef}{
 \tikzmath{
 function f(\x) {
@@ -531,7 +575,7 @@ Osserviamo che $S_1$ e $S_3$ hanno genere almeno $1$, altrimenti $\alpha$ o $\be
 
 Grazie al criterio del bigono, si verifica che $\beta$ e $\gamma$ sono in posizione minimale, da cui
 \[
-i(a,c)=0\neq 2=i(b,c).
+i(a,c)=0\neq 2=i(b,c).\qedhere
 \]
 \end{itemize}
 \end{proof}

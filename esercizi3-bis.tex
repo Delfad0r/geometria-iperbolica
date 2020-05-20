@@ -1,150 +1,16 @@
+
 \tikzset{surface color/.style={fill={rgb:yellow,2.5;red,.5;white,4;gray,.5}}}
-Osserviamo innanzitutto che se $i(a,b)\neq 0$ allora è sufficiente scegliere $c=a$, giacché $i(a,a)=0$. Supponiamo dunque che $i(a,b)=0$, e siano $\alpha$, $\beta$ curve semplici chiuse in posizione minimale che rappresentano rispettivamente $a$ e $b$; in particolare, $\alpha$ e $\beta$ hanno supporti disgiunti. Distinguiamo alcuni casi.
-\begin{itemize}
-\item \textbf{Supponiamo che $\alpha$ non sia separante.} Allora $S\cut \alpha$ è una superficie compatta connessa con due componenti di bordo.
-
 \begin{center}
-\begin{tikzpicture}
-\pic[surface color,thick] {closed surface={radius=1.2cm,name=S,g=2,left=2}};
-\begin{scope}[red,very thick]
-\foreach \w in {S-1-t,S-1-b} {
-    \draw[dashed,opacity=.4] (\w-1) to[right vertical torus arc] (\w-2);
-    \draw (\w-1) to[left vertical torus arc] (\w-2);
+\begin{tikzpicture}[show background rectangle]
+\path[use as bounding box] (-2,-1.6) rectangle (9,1.4);
+\pic[surface color,thick] {closed surface={radius=1.5cm,g=1,name=S0}};
+\pic[surface color,thick] at (7,0) {closed surface={radius=1.5cm,g=1,name=S}};
+\draw[red,very thick] ($(S-1-t-1)!.3!(S-1-t-2)$) to[out=180,in=180,out looseness=3.5,in looseness=1.5] (S-1-l) edge[out=0,in=180,out looseness=.5,dashed,opacity=.4] (S-1-b-2) (S-1-b-2) to[out=0,in=0,out looseness=2,in looseness=4] ($(S-1-t-1)!.3!(S-1-t-2)$);
+\foreach \w in {S0,S} {
+\draw[blue,very thick] (\w-1-b-1) edge[right vertical torus arc,dashed,opacity=.4]  (\w-1-b-2) (\w-1-b-1) edge[left vertical torus arc] (\w-1-b-2);
+\node[blue,anchor=north,inner sep=5pt] at (\w-1-b-2) {$\alpha$};
 }
-\end{scope}
-\node[red] at (-.4,0) {$\alpha$};
-\node[anchor=west] at ($(S-r)+(.2,0)$) {$S\cut\alpha$};
+\draw[red,very thick] ($(S0-1-t-1)!.3!(S0-1-t-2)$) to[arc with diameter={90:-90:{1/cos(70)} and 1}] ($(S0-1-b-1)!.3!(S0-1-b-2)$) to[arc with diameter={270:90:{1/cos(70)} and 1}] ($(S0-1-t-1)!.3!(S0-1-t-2)$);
+\draw[->,shorten <=.7cm,shorten >=.7cm] (S0-r) to["$T_{\alpha}$"] (S-l);
 \end{tikzpicture}
 \end{center}
-
-\begin{itemize}
-\item \textbf{Supponiamo che le due componenti di bordo appartengano alla stessa componente connessa di $S\cut\alpha\cut\beta$.} Allora esiste una curva $\gamma$ che interseca $\alpha$ esattamente una volta e non interseca $\beta$.
-
-\begin{center}
-\begin{tikzpicture}
-\pic[surface color,thick] {closed surface={radius=1.2cm,name=S,g=2,left=2}};
-\path (S-1-t-1) to[left vertical torus arc] coordinate[pos=.3] (c1) (S-1-t-2);
-\path (S-1-b-1) to[left vertical torus arc] coordinate[pos=.3] (c2) (S-1-b-2);
-\begin{scope}[red,very thick]
-\foreach \w in {S-1-t,S-1-b} {
-    \draw[dashed,opacity=.4] (\w-1) to[right vertical torus arc] (\w-2);
-    \draw (\w-1) to[left vertical torus arc] (\w-2);
-}
-\end{scope}
-\begin{scope}[blue,very thick]
-    \draw[dashed,opacity=.4] (S-2-b-1) to[right vertical torus arc] (S-2-b-2);
-    \draw (S-2-b-1) to[left vertical torus arc] (S-2-b-2);
-\end{scope}
-\draw[very thick,green!80!blue] (c1) to[arc with diameter={90:-90:{1/cos(70)} and 1}] (c2);
-\node[red] at (-.4,0) {$\alpha$};
-\node[blue] at ($(S-2-b-1)!.5!(S-2-b-2)+(-.4,0)$) {$\beta$};
-\node[green!80!blue] at ($(S-1-i-1)+(.2,-.2)$) {$\gamma$};
-
-\pic[surface color,thick] at (7.5,0) {closed surface={radius=1.2cm,name=S2,g=2}};
-\begin{scope}[red,very thick]
-    \draw[dashed,opacity=.4] (S2-1-l) to[arc with diameter={10:-190:1 and .8}] (S2-l);
-    \draw (S2-1-l) to[arc with diameter={10:170:1 and .8}] (S2-l);
-\end{scope}
-\begin{scope}[blue,very thick]
-    \draw[dashed,opacity=.4] (S2-2-b-1) to[right vertical torus arc] (S2-2-b-2);
-    \draw (S2-2-b-1) to[left vertical torus arc] (S2-2-b-2);
-\end{scope}
-\begin{scope}[green!80!blue,very thick]
-\draw ($(S2-1-i-1)!.3!(S2-1-i-2)$) to [horizontal torus arc={0:180}] ($(S2-0-i-1)!.3!(S2-0-i-2)$);
-\draw ($(S2-1-i-1)!.3!(S2-1-i-2)$) to [horizontal torus arc={0:-180}] ($(S2-0-i-1)!.3!(S2-0-i-2)$);
-\end{scope}
-\node[red] at ($(S2-l)+(-.2,.3)$) {$\alpha$};
-\node[blue] at ($(S2-2-b-1)!.5!(S2-2-b-2)+(-.4,0)$) {$\beta$};
-\node[green!80!blue] at ($(S2-1-i-1)+(.2,-.2)$) {$\gamma$};
-
-\draw[thick,-implies,double equal sign distance,shorten <=.5cm,shorten >=.5cm] (S-r) -- (S2-l);
-\end{tikzpicture}
-\end{center}
-
-Prendendo come $c$ la classe di isotopia di $\gamma$, otteniamo che
-\[
-i(a,c)=1\neq0=i(b,c).
-\]
-\item\textbf{Supponiamo che le due componenti di bordo appartengano a componenti connesse diverse di $S\cut\alpha\cut\beta$.} In questo caso $S\cut\alpha\cut\beta$ è unione disgiunta di due superfici $S_1$ e $S_2$, ciascuna con due componenti di bordo, una lungo $\alpha$ e una lungo $\beta$.
-
-\begin{center}
-\begin{tikzpicture}
-\pic[surface color,thick] {closed surface={radius=1.2cm,name=S1,g=2,right=2}};
-\pic[surface color,thick] at (3,0) {closed surface={radius=1.2cm,name=S2,g=2,left=2}};
-\foreach \w/\col in {t/red,b/blue} {
-    \draw[very thick,\col] (S1-2-\w-1) to[left vertical torus arc] (S1-2-\w-2) (S1-2-\w-1) to[right vertical torus arc] (S1-2-\w-2);
-    \draw[very thick,\col,dashed,opacity=.4] (S2-1-\w-1) to[right vertical torus arc] (S2-1-\w-2);
-    \draw[very thick,\col] (S2-1-\w-1) to[left vertical torus arc] (S2-1-\w-2);
-}
-\node at ($(S1-l)+(-.5,0)$) {$S_1$};
-\node at ($(S2-r)+(.5,0)$) {$S_2$};
-\node[red] at ($(S1-2-t-1)!.5!(S2-1-t-1)+(0,.2)$) {$\alpha$};
-\node[blue] at ($(S1-2-b-2)!.5!(S2-1-b-2)+(0,-.2)$) {$\beta$};
-\end{tikzpicture}
-\end{center}
-
-Osserviamo che $S_1$ e $S_2$ hanno genere almeno $1$, altrimenti $\alpha$ e $\beta$ coborderebbero un anello e sarebbero dunque isotope. È allora facile individuare una curva $\gamma$ la cui classe di isotopia $c$ soddisfa la tesi.
-\begin{center}
-\begin{tikzpicture}
-\pic[surface color,thick] {closed surface={radius=1.2cm,name=S,g=3}};
-\foreach \w/\col in {t/red,b/blue} {
-    \draw[very thick,\col,dashed,opacity=.4] (S-2-\w-1) to[right vertical torus arc] (S-2-\w-2);
-    \draw[very thick,\col] (S-2-\w-1) to[left vertical torus arc] (S-2-\w-2);
-}
-\draw[green!80!blue,very thick] ($(S-2-t-1)!.2!(S-2-t-2)$) to[out=0,in=180] ($(S-2-i-1)!.1!(S-2-i-2)$) to[out=0,in=180] ($(S-3-t-1)!.3!(S-3-t-2)$) to[arc with diameter={90:-90:{1/cos(70)} and 1}] ($(S-3-b-1)!.3!(S-3-b-2)$) to[out=180,in=-50] ($(S-2-i-1)!.35!(S-2-i-2)$) to[out=130,in=0,looseness=.4] ($(S-2-t-1)!.5!(S-2-t-2)$) to[out=180,in=50,looseness=.4] ($(S-1-i-1)!.35!(S-1-i-2)$) to[out=-130,in=0] ($(S-1-b-1)!.3!(S-1-b-2)$) to [arc with diameter={270:90:{1/cos(70)} and 1}] ($(S-1-t-1)!.3!(S-1-t-2)$) to [out=0,in=180] ($(S-1-i-1)!.1!(S-1-i-2)$) to[out=0,in=180] ($(S-2-t-1)!.2!(S-2-t-2)$);
-\node[red] at ($(S-2-t-1)+(0,.3)$) {$\alpha$};
-\node[blue] at ($(S-2-b-2)+(0,-.4)$) {$\beta$};
-\node[green!80!blue] at ($(S-1-i-1)!.8!(S-1-i-2)$) {$\gamma$};
-\end{tikzpicture}
-\end{center}
-Grazie al criterio del bigono, si verifica che $\alpha$ e $\gamma$ sono in posizione minimale, da cui
-\[
-i(a,c)=2\neq0=i(b,c).
-\]
-\end{itemize}
-\item \textbf{Supponiamo che $\beta$ non sia separante.} Possiamo allora ripetere il ragionamento del punto precedente, scambiando i ruoli di $\alpha$ e $\beta$, ottenendo una classe $c$ tale che $i(a,c)\neq i(b,c)$.
-\item \textbf{Supponiamo che $\alpha$ e $\beta$ siano separanti.} Allora $S\cut\alpha\cut\beta$ è unione disgiunta di tre superfici $S_1$, $S_2$ e $S_3$; $S_1$ ha una componente di bordo lungo $\alpha$, $S_3$ ha una componente di bordo lungo $\beta$, e $S_2$ ha due componenti di bordo, una lungo $\alpha$ e una lungo $\beta$.
-
-\begin{center}
-\begin{tikzpicture}
-\pic[surface color,thick] {closed surface={radius=1.2cm,name=S1,g=1,right=1}};
-\pic[surface color,thick] at ($(S1-r)+(1.6,0)$)  {closed surface={radius=1.2cm,name=S2,g=1,left=1,right=1}};
-\pic[surface color,thick] at ($(S2-r)+(1.6,0)$)  {closed surface={radius=1.2cm,name=S3,g=1,left=1}};
-\foreach \w/\ww/\col in {S1/S2/red,S2/S3/blue} {
-\begin{scope}[\col,very thick]
-\draw (\w-1-i-1) to[left vertical torus arc] (\w-1-i-2) (\w-1-i-1) to[right vertical torus arc] (\w-1-i-2);
-\draw[dashed,opacity=.4] (\ww-0-i-1) to[right vertical torus arc] (\ww-0-i-2);
-\draw (\ww-0-i-1) to[left vertical torus arc] (\ww-0-i-2);
-\end{scope}
-}
-\node at ($(S1-1-b-2)+(0,-.4)$) {$S_1$};
-\node at ($(S2-1-b-2)+(0,-.4)$) {$S_2$};
-\node at ($(S3-1-b-2)+(0,-.4)$) {$S_3$};
-\node[red] at ($(S1-1-i-1)!.5!(S2-0-i-1)+(0,.2)$) {$\alpha$};
-\node[blue] at ($(S2-1-i-1)!.5!(S3-0-i-1)+(0,.2)$) {$\beta$};
-\end{tikzpicture}
-\end{center}
-
-Osserviamo che $S_1$ e $S_3$ hanno genere almeno $1$, altrimenti $\alpha$ o $\beta$ sarebbero omotopicamente banali, e che anche $S_2$ ha genere almeno $1$, altrimenti sarebbero isotope. È allora facile individuare una curva $\gamma$ la cui classe di isotopia $c$ soddisfa la tesi.
-
-\begin{center}
-\begin{tikzpicture}
-\pic[surface color,thick] {closed surface={radius=1.2cm,name=S,g=3}};
-\foreach \w/\col in {S-1-i/red,S-2-i/blue} {
-\begin{scope}[\col,very thick]
-\draw[dashed,opacity=.4] (\w-1) to[right vertical torus arc] (\w-2);
-\draw (\w-1) to[left vertical torus arc] (\w-2);
-\end{scope}
-}
-\draw[green!80!blue,very thick] ($(S-2-i-1)!.15!(S-2-i-2)$) to[out=0,in=180] ($(S-3-t-1)!.3!(S-3-t-2)$) to[arc with diameter={90:-90:{1/cos(70)} and 1}] ($(S-3-b-1)!.3!(S-3-b-2)$) to[out=180,in=0] ($(S-2-i-1)!.6!(S-2-i-2)$) to ($(S-2-b-1)!.3!(S-2-b-2)$) to[arc with diameter={270:90:{1/cos(70)-2} and 1}] ($(S-2-t-1)!.3!(S-2-t-2)$) to[out=0,in=180] ($(S-2-i-1)!.15!(S-2-i-2)$);
-\node[red] at ($(S-1-i-1)+(0,.4)$) {$\alpha$};
-\node[blue] at ($(S-2-i-1)+(0,.4)$) {$\beta$};
-\node[green!80!blue] at ($(S-r)+(.2,.3)$) {$\gamma$};
-\end{tikzpicture}
-\end{center}
-
-Grazie al criterio del bigono, si verifica che $\beta$ e $\gamma$ sono in posizione minimale, da cui
-\[
-i(a,c)=0\neq 2=i(b,c).
-\]
-\end{itemize}
