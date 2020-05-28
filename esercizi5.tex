@@ -1,0 +1,95 @@
+\section*{Esercizi del 16 maggio}
+\subsection*{Esercizio 5.1}
+
+
+\subsection*{Esercizio 5.4}
+\paragraph*{Definizione di $X$.} Sia
+\[
+X=\{A\in\SL(n,\RR):\text{$A$ è simmetrica e definita positiva}\}.
+\]
+Definiamo l'azione
+\Map{\alpha}{G\times X}{X}{(M,A)}{MAM^t.}
+Per un ben noto fatto di algebra lineare, per ogni $A\in X$ esiste una matrice $M\in\GL(n,\RR)$ tale che $MM^t=A$ (infatti $A$ e $\Id$ hanno la stessa segnatura). A meno di sostituire $M$ con
+\[
+M\cdot\begin{pmatrix}-1&&&\\&1&&\\&&\ddots&\\&&&1\end{pmatrix}
+\]
+possiamo supporre che $\det M>0$. Osserviamo poi che
+\[
+1=\det A=\det(MM^t)=(\det M)^2,
+\]
+da cui $\det M=1$. Abbiamo dunque mostrato che per ogni $A\in X$ esiste $M\in G$ tale che $\alpha(M,\Id)=A$, da cui segue che l'azione è transitiva. Lo stabilizzatore di $\Id\in X$ è l'insieme dalle matrici $M\in G$ tali che $MM^t=\Id$, ossia precisamente $SO(n,\RR)=K$.
+
+Come accade sempre per un'azione transitiva, abbiamo la seguente corrispondenza biunivoca
+\begin{equation*}
+\begin{array}{@{}c@{{}\mathrel{}}c@{{}\mathrel{}}c}
+X&\longleftrightarrow&G/K\\
+\alpha(M,\Id)&\longmapsfrom& M\cdot K,
+\end{array}
+\end{equation*}
+che permette di identificare $X$ con $G/K$.
+
+\paragraph*{Definizione della metrica Riemanniana.} Sappiamo che il tangente a $X$ nel punto $\Id$ è dato da
+\[
+T_{\Id}X=\{B\in\Mat_{n\times n}(\RR):B=B^t,\tr B=0\}.
+\]
+Il gruppo $G$ agisce su $TX$ mediante $\alpha$ come segue: se $M\in G$, $A\in X$, $B\in T_AX$ allora
+\[
+M\cdot B=MBM^t\in T_{\alpha(M,A)}X.
+\]
+
+Definiamo il prodotto scalare
+\Map{\langle-,-\rangle_{\Id}}{T_{\Id}X\times T_{\Id}X}{\RR}{(B,C)}{\tr(BC).}
+È evidente che si tratta di un'applicazione bilineare simmetrica; è inoltre un prodotto scalare definito positivo poiché, se $B$ è una matrice simmetrica, allora $\tr(B^2)$ è la somma dei quadrati degli autovalori di $B$, strettamente positiva a meno che $B=0$.
+
+Osserviamo che questo prodotto scalare è $K$-invariante: per ogni $B,C\in T_{\Id}X$, $M\in K$ vale infatti
+\[
+\left\langle MBM^t,MCM^t\right\rangle_{\Id}=\tr(MBCM^t)=\tr(MM^tBC)=\tr(BC)=\left\langle B,C\right\rangle_{\Id}.
+\]
+Possiamo allora definire una metrica Riemanniana $G$-invariante su $X$ come segue: per ogni $A\in X$ definiamo
+\Map{\langle-,-\rangle_A}{T_AX\times T_AX}{\RR}{B,C}{\left\langle MBM^t,MCM^t\right\rangle_{\Id},}
+dove $M\in G$ è una matrice tale che $\alpha(M,A)=\Id$. Svolgiamo le verifiche necessarie.
+\begin{itemize}
+\item L'applicazione è ben definita. Infatti, se due matrici $M,N\in G$ soddisfano $\alpha(M,A)=\alpha(N,A)=\Id$, allora $NM^{-1}$ è un elemento dello stabilizzatore di $\Id$, ossia è un elemento di $K$. Ma allora, poiché $\langle-,-\rangle_{\Id}$ è $K$-invariante, abbiamo
+\begin{align*}
+\left\langle MBM^t,MCM^t\right\rangle_{\Id}&=\left\langle NM^{-1}MBM^t(M^t)^{-1}N^t,NM^{-1}MCM^t(M^t)^{-1}N^t\right\rangle_{\Id}\\
+&=\left\langle NBN^t,NCN^t\right\rangle_{\Id}.
+\end{align*}
+\item Poiché $\langle-,-\rangle_{\Id}$ è un prodotto scalare definito positivo, è evidente che lo stesso vale per $\langle-,-\rangle_A$.
+\item La metrica Riemanniana così definita è $G$-invariante. Siano infatti $A\in X$, $M\in G$, $B,C\in T_AX$; sia $N\in G$ tale che $\alpha(N,A)=\Id$. Allora $NM^{-1}$ è tale che $\alpha(NM^{-1},\alpha(M,A))=\Id$, dunque
+\begin{align*}
+\left\langle MBM^t,MCM^t\right\rangle_{\alpha(M,A)}&=\left\langle (NM^{-1})MBM^t(NM^{-1})^t,(NM^{-1})MCM^t(NM^{-1})^t\right\rangle_{\Id}\\
+&=\left\langle NBN^t,NCN^t\right\rangle_{\Id}\\
+&=\langle B,C\rangle_A
+\end{align*}
+\end{itemize}
+
+\paragraph{Definizione dell'inversione.} Definiamo l'inversione nel punto $\Id\in X$ come
+\Map{\tau}{X}{X}{A}{A^{-1}.}
+È ovviamente un diffeomorfismo di ordine $2$. Calcoliamo il differenziale di $\tau$ in ogni punto: se $A\in X$ e $B\in T_AB$, allora
+\begin{align*}
+\tau(A+tB)&=(A+tB)^{-1}\\
+&=(\Id+tA^{-1}B)^{-1}A^{-1}\\
+&=A^{-1}-tA^{-1}BA^{-1}+o(t),
+\end{align*}
+da cui
+\[
+\d{\tau}{A}(B)=-A^{-1}BA^{1}\in T_{A^{-1}}X.
+\]
+Questo ci dice immediatamente che $\d{\tau}{\Id}=-\id_{T_{\Id}X}$. Possiamo inoltre verificare che $\tau$ è un'isometria. Siano $M\in G$, $A\in X$, $B,C\in T_AX$. Sia $M\in G$ una matrice tale che $\alpha(M,A)=\Id$. Allora $(M^{-1})^t$ è tale che $\alpha((M^{-1})^t,A^{-1})=\Id$, dunque
+\begin{align*}
+\left\langle\d{\tau}{A}(B),\d{\tau}{A}(C)\right\rangle&=\left\langle(M^{-1})^tA^{-1}BA^{-1}M^{-1},(M^{-1})^tA^{-1}CA^{-1}M^{-1}\right\rangle_{\Id}\\
+&=\left\langle(AM^t)^{-1}B(MA)^{-1},(AM^t)^{-1}C(MA)^{-1}\right\rangle_{\Id}\\
+&\sidenote{{}={}}{$MAM^t=\Id$}\left\langle MBM^t,MCM^t\right\rangle_{\Id}\\
+&=\langle B,C\rangle_A.
+\end{align*}
+
+Evidentemente $\Id\in X$ è un punto fisso per $\tau$; mostriamo che è anche isolato. Fissiamo una norma submoltiplicativa $\norm{-}$ sullo spazio di matrici $\Mat_{n\times n}(\RR)$. Sia $A\in X$ diverso dall'identità, e poniamo $B=A-\Id\neq 0$; mostriamo che se $\norm{B}<2$ allora $\tau(A)\neq A$. Se per assurdo $\tau(A)=A$, allora $(\Id+B)^2=\Id$, da cui immediatamente $-2B=B^2$. Ma allora varrebbe
+\[
+2\norm{B}=\norm{B^2}\le\norm{B}^2,
+\]
+contro l'ipotesi. Segue che $\Id$ è un punto fisso isolato di $\tau$.
+
+Mostriamo infine che $\tau$ è compatibile con l'azione di $G$ e $\sigma$: siano $A\in X$, $M\in G$. Allora
+\[
+\tau(\alpha(M,A))=(MAM^t)^{-1}=(M^t)^{-1}A^{-1}M^{-1}=\alpha((M^t)^{-1},A)=\alpha(\sigma(M),A).
+\]
