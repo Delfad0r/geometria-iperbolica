@@ -1,6 +1,53 @@
 \section*{Esercizi del 16 maggio}
 \subsection*{Esercizio 5.1}
 
+\subsection*{Esercizio 5.2}
+Ricordiamo che una \defterm{colorazione} di $P_n$ a valori in un $\FF_2$-spazio vettoriale $V$ è il dato di un vettore $c(F)\in V$ per ogni $1$-faccia (ossia spigolo) $F$ di $P_n$. La colorazione è \defterm{propria} se per ogni vertice $v$ di $P_n$  vale la seguente condizione: i due vettori $c(F)$, $c(F')$ sono linearmente indipendenti, dove $F$ e $F'$ sono i due spigoli adiacenti a $v$.
+
+È evidente che non esiste alcuna colorazione propria di $P_n$ a valori in $\FF_2$, poiché comunque presi due elementi di $\FF_2$ essi sono linearmente dipendenti. Esibiamo ora esplicitamente una colorazione di $P_n$ a valori in $\FF_2\dirsum\FF_2$. Siano $F_1,F_2,\ldots,F_n$ gli spigoli di $P_n$, numerati in senso antiorario a partire da $F_1$, scelto arbitrariamente. Definiamo la colorazione come segue:
+\[
+c(F_i)=\begin{cases*}
+1\choose1&se $i=1$,\\
+1\choose0&se $i>1$ e $i$ pari,\\
+0\choose1&se $i>1$ e $i$ dispari.
+\end{cases*}
+\]
+A seconda della parità di $n$, possono verificarsi i due casi illustrati in figura.
+
+\begin{center}
+\begin{tikzpicture}[
+evaluate={function col(\i){if \i == 1 then {return "purple";} else {if mod(\i, 2) == 0 then {return "blue!50!green";} else {return "orange!60!red";};};};},
+pics/right angled polygon/.style 2 args={
+code={
+\tikzmath{\n=#1;\r=#2;\l=sin(180/\n)/sin(135+180/\n)*\r;}
+\begin{scope}
+\clip (360/\n:\r pt) \foreach \i [evaluate=\i as \a using \i/\n*360] in {1,...,\n} {-- (\a:\r pt) arc (-135+\a:{360/\n-225+\a}:\l pt)};
+\fill circle(2*\r pt);
+\foreach \i [evaluate=\i as \a using \i/\n*360] in {1,...,\n} {
+\begin{scope}
+\clip (0,0) -- (\a:\r pt) -- (\a+360/\n:\r pt) -- cycle;
+\tikzmath{\col=col(\i);}
+\fill[\col!70!black,opacity=.8,path fading=fuzzy ring 15 percent] ($(\a:\r pt)+(45+\a:\l pt)$) circle ({\l pt*1.075});
+\end{scope}
+}
+\end{scope}
+\node[gray,opacity=1] {$n=\n$};
+\foreach \i in {1,...,\n} {
+\tikzmath{\col = col(\i);}
+\draw[rotate={\i/\n*360},\col,ultra thick] (0:\r pt) arc (-135:{360/\n-225}:\l pt) node[midway,label={[label distance=.4cm,opacity=1,anchor=center]{(\i+.5)/\n*360}:$F_{\i}$}] {};
+}
+\foreach \i in {1,...,\n} {\fill[black,opacity=1] (\i/\n*360:\r pt) circle (1pt);}
+}}]
+\pic[fill=gray,fill opacity=.1] {right angled polygon={6}{2 cm}};
+\pic[fill=gray,fill opacity=.1] at (6,0) {right angled polygon={7}{2cm}};
+\matrix[below right,legend/.style={draw=#1,very thick,shade,left color=#1!20,right color=#1!80}] at ($(current bounding box.north east)+(1.5,0)$) {
+\tikzmath{\col = col(1);}\node[legend=\col,label={[\col]right:$1\choose 1$}] {};\\
+\tikzmath{\col = col(2);}\node[legend=\col,label={[\col]right:$1\choose 0$}] {};\\
+\tikzmath{\col = col(3);}\node[legend=\col,label={[\col]right:$0\choose 1$}] {};\\
+};
+\end{tikzpicture}
+\end{center}
+In ogni caso, poiché due elementi distinti non nulli di $\FF_2\dirsum\FF_2$ sono sempre linearmente indipendenti, è evidente che la colorazione così definita risulta essere propria.
 
 \subsection*{Esercizio 5.4}
 \paragraph*{Definizione di $X$.} Sia
@@ -73,11 +120,11 @@ dove $M\in G$ è una matrice tale che $\alpha(M,A)=\Id$. Svolgiamo le verifiche 
 \end{align*}
 da cui
 \[
-\d{\tau}{A}(B)=-A^{-1}BA^{1}\in T_{A^{-1}}X.
+\d{\tau}{A}(B)=-A^{-1}BA^{-1}\in T_{A^{-1}}X.
 \]
 Questo ci dice immediatamente che $\d{\tau}{\Id}=-\id_{T_{\Id}X}$. Possiamo inoltre verificare che $\tau$ è un'isometria. Siano $M\in G$, $A\in X$, $B,C\in T_AX$. Sia $M\in G$ una matrice tale che $\alpha(M,A)=\Id$. Allora $(M^{-1})^t$ è tale che $\alpha((M^{-1})^t,A^{-1})=\Id$, dunque
 \begin{align*}
-\left\langle\d{\tau}{A}(B),\d{\tau}{A}(C)\right\rangle&=\left\langle(M^{-1})^tA^{-1}BA^{-1}M^{-1},(M^{-1})^tA^{-1}CA^{-1}M^{-1}\right\rangle_{\Id}\\
+\left\langle\d{\tau}{A}(B),\d{\tau}{A}(C)\right\rangle_{A^{-1}}&=\left\langle(M^{-1})^tA^{-1}BA^{-1}M^{-1},(M^{-1})^tA^{-1}CA^{-1}M^{-1}\right\rangle_{\Id}\\
 &=\left\langle(AM^t)^{-1}B(MA)^{-1},(AM^t)^{-1}C(MA)^{-1}\right\rangle_{\Id}\\
 &\sidenote{{}={}}{$MAM^t=\Id$}\left\langle MBM^t,MCM^t\right\rangle_{\Id}\\
 &=\langle B,C\rangle_A.
