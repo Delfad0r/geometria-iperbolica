@@ -1,5 +1,53 @@
 \section*{Esercizi del 16 maggio}
 \subsection*{Esercizio 5.1}
+Ricordiamo che il gruppo di Coxeter $\Gamma$ di $P$ ammette la presentazione
+\[
+\Gamma=\left\langle g_1,\ldots,g_s\;\left\lvert\;\begin{matrix*}[l] g_i^2\text{ per $i\in\{1,\ldots,s\}$},\\(g_ig_j)^2\text{ se $F_i$ e $F_j$ si intersecano}\end{matrix*}\right.\right\rangle<\Isom(\HH^n),
+\]
+dove $F_1,\ldots,F_s$ sono le $(n-1)$-facce di $P$, e per ogni $i\in{1,\ldots,s}$ l'elemento $g_i\in\Gamma$ è la riflessione rispetto al piano su cui giace $F_i$. Ogni colorazione
+\[
+\map{c}{\{F_1,\ldots,F_s\}}{V}
+\]
+induce un morfismo di gruppi
+\Map{\varphi}{\Gamma}{V}{g_i}{c(F_i).}
+Se la colorazione $c$ è propria, allora $\ker\varphi<\Gamma$ è un gruppo di isometrie di $\HH^n$ che agisce in modo libero e propriamente discontinuo.
+
+\begin{enumerate}[\textbf{\arabic{enumi}.}]
+\setcounter{enumi}{-1}
+\item Ovviamente \textbf{la varietà $M=\HH^n/\ker\varphi$ è orientabile se e solo se tutti gli elementi di $\ker\varphi$ sono isometrie che preservano l'orientazione}.
+\item Ogni elemento $g$ di $\Gamma$ può scriversi (in modo non unico) come prodotto $g=g_{i_1}\cdots g_{i_t}$; osserviamo che $g$ preserva l'orientazione se e solo se $t$ è pari, poiché ogni $g_i$ inverte l'orientazione. Di conseguenza, \textbf{$M$ è orientabile se e solo se per ogni scelta di $i_1,\ldots,i_t\in\{1,\ldots,s\}$ con $t$ dispari vale $\varphi(g_{i_1}\cdots g_{i_t})\neq0$}.
+\item Osserviamo ora che, essendo $V$ un $\FF_2$-spazio vettoriale, per ogni $g,h\in\Gamma$ vale $\varphi(gh)=\varphi(hg)$.
+Poiché i $g_i$ hanno ordine $2$, possiamo riformulare la condizione come segue: \textbf{$M$ è orientabile se e solo se per ogni $T\subs\{1,\ldots,s\}$ di cardinalità dispari vale}
+\[
+\sum_{t\in T}c(F_t)\neq 0.
+\]
+Questa osservazione fornisce un algoritmo esponenziale in $s$ per stabilire se la varietà $M$ ottenuta dalla colorazione è orientabile (basta controllare tutti i sottoinsiemi di cardinalità dispari di $\{1,\ldots,s\}$).
+\item Possiamo riformulare ulteriormente il criterio, in modo da ottenere un algoritmo polinomiale in $s$. Notiamo infatti che la condizione che abbiamo trovato è equivalente a richiedere che ogniqualvolta una combinazione lineare dei $c(F_i)$ a coefficienti in $\FF_2$ è nulla, il numero di coefficienti non nulli sia pari. Concludiamo pertanto che \textbf{$M$ è orientabile se e solo se il seguente sistema lineare a coefficienti in $\FF_2$ non ha soluzioni}.
+\begingroup
+\tikzset{
+every outer matrix/.style={inner xsep=0pt,inner ysep=2pt},
+every matrix/.style={matrix of math nodes,left delimiter=(,right delimiter=),text height=1.5ex,text depth=.25ex,nodes={inner xsep=0pt}},
+col/.style={inner xsep=3pt,opacity=.5,text opacity=1,draw=blue!70!green,line width=1.5pt,rectangle,rounded corners=1pt,minimum height=3cm,minimum width=1.1cm},
+vector/.style={row sep=10pt}
+}
+\[
+\begin{tikzpicture}[baseline={(0,-.5ex)}]
+\matrix[column sep=10pt,row sep=5pt,row 1/.style={nodes={col}},row 1 column 3/.style={nodes={draw=none}}] {
+c(F_1)&c(F_2)&\cdots&c(F_s)\\
+1&1&\cdots&1\\
+};
+\end{tikzpicture}
+\cdot
+\begin{tikzpicture}[baseline={(0,-.5ex)}]
+\matrix[vector] {x_1\\x_2\\\vdots\\x_s\\};
+\end{tikzpicture}
+=
+\begin{tikzpicture}[baseline={(0,-.5ex)}]
+\matrix[row sep=5pt,row 1/.style={nodes={col}}] {0\\1\\};
+\end{tikzpicture}.
+\]
+\endgroup
+\end{enumerate}
 
 \subsection*{Esercizio 5.2}
 Ricordiamo che una \defterm{colorazione} di $P_n$ a valori in un $\FF_2$-spazio vettoriale $V$ è il dato di un vettore $c(F)\in V$ per ogni $1$-faccia (ossia spigolo) $F$ di $P_n$. La colorazione è \defterm{propria} se per ogni vertice $v$ di $P_n$  vale la seguente condizione: i due vettori $c(F)$, $c(F')$ sono linearmente indipendenti, dove $F$ e $F'$ sono i due spigoli adiacenti a $v$.
