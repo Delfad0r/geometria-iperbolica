@@ -15,9 +15,8 @@ Se la colorazione $c$ è propria, allora $\ker\varphi<\Gamma$ è un gruppo di is
 \begin{enumerate}[\textbf{\arabic{enumi}.}]
 \setcounter{enumi}{-1}
 \item Ovviamente \textbf{la varietà $M=\HH^n/\ker\varphi$ è orientabile se e solo se tutti gli elementi di $\ker\varphi$ sono isometrie che preservano l'orientazione}.
-\item Ogni elemento $g$ di $\Gamma$ può scriversi (in modo non unico) come prodotto $g=g_{i_1}\cdots g_{i_t}$; osserviamo che $g$ preserva l'orientazione se e solo se $t$ è pari, poiché ogni $g_i$ inverte l'orientazione. Di conseguenza, \textbf{$M$ è orientabile se e solo se per ogni scelta di $i_1,\ldots,i_t\in\{1,\ldots,s\}$ con $t$ dispari vale $\varphi(g_{i_1}\cdots g_{i_t})\neq0$}.
-\item Osserviamo ora che, essendo $V$ un $\FF_2$-spazio vettoriale, per ogni $g,h\in\Gamma$ vale $\varphi(gh)=\varphi(hg)$.
-Poiché i $g_i$ hanno ordine $2$, possiamo riformulare la condizione come segue: \textbf{$M$ è orientabile se e solo se per ogni $T\subs\{1,\ldots,s\}$ di cardinalità dispari vale}
+\item\label{ex-5-1-1} Ogni elemento $g$ di $\Gamma$ può scriversi (in modo non unico) come prodotto $g=g_{i_1}\cdots g_{i_t}$; osserviamo che $g$ preserva l'orientazione se e solo se $t$ è pari, poiché ogni $g_i$ inverte l'orientazione. Di conseguenza, \textbf{$M$ è orientabile se e solo se per ogni scelta di $i_1,\ldots,i_t\in\{1,\ldots,s\}$ con $t$ dispari vale $\varphi(g_{i_1}\cdots g_{i_t})\neq0$} (ossia $g_{i_1}\cdots g_{i_t}\not\in\ker\varphi$).
+\item Osserviamo ora che, essendo $V$ un $\FF_2$-spazio vettoriale, per ogni $g,h\in\Gamma$ vale $\varphi(gh)=\varphi(hg)$; poiché i $g_i$ hanno ordine $2$, è sufficiente verificare la condizione del punto \ref{ex-5-1-1} nel caso in cui tutti gli $i_j$ sono distinti. Otteniamo dunque che \textbf{$M$ è orientabile se e solo se per ogni $T\subs\{1,\ldots,s\}$ di cardinalità dispari vale}
 \[
 \sum_{t\in T}c(F_t)\neq 0.
 \]
@@ -27,7 +26,7 @@ Questa osservazione fornisce un algoritmo esponenziale in $s$ per stabilire se l
 \tikzset{
 every outer matrix/.style={inner xsep=0pt,inner ysep=2pt},
 every matrix/.style={matrix of math nodes,left delimiter=(,right delimiter=),text height=1.5ex,text depth=.25ex,nodes={inner xsep=0pt}},
-col/.style={inner xsep=3pt,opacity=.5,text opacity=1,draw=blue!70!green,line width=1.5pt,rectangle,rounded corners=1pt,minimum height=3cm,minimum width=1.1cm},
+col/.style={inner xsep=3pt,opacity=.4,text opacity=1,draw=blue!70!green,line width=1.5pt,rectangle,rounded corners=1pt,minimum height=3cm,minimum width=1.1cm},
 vector/.style={row sep=10pt}
 }
 \[
@@ -49,6 +48,7 @@ c(F_1)&c(F_2)&\cdots&c(F_s)\\
 \endgroup
 \end{enumerate}
 
+\newpage
 \subsection*{Esercizio 5.2}
 Ricordiamo che una \defterm{colorazione} di $P_n$ a valori in un $\FF_2$-spazio vettoriale $V$ è il dato di un vettore $c(F)\in V$ per ogni $1$-faccia (ossia spigolo) $F$ di $P_n$. La colorazione è \defterm{propria} se per ogni vertice $v$ di $P_n$  vale la seguente condizione: i due vettori $c(F)$, $c(F')$ sono linearmente indipendenti, dove $F$ e $F'$ sono i due spigoli adiacenti a $v$.
 
@@ -97,6 +97,7 @@ code={
 \end{center}
 In ogni caso, poiché due elementi distinti non nulli di $\FF_2\dirsum\FF_2$ sono sempre linearmente indipendenti, è evidente che la colorazione così definita risulta essere propria.
 
+\newpage
 \subsection*{Esercizio 5.4}
 \paragraph*{Definizione di $X$.} Sia
 \[
